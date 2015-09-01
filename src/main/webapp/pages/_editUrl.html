@@ -1,0 +1,45 @@
+@var content={
+    <div class="tip"/>
+    <form method="post" add-action="/system/doAddUrl" update-action="/system/doUpdateUrl" class="ajaxForm">
+        <input type="hidden" name="url.id"/>
+        <div class="form-group">
+            <label for="urlName">权限名称</label>
+            <input id="urlName" class="form-control" name="url.name" placeholder="为权限起一个名字">
+        </div>
+        <div class="form-group">
+            <label for="urlUri">菜单URL</label>
+            <input id="urlUri" class="form-control" name="url.uri" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="urlPattern">权限URL</label>
+            <input id="urlPattern" class="form-control" name="url.url_pattern" placeholder="匹配权限路径">
+        </div>
+         <div class="form-group">
+            <label for="urlFilters">过滤器</label>
+            <input id="urlFilters" class="form-control" name="url.filters" placeholder="填写权限验证过滤器表达式">
+        </div>
+         <div class="form-group">
+            <label for="urlRemark">备注</label>
+            <textarea id="urlRemark" class="form-control" rows="3" name="url.remark" placeholder=""></textarea>
+        </div>
+    </form>
+@};
+
+<tp:modal id="${dialogId}" btn="添加角色" title="编辑角色" content="${content}"/>
+
+<script>
+function loadItem(id){
+    $.getJSON("/system/getUrl/" + id, function(json){
+        if(json.error != 0){
+            alert('获取数据失败:' + json.data);
+        }
+        var item = json.data;
+        $("input[name='url.id']").val(item.id);
+        $("input[name='url.name']").val(item.name);
+        $("input[name='url.uri']").val(item.uri);
+        $("input[name='url.url_pattern']").val(item.url_pattern);
+        $("input[name='url.filters']").val(item.filters);
+        $("textarea[name='url.remark']").val(item.remark);
+    });
+}
+</script>

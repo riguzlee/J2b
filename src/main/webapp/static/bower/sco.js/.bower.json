@@ -1,0 +1,14 @@
+{
+  "name": "sco.js",
+  "homepage": "https://github.com/terebentina/sco.js",
+  "_release": "c666d313f8",
+  "_resolution": {
+    "type": "branch",
+    "branch": "bs3",
+    "commit": "c666d313f8e1e8fdb80cdda2c6f85e37f8303037"
+  },
+  "_source": "git://github.com/terebentina/sco.js.git",
+  "_target": "bs3",
+  "_originalSource": "sco.js",
+  "_direct": true
+}

@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+body {
+	/*
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "STHeiti", "Helvetica","Arial","Verdana","sans-serif";
+	font-family: Avenir,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	*/
+	font-family: "Helvetica Neue", Helvetica, Microsoft Yahei,
+		Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+}
+.fixed-table-toolbar .bars{
+	width:100%;
+}

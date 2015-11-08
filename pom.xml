@@ -30,6 +30,7 @@
 		<guava>18.0</guava>
 		<uuid>3.2</uuid>
 		<jbcrypt>0.3m</jbcrypt>
+		<jfinal-captcha>0.1</jfinal-captcha>
 	</properties>
 
 	<dependencies>
@@ -135,6 +136,11 @@
 			<groupId>org.beetl</groupId>
 			<artifactId>beetl-core</artifactId>
 			<version>${beetl}</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.dreampie</groupId>
+			<artifactId>jfinal-captcha</artifactId>
+			<version>${jfinal-captcha}</version>
 		</dependency>
 
 	</dependencies>

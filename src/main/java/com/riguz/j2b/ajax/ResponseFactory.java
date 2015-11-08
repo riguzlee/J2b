@@ -1,0 +1,40 @@
+package com.riguz.j2b.ajax;
+
+import com.jfinal.core.Controller;
+import com.riguz.j2b.config.DefaultSettings;
+import com.riguz.j2b.model.bean.JsonResponse;
+
+public class ResponseFactory {
+	public static void createSuccessResponse(Controller c) {
+		if (c == null)
+			return;
+		JsonResponse response = new JsonResponse();
+		c.renderJson(response);
+	}
+
+	public static void createSuccessResponse(Controller c, Object data) {
+		if (c == null)
+			return;
+		JsonResponse response = new JsonResponse(data);
+		c.renderJson(response);
+	}
+
+	public static void createErrorRespone(Controller c) {
+		createErrorRespone(c, (String) c.getAttr(DefaultSettings.ERROR_KEY));
+	}
+
+	public static void createErrorRespone(Controller c, String error) {
+		if (c == null)
+			return;
+		JsonResponse response = new JsonResponse("0x004000", error);
+		c.renderJson(response);
+	}
+
+	public static void createErrorResponse(Controller c, String errorCode, String errorDesc) {
+		if (c == null)
+			return;
+		JsonResponse response = new JsonResponse(errorCode, errorDesc);
+		c.renderJson(response);
+	}
+
+}

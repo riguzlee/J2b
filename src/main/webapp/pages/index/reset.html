@@ -1,0 +1,82 @@
+@var js={
+<script src="${CONTEXT_PATH}/static/js/login.js"></script>
+@};
+
+@var bodyClass="login-layout blur-login";
+@layout("../../layout/_aceSimpleLayout.html", {extJs:js, bodyClass:bodyClass}){
+<div class="main-container">
+    <div class="main-content">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="login-container">
+                    <div class="center">
+                        <h1>
+                            <i class="ace-icon fa fa-lock green"></i>
+                            <span class="red">必达</span>
+                            <span class="white" id="id-text2">云平台</span>
+                            <i class="ace-icon fa fa-cloud blue"></i>
+                        </h1>
+                     
+                    </div>
+                    <div class="space-6"></div>
+                    <div class="position-relative">
+                    
+                        <div id="login-box" class="login-box visible widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header blue lighter bigger">
+                                        <i class="ace-icon fa fa-coffee green"></i>
+                                        重置密码
+                                    </h4>
+                                    <div class="space-6"></div>
+                                    <form action="/doReset" method="post" class="resetForm">
+                                        <fieldset>
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input name="token" type="text" class="form-control" placeholder="收到的验证码" />
+                                                    <i class="ace-icon fa fa-user"></i>
+                                                </span>
+                                            </label>
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input name="new-password" type="password" class="form-control" placeholder="新密码" />
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </label>
+                                             <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input name="new-password2" type="password" class="form-control" placeholder="再次输入新密码" />
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </label>
+                                            <label class="block clearfix">
+                                            	<span class="">
+                                            		<img src="/randpic" alt="验证码" onclick="javascript:this.src='/randpic/' + new Date().getTime();" />
+                                            	</span>
+                                                <span class=" input-icon input-icon-right pull-right" style="width:150px;">
+                                                    <input name="rand" type="text" class="form-control" placeholder="验证码" />
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </label>
+                                            <div class="space"></div>
+                                            <div class="clearfix">
+                                                <button id="resetBtn" type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                                                    <i class="ace-icon fa fa-key"></i>
+                                                    <span class="bigger-110">提交</span>
+                                                </button>
+                                            </div>
+                                            <div class="space-4"></div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+             <h4 class="light-blue" id="id-company-text" style="text-align:center;">Powered by 聚利科技</h4>
+            </div>
+        </div>
+    </div>
+</div>
+@};

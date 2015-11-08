@@ -7,15 +7,20 @@ package com.riguz.j2b.config;
  *
  */
 public enum Status {
-    DELETED(-1), NORMAL(0), NOT_ENABLED(1), LOCKED(2);
+	DELETED(-1), NORMAL(0), NOT_ENABLED(1), LOCKED(2);
 
-    private int status;
+	private int status;
 
-    Status(int status) {
-        this.status = status;
-    }
+	Status(int status) {
+		this.status = status;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	/**
+	 * DELETED(-1), NORMAL(0), NOT_ENABLED(1), LOCKED(2);
+	 * 
+	 * @return
+	 */
+	public int getStatus() {
+		return status;
+	}
 }

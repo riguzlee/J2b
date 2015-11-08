@@ -18,8 +18,8 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 
 import com.jfinal.log.Logger;
 import com.riguz.j2b.config.Status;
-import com.riguz.j2b.model.Role;
-import com.riguz.j2b.model.User;
+import com.riguz.j2b.model.entity.Role;
+import com.riguz.j2b.model.entity.User;
 import com.riguz.j2b.service.SecurityService;
 
 public class ShiroDbRealm extends AuthorizingRealm {
@@ -37,7 +37,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
             logger.warn("User not found:" + token.getUsername());
             throw new UnknownAccountException();
         }
-        int status = user.getInt("status");
+        int status = user.getInt("ACCOUNT_STATUS");
         // 用户被锁定
         if (Status.LOCKED.getStatus() == status)
             throw new LockedAccountException(" USER Freezed");
@@ -45,13 +45,13 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if (Status.NOT_ENABLED.getStatus() == status)
             throw new LockedAccountException(" USER not validated");
         // 认证用户密码
-        if (SecurityService.checkPassword(new String(token.getPassword()), user.getStr("password"))) {
+        if (SecurityService.checkPassword(new String(token.getPassword()), user.getStr("PASSWORD"))) {
             logger.info("Password validated.");
         }
         else
             throw new AuthenticationException("Username/Password not match");
         // 认证成功
-        return new SimpleAuthenticationInfo(user.getStr("login_name"), user.getStr("password"), this.getName());
+        return new SimpleAuthenticationInfo(user.getStr("LOGIN_NAME"), user.getStr("PASSWORD"), this.getName());
     }
 
     /**

@@ -13,7 +13,7 @@ $(function() {
 				var error = data.error;
 				if(error == '0'){
 					$.scojs_message('登录成功！', $.scojs_message.TYPE_OK);
-					$(window.location).attr('href', '/monitor/lockMonitor/lockMonitor');
+					$(window.location).attr('href', '/');
 				}
 				else
 					$.scojs_message('登录失败:' + data.data, $.scojs_message.TYPE_ERROR);

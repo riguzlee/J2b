@@ -3,33 +3,54 @@ package com.riguz.j2b.model.entity;
 import java.util.List;
 
 import com.jfinal.log.Logger;
-import com.jfinal.plugin.activerecord.Model;
+import com.riguz.j2b.model.Entity;
 
-public class User extends Model<User> {
-    private static final long  serialVersionUID = -7192602281278366184L;
-    private static Logger      logger           = Logger.getLogger(User.class.getName());
-    public static final User   dao              = new User();
-    public static final String ME_TABLE_NAME    = "sys_user";
+public class User extends Entity<User> {
+    private static final long serialVersionUID = -7192602281278366184L;
+    private static Logger     logger           = Logger.getLogger(User.class.getName());
+    public static final User  dao              = new User();
 
     public User() {
         super();
     }
 
-    /**
-     * 获取当前用户角色列表
-     * 
-     * @return
-     */
+    public enum ACCOUNT_STATUS {
+        NORMAL(0), LOCKED(-1), BLOCKED(1);
+        int status = 0;
+
+        ACCOUNT_STATUS(int t) {
+            this.status = t;
+        }
+
+        public int getValue() {
+            return this.status;
+        }
+    }
+
+    public enum EMAIL_STATUS {
+        DEFAULT(-1), VALIDATED(0);
+        int status = 0;
+
+        EMAIL_STATUS(int t) {
+            this.status = t;
+        }
+
+        public int getValue() {
+            return this.status;
+        }
+    }
+
     public List<Role> getRoles() {
-        String query = "select * from `ROLE` where ROLE_ID in (select ROLE_ID from USER_TO_ROLE where USER_ID=?)";
-        return Role.dao.find(query, this.get("USER_ID"));
+        String sql = "SELECT * FROM `ROLE` WHERE `ROLE_ID` IN (SELECT `ROLE_ID` FROM `USER_TO_ROLE` WHERE `USER_ID`=?)";
+        return Role.dao.find(sql, this.get("USER_ID"));
     }
 
     public User findByLoginName(String loginName) {
-        return User.dao.findFirst("select * from `USER` where THRU_DATE is null and LOGIN_NAME = ?", loginName);
+        String sql = "SELECT * FROM `USER` WHERE `THRU_DATE` IS NULL AND LOGIN_NAME=?";
+        return User.dao.findFirst(sql, loginName);
     }
 
     public User findByEmail(String email) {
-        return User.dao.findFirst("select * from `USER` where THRU_DATE is null and EMAIL = ?", email);
+        return User.dao.findFirst("SELECT * FROM `USER` WHERE THRU_DATE IS NULL AND EMAIL = ?", email);
     }
 }

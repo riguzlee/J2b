@@ -53,9 +53,9 @@ public class Linq {
 
     public class Order {
         String fields;
-        ORDER  order;
+        ORDER_TYPE  order;
 
-        public Order(String fields, ORDER order) {
+        public Order(String fields, ORDER_TYPE order) {
             this.fields = fields;
             this.order = order;
         }
@@ -68,16 +68,16 @@ public class Linq {
             this.fields = fields;
         }
 
-        public ORDER getOrder() {
+        public ORDER_TYPE getOrder() {
             return order;
         }
 
-        public void setOrder(ORDER order) {
+        public void setOrder(ORDER_TYPE order) {
             this.order = order;
         }
     }
 
-    enum ORDER {
+    enum ORDER_TYPE {
         DESC, ASC
     };
 
@@ -102,7 +102,7 @@ public class Linq {
         return this;
     }
 
-    public Linq orderBy(String field, ORDER order) {
+    public Linq orderBy(String field, ORDER_TYPE order) {
         this.order = new Order(field, order);
         return this;
     }

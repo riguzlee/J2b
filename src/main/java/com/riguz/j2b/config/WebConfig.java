@@ -17,55 +17,55 @@ import com.riguz.j2b.shiro.SessionHandler;
 import com.riguz.j2b.shiro.ShiroPlugin;
 
 public class WebConfig extends JFinalConfig {
-	private static Logger logger = LoggerFactory.getLogger(WebConfig.class.getName());
-	Routes routes;
+    private static Logger logger = LoggerFactory.getLogger(WebConfig.class.getName());
+    Routes                routes;
 
-	@Override
-	public void configConstant(Constants me) {
-		this.loadPropertyFile("jfinal.properties");
-		me.setDevMode(PropKit.getBoolean("devMode", false));
-		me.setViewType(ViewType.JSP);
-		me.setEncoding("UTF-8");
+    @Override
+    public void configConstant(Constants me) {
+        this.loadPropertyFile("jfinal.properties");
+        me.setDevMode(PropKit.getBoolean("devMode", false));
+        me.setViewType(ViewType.JSP);
+        me.setEncoding("UTF-8");
 
-		// 配置错误页面
-		me.setError404View("/error/404.html");
-		me.setError401View("/error/401.html");
-		me.setError403View("/error/403.html");
-		me.setError500View("/error/500.html");
+        // 配置错误页面
+        me.setError404View("/error/404.html");
+        me.setError401View("/error/401.html");
+        me.setError403View("/error/403.html");
+        me.setError500View("/error/500.html");
 
-		// 配置Beetl视图渲染引擎
-		me.setMainRenderFactory(new BeetlRenderFactory());
+        // 配置Beetl视图渲染引擎
+        me.setMainRenderFactory(new BeetlRenderFactory());
 
-	}
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void configRoute(Routes me) {
-		this.routes = me;
-		// 动态加载路由配置
-		ConfigFactory.createRoute(me, "route.properties");
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public void configRoute(Routes me) {
+        this.routes = me;
+        // 动态加载路由配置
+        ConfigFactory.createRoute(me, "jfinal.properties");
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void configPlugin(Plugins me) {
-		// 使用Druid作为数据库连接池
-		ConfigFactory.createTableMapping(me, "jdbc.properties");
+    @SuppressWarnings("unchecked")
+    @Override
+    public void configPlugin(Plugins me) {
+        // 使用Druid作为数据库连接池
+        ConfigFactory.createTableMapping(me, "jdbc.properties");
 
-		// 加载Shiro插件
-		me.add(new ShiroPlugin(this.routes));
-	}
+        // 加载Shiro插件
+        me.add(new ShiroPlugin(this.routes));
+    }
 
-	@Override
-	public void configInterceptor(Interceptors me) {
-	}
+    @Override
+    public void configInterceptor(Interceptors me) {
+    }
 
-	@Override
-	public void configHandler(Handlers me) {
-		// 加载路径处理器，处理${CONTEXT_PATH}
-		me.add(new ContextPathHandler());
+    @Override
+    public void configHandler(Handlers me) {
+        // 加载路径处理器，处理${CONTEXT_PATH}
+        me.add(new ContextPathHandler());
 
-		// 去掉 jsessionid 防止找不到action
-		me.add(new SessionHandler());
-	}
+        // 去掉 jsessionid 防止找不到action
+        me.add(new SessionHandler());
+    }
 }

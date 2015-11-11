@@ -18,7 +18,7 @@
     data-toggle="table"
     data-toolbar="#toolbar"
     data-height="600"
-    data-url="/system/getUrls"
+    data-url="/system/urls/list"
     data-query-params="queryParams"
     data-show-columns="false"
     data-side-pagination="server"
@@ -30,15 +30,12 @@
     <thead>
     <tr>
         <th data-field="check" data-checkbox="true"></th>
-        <th data-field="id" data-visible="false">ID</th>
-        <th data-field="name">权限名称</th>
-        <th data-field="uri">菜单路径</th>
-        <th data-field="show_menu">生成菜单</th>
-        <th data-field="chain_order">权限排序</th>
-        <th data-field="url_pattern">权限路径</th>
-        <th data-field="filters">权限表达式</th>
-        <th data-field="status" data-formatter="statusFormatter">状态</th>
-        <th data-field="remark">备注</th>
+        <th data-field="SHIRO_ID" data-visible="false">ID</th>
+        <th data-field="NAME">权限名称</th>
+        <th data-field="URL">权限路径</th>
+        <th data-field="ORDER">权限排序</th>
+        <th data-field="FILTERS">权限表达式</th>
+        <th data-field="REMARK">备注</th>
     </tr>
     </thead>
 </table>

@@ -48,12 +48,12 @@ public class IndexController extends AbstractJsonController {
                 return;
             }
             Role role = roles.get(0);
-            String roleIdent = role.getStr("ident");
+            String roleIdent = role.getStr("IDENT");
             List<MenuItem> menu = MenuFactory.getRoleMenu(roleIdent);
             // TODO:support muti roles
             Map<String, Object> vars = new HashMap<String, Object>();
             vars.put("roleMenu", menu);
-            vars.put("loginUser", u.get("login_name"));
+            vars.put("loginUser", u.get("LOGIN_NAME"));
             BeetlRenderFactory.groupTemplate.setSharedVars(vars);
             this.setSessionAttr(DefaultSettings.SESSION_USERNAME, userName);
             ResponseFactory.createSuccessResponse(this);

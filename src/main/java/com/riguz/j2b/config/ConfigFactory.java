@@ -72,10 +72,15 @@ public class ConfigFactory {
         int i = 0;
         while (true) {
             i += 1;
-            String url = p.get(i + ".url");
-            String className = p.get(i + ".controller");
-            if (Strings.isNullOrEmpty(url))
+            String tmp = p.get("route." + i);
+            if (Strings.isNullOrEmpty(tmp))
                 break;
+            String[] arr = tmp.split("=>");
+            if (arr.length != 2)
+                throw new IllegalArgumentException("Route config not valid");
+            String url = arr[0].trim();
+            String className = arr[1].trim();
+
             try {
                 logger.debug("Adding route:{}=>{}", url, className);
                 routes.add(url, (Class<? extends Controller>) Class.forName(className));

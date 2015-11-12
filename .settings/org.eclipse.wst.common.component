@@ -5,6 +5,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/tests"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/lp"/>
         <property name="java-output-path" value="/BidaOnline/target/classes"/>
         <property name="context-root" value="J2b"/>
     </wb-module>

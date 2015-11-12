@@ -17,4 +17,9 @@ public class Shiro extends Entity<Shiro> {
     public List<Shiro> getAllFilters() {
         return Shiro.dao.find("select * from SHIRO");
     }
+
+    @Override
+    public String getTableName() {
+        return "SHIRO";
+    }
 }

@@ -57,7 +57,12 @@ public class ConfigFactory {
 
             try {
                 logger.debug("Adding mapping:{}=>{}", tableName, className);
-                recordPlugin.addMapping(tableName, (Class<? extends Model<?>>) Class.forName(className));
+                if (tableName.contains(":")) {
+                    String[] tmp = tableName.split(":");
+                    recordPlugin.addMapping(tmp[0], tmp[1], (Class<? extends Model<?>>) Class.forName(className));
+                }
+                else
+                    recordPlugin.addMapping(tableName, (Class<? extends Model<?>>) Class.forName(className));
                 tables += 1;
             }
             catch (ClassNotFoundException e) {

@@ -3,9 +3,10 @@ package com.riguz.j2b.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 import com.riguz.j2b.model.Entity;
-import com.riguz.j2b.model.entity.Argument;
+import com.riguz.j2b.model.bean.Argument;
 
 public class CurdService<M extends Entity> extends AbstractService {
 
@@ -50,6 +51,34 @@ public class CurdService<M extends Entity> extends AbstractService {
             params.add(arg.getParam());
         }
         return (Page<M>) dao.paginate(pageNumber, pageSize, select, sqlExceptSelect, newParams.toArray());
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public M get(Entity dao, String id, String... fields) {
+        String sql = null;
+        for (String field : fields) {
+            if (sql == null)
+                sql = "SELECT " + field;
+            else
+                sql += ", `" + field + "` ";
+        }
+        sql += "FROM `" + dao.getTableName() + "` WHERE `THRU_DATE` IS NULL AND  `" + dao.getTableName() + "_ID` =?";
+        return (M) dao.findFirst(sql, id);
+    }
+
+    @SuppressWarnings("rawtypes")
+    public boolean save(Model item) {
+        return item.save();
+    }
+
+    @SuppressWarnings("rawtypes")
+    public boolean update(Model item) {
+        return item.update();
+    }
+
+    @SuppressWarnings("rawtypes")
+    public boolean delete(Model item) {
+        return item.delete();
     }
 
 }

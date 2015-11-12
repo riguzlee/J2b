@@ -1,4 +1,4 @@
-package com.riguz.j2b.model.entity;
+package com.riguz.j2b.model.bean;
 
 public class Argument {
     public enum QUERY_TYPE {

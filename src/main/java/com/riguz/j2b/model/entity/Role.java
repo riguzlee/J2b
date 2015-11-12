@@ -12,4 +12,9 @@ public class Role extends Entity<Role> {
         super();
     }
 
+    @Override
+    public String getTableName() {
+        return "ROLE";
+    }
+
 }

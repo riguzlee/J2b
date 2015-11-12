@@ -20,4 +20,9 @@ public class Token extends Entity<Token> {
             this.type = t;
         }
     }
+
+    @Override
+    public String getTableName() {
+        return "TOKEN";
+    }
 }

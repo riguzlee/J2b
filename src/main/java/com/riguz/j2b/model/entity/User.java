@@ -53,4 +53,9 @@ public class User extends Entity<User> {
     public User findByEmail(String email) {
         return User.dao.findFirst("SELECT * FROM `USER` WHERE THRU_DATE IS NULL AND EMAIL = ?", email);
     }
+
+    @Override
+    public String getTableName() {
+        return "USER";
+    }
 }

@@ -7,6 +7,10 @@ import com.jfinal.plugin.activerecord.Model;
 @SuppressWarnings("rawtypes")
 public class Entity<M extends Model> extends Model<M> {
 
+    public String getTableName() {
+        return "";
+    }
+
     @Override
     public boolean update() {
         this.set("LAST_UPDATED_DATE", new Date());

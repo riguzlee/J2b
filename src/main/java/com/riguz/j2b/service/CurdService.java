@@ -77,7 +77,10 @@ public class CurdService<M extends Entity> extends AbstractService {
     }
 
     @SuppressWarnings("rawtypes")
-    public boolean delete(Model item) {
+    public boolean delete(Entity dao, String id) {
+        Model item = dao.findById(id);
+        if (item == null)
+            return false;
         return item.delete();
     }
 

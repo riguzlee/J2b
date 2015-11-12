@@ -30,7 +30,7 @@ public abstract class Entity<M extends Model> extends Model<M> {
 
     @Override
     public boolean delete() {
-        this.set("THUR_DATE", new Date());
+        this.set("THRU_DATE", new Date());
         return this.update();
     }
 }

@@ -12,7 +12,7 @@
 
 
 @layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"/system/roles"}){
-@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addRoleDialog", editDialog:"#addRoleDialog", deleteAction:"/system/doDeleteRole"}){}
+@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addRoleDialog", editDialog:"#addRoleDialog", deleteAction:"/system/roles/delete"}){}
 @include("_editRole.html",{dialogId:"addRoleDialog", formId:"addRoleForm"}){}
 <table id="rolesList" class="dataTable"
     data-toggle="table"

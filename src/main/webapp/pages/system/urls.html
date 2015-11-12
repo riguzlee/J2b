@@ -12,7 +12,7 @@
 @};
 
 @layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"/system/urls"}){
-@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addUrlDialog", editDialog:"#addUrlDialog", deleteAction:"/system/doDeleteUrl"}){}
+@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addUrlDialog", editDialog:"#addUrlDialog", deleteAction:"/system/urls/delete"}){}
 @include("_editUrl.html",{dialogId:"addUrlDialog", formId:"addUrlForm"}){}
 <table id="urlsList" class="dataTable"
     data-toggle="table"

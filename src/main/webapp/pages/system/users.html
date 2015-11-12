@@ -21,7 +21,7 @@
 @};
 
 @layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"/system/users"}){
-@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addUserDialog", editDialog:"#addUserDialog", deleteAction:"/system/doDeleteUser"}){}
+@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addUserDialog", editDialog:"#addUserDialog", deleteAction:"/system/users/delete"}){}
 
 @include("_editUser.html",{dialogId:"addUserDialog", formId:"addUserForm"}){}
 

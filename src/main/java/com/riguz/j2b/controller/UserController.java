@@ -1,11 +1,12 @@
 package com.riguz.j2b.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.riguz.j2b.ajax.ResponseFactory;
 import com.riguz.j2b.config.DefaultSettings;
-import com.riguz.j2b.model.entity.Role;
 import com.riguz.j2b.model.entity.User;
 import com.riguz.j2b.service.UserService;
+import com.riguz.j2b.validator.IdValidator;
 
 public class UserController extends AbstractJsonController {
     UserService userService = new UserService();
@@ -22,6 +23,7 @@ public class UserController extends AbstractJsonController {
         this.renderJson(list);
     }
 
+    @Before(IdValidator.class)
     public void get() {
         String id = this.getPara();
         User user = this.userService.get(id);
@@ -34,15 +36,16 @@ public class UserController extends AbstractJsonController {
         ResponseFactory.renderResult(this, result);
     }
 
+    @Before(IdValidator.class)
     public void update() {
         User item = this.getModel(User.class, "user");
         boolean result = this.userService.update(item);
         ResponseFactory.renderResult(this, result);
     }
 
+    @Before(IdValidator.class)
     public void delete() {
-        User item = this.getModel(User.class, "user");
-        boolean result = this.userService.delete(item);
+        boolean result = this.userService.delete(User.dao, this.getPara());
         ResponseFactory.renderResult(this, result);
     }
 }

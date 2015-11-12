@@ -31,8 +31,7 @@ $(function() {
 					$.getJSON(deleteUrl + "/" + this.id, function(json){
 						if(json.error != 0){
 							console.log('删除失败'+$.scojs_message.TYPE_ERROR);
-							//$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);
-							$.scojs_message(json.data,$.scojs_message.TYPE_Ok);	
+							$.scojs_message('删除失败！', $.scojs_message.TYPE_ERROR);							
 							return;
 						}else{
 							deleted += 1;

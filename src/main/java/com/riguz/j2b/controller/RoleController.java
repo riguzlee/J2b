@@ -1,10 +1,12 @@
 package com.riguz.j2b.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.riguz.j2b.ajax.ResponseFactory;
 import com.riguz.j2b.config.DefaultSettings;
 import com.riguz.j2b.model.entity.Role;
 import com.riguz.j2b.service.RoleService;
+import com.riguz.j2b.validator.IdValidator;
 
 public class RoleController extends AbstractJsonController {
     RoleService roleService = new RoleService();
@@ -21,6 +23,7 @@ public class RoleController extends AbstractJsonController {
         this.renderJson(list);
     }
 
+    @Before(IdValidator.class)
     public void get() {
         String id = this.getPara();
         Role role = this.roleService.get(id);
@@ -33,15 +36,16 @@ public class RoleController extends AbstractJsonController {
         ResponseFactory.renderResult(this, result);
     }
 
+    @Before(IdValidator.class)
     public void update() {
         Role item = this.getModel(Role.class, "role");
         boolean result = this.roleService.update(item);
         ResponseFactory.renderResult(this, result);
     }
 
+    @Before(IdValidator.class)
     public void delete() {
-        Role item = this.getModel(Role.class, "role");
-        boolean result = this.roleService.delete(item);
+        boolean result = this.roleService.delete(Role.dao, this.getPara());
         ResponseFactory.renderResult(this, result);
     }
 }

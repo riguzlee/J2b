@@ -5,7 +5,7 @@ import com.riguz.j2b.config.DefaultSettings;
 
 import cn.dreampie.encription.EncriptionKit;
 
-public class RandkeyValidator extends DefaultValidator {
+public class RandkeyValidator extends AbstractValidator {
     @Override
     protected void validate(Controller c) {
         this.validateRequired("rand", DefaultSettings.ERROR_KEY, "验证码必输!");

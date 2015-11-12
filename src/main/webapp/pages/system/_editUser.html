@@ -1,26 +1,12 @@
 @var content={
     <div class="tip"/>
-    <form method="post" add-action="/system/doAddUser" update-action="/system/doUpdateUser" id="${formId}" class="ajaxForm">
-        <input type="hidden" name="user.id"/>
-        <tp:field id="userloginName" label="登录名" name="user.login_name" desc="请输入字母或者数字组合" required="true"/>
-        <tp:field id="userRealName" label="真实姓名" name="user.real_name" required="true"/>
-        <div class="form-group">
-            <label for="user_company_id">所属单位<font class="mandatory-field" >*</font></label>
-         	<select id="user_company_id" class="form-control" name="user.company_id">
-            </select>
-        </div>
-        
-         <div class="form-group">
-            <label for="user_role_id">选择角色</label>
-            <select id="user_role_id" class="form-control" name="role_id"></select>
-        </div>
-        
-        <tp:field id="userEmail" label="用户邮箱" name="user.email" required="true" valid="email=true"/>
-        <tp:field id="userTel" label="联系电话" name="user.tel" required="true"/>
-        <tp:field id="ID_code" label="身份证" name="user.ID_code" required="false"/>
+    <form method="post" add-action="/system/users/add" update-action="/system/users/update" id="${formId}" class="ajaxForm">
+        <input type="hidden" name="user.USER_ID"/>
+        <tp:field id="userloginName" label="登录名" name="user.LOGIN_NAME" desc="请输入字母或者数字组合" required="true"/>
+        <tp:field id="userEmail" label="用户邮箱" name="user.EMAIL" required="true" valid="email=true"/>
         <div class="form-group">
             <label for="remark">备注</label>
-            <textarea class="form-control" rows="3" name="user.remark" placeholder=""></textarea>
+            <textarea class="form-control" rows="3" name="user.REMARK" placeholder=""></textarea>
         </div>
     </form>
 @};
@@ -36,20 +22,15 @@ function initControls(){
 	$("input[name='user.login_name']").attr("disabled",false);
 }
 function loadItem(id){
-    $.getJSON("/system/getUser/" + id, function(json){
+    $.getJSON("/system/users/get/" + id, function(json){
     	if(json.error != 0){
     		alert('获取数据失败:' + json.data);
     	}
     	var item = json.data;
-    	$("input[name='user.id']").val(item.id);
-    	$("input[name='user.login_name']").val(item.login_name);
-    	$("input[name='user.login_name']").attr("disabled",true);
-    	$("input[name='user.real_name']").val(item.real_name);
-    	$("input[name='user.email']").val(item.email);
-    	$("input[name='user.tel']").val(item.tel);
-    	$("input[name='user.ID_code']").val(item.ID_code);
-    	$("textarea[name='user.remark']").val(item.remark);
-    	$("select[name='role_id']").val(item.role_id);
+    	$("input[name='user.USER_ID']").val(item.USER_ID);
+    	$("input[name='user.LOGIN_NAME']").val(item.LOGIN_NAME);
+    	$("input[name='user.EMAIL']").val(item.EMAIL);
+    	$("textarea[name='user.REMARK']").val(item.REMARK);
     });   
 }
 </script>

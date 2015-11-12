@@ -22,4 +22,9 @@ public class Shiro extends Entity<Shiro> {
     public String getTableName() {
         return "SHIRO";
     }
+
+    @Override
+    public String getPrimaryKeyName() {
+        return "SHIRO_ID";
+    }
 }

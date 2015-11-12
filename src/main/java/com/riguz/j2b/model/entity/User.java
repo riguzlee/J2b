@@ -58,4 +58,9 @@ public class User extends Entity<User> {
     public String getTableName() {
         return "USER";
     }
+
+    @Override
+    public String getPrimaryKeyName() {
+        return "USER_ID";
+    }
 }

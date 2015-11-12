@@ -25,4 +25,9 @@ public class Token extends Entity<Token> {
     public String getTableName() {
         return "TOKEN";
     }
+
+    @Override
+    public String getPrimaryKeyName() {
+        return "TOKEN_ID";
+    }
 }

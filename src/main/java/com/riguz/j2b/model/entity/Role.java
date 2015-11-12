@@ -17,4 +17,9 @@ public class Role extends Entity<Role> {
         return "ROLE";
     }
 
+    @Override
+    public String getPrimaryKeyName() {
+        return "ROLE_ID";
+    }
+
 }

@@ -18,4 +18,12 @@ public class LepaoController extends AbstractJsonController {
     public void share() {
 
     }
+
+    public void portrait() {
+        this.render("/pages/lepao/portrait.html");
+    }
+
+    public void license() {
+
+    }
 }

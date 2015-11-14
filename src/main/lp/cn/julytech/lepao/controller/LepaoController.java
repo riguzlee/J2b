@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.google.common.base.Strings;
 import com.jfinal.kit.PathKit;
+import com.jfinal.log.Logger;
 import com.jfinal.upload.UploadFile;
 import com.riguz.j2b.ajax.ResponseFactory;
 import com.riguz.j2b.controller.AbstractJsonController;
@@ -18,7 +19,8 @@ import cn.julytech.lepao.entity.WeixinUser;
 import cn.julytech.lepao.service.WeixinUserService;
 
 public class LepaoController extends AbstractJsonController {
-    WeixinUserService usrService = new WeixinUserService();
+    private static Logger logger     = Logger.getLogger(LepaoController.class.getName());
+    WeixinUserService     usrService = new WeixinUserService();
 
     public void home() {
         String code = this.getPara("code");
@@ -62,7 +64,25 @@ public class LepaoController extends AbstractJsonController {
     }
 
     public void match() {
+        this.keepPara();
         this.render("/pages/lepao/match.html");
+    }
+
+    public synchronized void doMatch() {
+        WeixinUser user = this.getCurrentUser();
+        if (user == null) {
+            ResponseFactory.createErrorRespone(this, "无法获取微信授权");
+            return;
+        }
+        String result = this.usrService.doMatch(user);
+        if (result != null) {
+            ResponseFactory.createSuccessResponse(this, result);
+        }
+        else {
+            logger.error("Matched failed");
+            ResponseFactory.createErrorRespone(this, "匹配失败，请稍后再试试吧！");
+            return;
+        }
     }
 
     public void zone() {
@@ -98,7 +118,7 @@ public class LepaoController extends AbstractJsonController {
                     ResponseFactory.createErrorRespone(this, "提交数据库失败");
                     return;
                 }
-                ResponseFactory.createSuccessResponse(this, imgUrl);
+                this.redirect("/lepao/home?open_id=" + this.getPara("open_id"));
                 return;
             }
             catch (IOException e) {

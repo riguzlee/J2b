@@ -12,6 +12,8 @@ public abstract class Entity<M extends Model> extends Model<M> {
 
     public abstract String getPrimaryKeyName();
 
+    public abstract boolean autoId();
+
     @Override
     public boolean update() {
         this.set("LAST_UPDATED_DATE", new Date());
@@ -20,8 +22,10 @@ public abstract class Entity<M extends Model> extends Model<M> {
 
     @Override
     public boolean save() {
-        String id = IdentityService.getNewId();
-        this.set(this.getPrimaryKeyName(), id);
+        if (!this.autoId()) {
+            String id = IdentityService.getNewId();
+            this.set(this.getPrimaryKeyName(), id);
+        }
         Date now = new Date();
         this.set("FROM_DATE", now);
         this.set("CREATED_DATE", now);

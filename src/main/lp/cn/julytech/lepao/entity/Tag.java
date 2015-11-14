@@ -11,7 +11,11 @@ public class Tag extends Entity {
 
     @Override
     public String getPrimaryKeyName() {
-        return "tag_id";
+        return "TAG_ID";
     }
 
+    @Override
+    public boolean autoId() {
+        return true;
+    }
 }

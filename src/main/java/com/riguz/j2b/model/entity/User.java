@@ -63,4 +63,9 @@ public class User extends Entity<User> {
     public String getPrimaryKeyName() {
         return "USER_ID";
     }
+
+    @Override
+    public boolean autoId() {
+        return false;
+    }
 }

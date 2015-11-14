@@ -11,7 +11,12 @@ public class MatchRecord extends Entity {
 
     @Override
     public String getPrimaryKeyName() {
-        return "usr_id";
+        return "MATCH_ID";
+    }
+
+    @Override
+    public boolean autoId() {
+        return true;
     }
 
 }

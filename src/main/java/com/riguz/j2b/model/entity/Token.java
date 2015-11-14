@@ -30,4 +30,9 @@ public class Token extends Entity<Token> {
     public String getPrimaryKeyName() {
         return "TOKEN_ID";
     }
+
+    @Override
+    public boolean autoId() {
+        return false;
+    }
 }

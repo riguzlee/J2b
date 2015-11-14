@@ -11,7 +11,12 @@ public class Img extends Entity {
 
     @Override
     public String getPrimaryKeyName() {
-        return "img_id";
+        return "IMG_ID";
+    }
+
+    @Override
+    public boolean autoId() {
+        return false;
     }
 
 }

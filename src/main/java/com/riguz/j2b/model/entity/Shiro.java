@@ -27,4 +27,9 @@ public class Shiro extends Entity<Shiro> {
     public String getPrimaryKeyName() {
         return "SHIRO_ID";
     }
+
+    @Override
+    public boolean autoId() {
+        return false;
+    }
 }

@@ -12,7 +12,11 @@ public class WeixinUser extends Entity<WeixinUser> {
 
     @Override
     public String getPrimaryKeyName() {
-        return "usr_id";
+        return "USR_ID";
     }
 
+    @Override
+    public boolean autoId() {
+        return false;
+    }
 }

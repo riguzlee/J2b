@@ -1,9 +1,31 @@
 @var js={
 <script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
 <script>
-$(document).ready(function(){
-    
-});
+function doMatch(){
+	$("#matchForm").validate({
+	}).form();
+	var formData = $("#matchForm").serialize();
+	var url = $("#matchForm").attr('action');
+	$.ajax({
+		type:'post',
+		url:url,
+		data:formData,
+		cache:false,
+		dataType:'json',
+		success:function(data){
+			var error = data.error;
+			if(error == '0'){
+				$('.modal').modal('hide')
+				$.scojs_message('操作成功！', $.scojs_message.TYPE_OK);
+				setTimeout(function(){
+					alert(data.data);
+				},1000); 
+			}
+			else
+				alert('错误：' + data.data);
+		}
+	});
+}
 </script>
 @};
 
@@ -17,6 +39,9 @@ $(document).ready(function(){
     			<img src="${CONTEXT_PATH}/static/img/lepao/she.png" alt="she/he">
     		</div>
     	</div>
-    	<button type="button" class="btn btn-success">挑个对象</button>
+    	<form method="post" action="/lepao/doMatch" id="matchForm" class="form-horizontal" user="form">
+			<input type="hidden" name="open_id" value="${open_id!}"/>
+    		<button type="button" class="btn btn-success" onclick="doMatch()">挑个对象</button>
+    	</form>
     </div>
 @}

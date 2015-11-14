@@ -22,4 +22,9 @@ public class Role extends Entity<Role> {
         return "ROLE_ID";
     }
 
+    @Override
+    public boolean autoId() {
+        return false;
+    }
+
 }

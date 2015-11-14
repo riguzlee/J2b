@@ -11,7 +11,11 @@ public class Sig extends Entity {
 
     @Override
     public String getPrimaryKeyName() {
-        return "sig_id";
+        return "SIG_ID";
     }
 
+    @Override
+    public boolean autoId() {
+        return false;
+    }
 }

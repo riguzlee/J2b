@@ -6,7 +6,6 @@
     		</div>
     		<div class="row">
 				<a href="/lepao/portrait">更换头像</a>
-				<a href="#">编辑资料</a>
 			</div>
     	</div>
     	<div class="userInfo">
@@ -15,19 +14,33 @@
     		</div>
 	    	<div class="row">
 	    		<div class="col-xs-4 col-sm-4"><label>姓名</label></div>
-	    		<div class="col-xs-8 col-sm-8"><span>李海峰</span></div>
+	    		<div class="col-xs-8 col-sm-8"><span>${user.REAL_NAME}</span></div>
 	    	</div>
 	    	<div class="row">
 	    		<div class="col-xs-4 col-sm-4"><label>性别</label></div>
-	    		<div class="col-xs-8 col-sm-8"><span>男</span></div>
+	    		<div class="col-xs-8 col-sm-8"><span>
+	    			@if(user.GENDER == 1){
+	    			男
+	    			@}else{
+	    			女
+	    			@};
+	    		</span></div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-xs-4 col-sm-4"><label>年龄</label></div>
+	    		<div class="col-xs-8 col-sm-8"><span>${user.AGE}</span></div>
 	    	</div>
 	    	<div class="row">
 	    		<div class="col-xs-4 col-sm-4"><label>号牌</label></div>
-	    		<div class="col-xs-8 col-sm-8"><span>4399</span></div>
+	    		<div class="col-xs-8 col-sm-8"><span>${user.LEPAO_NUMBER}</span></div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-xs-4 col-sm-4"><label>兴趣爱好</label></div>
+	    		<div class="col-xs-8 col-sm-8"><span>${user.HOBBY}</span></div>
 	    	</div>
 	    	<div class="row">
 	    		<div class="col-xs-4 col-sm-4"><label>登记时间</label></div>
-	    		<div class="col-xs-8 col-sm-8"><span>2015/11/27</span></div>
+	    		<div class="col-xs-8 col-sm-8"><span>${user.REGISTER_DATE}</span></div>
 	    	</div>
     	</div>
     </div>

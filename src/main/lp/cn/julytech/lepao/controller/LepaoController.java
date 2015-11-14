@@ -18,12 +18,13 @@ public class LepaoController extends AbstractJsonController {
             return;
         }
         // FIXME:
-        this.setAttr("id", openId);
+        this.setAttr("open_id", openId);
         WeixinUser usr = this.getCurrentUser();
         if (usr == null) {
-            this.license();
+            this.redirect("/lepao/license?open_id=" + openId);
             return;
         }
+        this.setAttr("user", usr);
         this.render("/pages/lepao/home.html");
     }
 
@@ -72,7 +73,7 @@ public class LepaoController extends AbstractJsonController {
     }
 
     private WeixinUser getCurrentUser() {
-        String id = this.getPara("id");
+        String id = this.getPara("open_id");
         if (Strings.isNullOrEmpty(id))
             return null;
         return this.usrService.getUsrByOpenId(id);

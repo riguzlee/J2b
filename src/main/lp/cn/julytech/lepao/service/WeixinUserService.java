@@ -1,5 +1,7 @@
 package cn.julytech.lepao.service;
 
+import java.util.Date;
+
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.riguz.j2b.model.bean.Argument;
@@ -51,6 +53,7 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         user.set("MOBILE", model.getStr("MOBILE"));
         user.set("HOBBY", model.getStr("HOBBY"));
         user.set("AGE", model.getInt("AGE"));
+        user.set("REGISTER_DATE", new Date());
         return user.update();
     }
 }

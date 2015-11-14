@@ -47,6 +47,11 @@ body {
 .userInfo {
 	padding: 15px 10px 15px 10px;
 	text-align: center;
+	background:url("../img/lepao/tag.png") no-repeat;
+	border:2px solid #eee;
+	-webkit-box-shadow: 3px 3px 3px;
+  -moz-box-shadow: 3px 3px 3px;
+  box-shadow: 3px 3px 3px;
 }
 
 #portrait {

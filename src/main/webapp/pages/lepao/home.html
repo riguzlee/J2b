@@ -2,10 +2,16 @@
     <div class="container">
     	<div class="row u-header round">
     		<div class="row">
-    		<img src="${CONTEXT_PATH}/static/img/lepao/user.jpg" alt="用户头像"/>
+    		<img src=
+    		@if(isEmpty(user.PORTRAIT)){
+    		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+    		@}else{
+    		${user.PORTRAIT}
+    		@}
+    		 alt="用户头像"/>
     		</div>
     		<div class="row">
-				<a href="/lepao/portrait">更换头像</a>
+				<a href="/lepao/portrait?open_id=${user.OPEN_ID}">更换头像</a>
 			</div>
     	</div>
     	<div class="userInfo">

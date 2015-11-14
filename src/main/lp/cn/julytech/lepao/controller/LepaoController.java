@@ -1,8 +1,18 @@
 package cn.julytech.lepao.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
+
 import com.google.common.base.Strings;
+import com.jfinal.kit.PathKit;
+import com.jfinal.upload.UploadFile;
 import com.riguz.j2b.ajax.ResponseFactory;
 import com.riguz.j2b.controller.AbstractJsonController;
+import com.riguz.j2b.service.IdentityService;
 
 import cn.julytech.lepao.entity.WeixinUser;
 import cn.julytech.lepao.service.WeixinUserService;
@@ -60,7 +70,42 @@ public class LepaoController extends AbstractJsonController {
     }
 
     public void portrait() {
+        this.keepPara();
         this.render("/pages/lepao/portrait.html");
+    }
+
+    public void doUpload() {
+        String path = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+        UploadFile file = getFile("upload", PathKit.getWebRootPath() + "/temp");
+        WeixinUser user = this.getCurrentUser();
+        if (user == null) {
+            ResponseFactory.createErrorRespone(this, "无法获取微信授权");
+            return;
+        }
+        File source = file.getFile();
+        String fileName = file.getFileName();
+        String extension = fileName.substring(fileName.lastIndexOf("."));
+        String prefix;
+        if (".png".equals(extension) || ".jpg".equals(extension)) {
+            prefix = "img";
+            fileName = IdentityService.getNewToken() + extension;
+            try {
+                String imgUrl = "/upload/" + path + "/" + fileName;
+                File newFile = new File(PathKit.getWebRootPath() + imgUrl);
+                FileUtils.copyFile(source, newFile);
+                user.set("PORTRAIT", imgUrl);
+                if (!user.update()) {
+                    ResponseFactory.createErrorRespone(this, "提交数据库失败");
+                    return;
+                }
+                ResponseFactory.createSuccessResponse(this, imgUrl);
+                return;
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        ResponseFactory.createErrorRespone(this);
     }
 
     public void license() {

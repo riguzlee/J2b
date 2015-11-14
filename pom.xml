@@ -142,6 +142,11 @@
 			<artifactId>jfinal-captcha</artifactId>
 			<version>${jfinal-captcha}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>cos</artifactId>
+			<version>26Dec2008</version>
+		</dependency>
 
 	</dependencies>
 	<build>

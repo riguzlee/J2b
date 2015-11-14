@@ -20,6 +20,7 @@ body {
 	padding-top: 15px;
 	text-align: center;
 }
+
 .match-header {
 	height: 150px;
 	background: url('../img/lepao/mt-bg.gif') no-repeat;
@@ -29,6 +30,8 @@ body {
 }
 
 .round img {
+	width:100px;
+	height:100px;
 	border-radius: 50px;
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
@@ -47,11 +50,11 @@ body {
 .userInfo {
 	padding: 15px 10px 15px 10px;
 	text-align: center;
-	background:url("../img/lepao/tag.png") no-repeat;
-	border:2px solid #eee;
+	background: url("../img/lepao/tag.png") no-repeat;
+	border: 2px solid #eee;
 	-webkit-box-shadow: 3px 3px 3px;
-  -moz-box-shadow: 3px 3px 3px;
-  box-shadow: 3px 3px 3px;
+	-moz-box-shadow: 3px 3px 3px;
+	box-shadow: 3px 3px 3px;
 }
 
 #portrait {
@@ -72,18 +75,30 @@ body {
 }
 
 /* for match.html*/
-#matchContainer, .matchBody{
-	background-color:#eee;
+#matchContainer, .matchBody {
+	background-color: #eee;
 }
-.match, #matchContainer{
-	text-align:center;	
+
+.match, #matchContainer {
+	text-align: center;
 }
-.match{
-	height:200px;
-	margin-bottom:10px;
+
+.match {
+	height: 200px;
+	margin-bottom: 10px;
 }
-.match img{
-	width:50%;
-	height:50%;
-	border:2px solid white;
+
+.match img {
+	width: 50%;
+	height: 50%;
+	border: 2px solid white;
+}
+
+.myPortrait img {
+	width: 50px;
+	height: 50px;
+}
+
+.uploadPreview img {
+	max-width: 100%;
 }

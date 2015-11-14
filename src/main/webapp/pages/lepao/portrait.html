@@ -1,9 +1,13 @@
 @var css={
 <link href="${CONTEXT_PATH}/static/jcrop/jquery.Jcrop.min.css" rel="stylesheet" />
+<link href="${CONTEXT_PATH}/static/fileinput/css/fileinput.min.css" rel="stylesheet" />
 @};
 
 @var js={
 <script src="${CONTEXT_PATH}/static/jcrop/jquery.Jcrop.min.js"></script>
+<script src="${CONTEXT_PATH}/static/fileinput/js/fileinput.min.js"></script>
+<script src="${CONTEXT_PATH}/static/fileinput/js/plugins/canvas-to-blob.min.js"></script>
+<script src="${CONTEXT_PATH}/static/fileinput/js/fileinput_locale_zh.js"></script>
 <script>
 	$(function(){
 		$('#portrait').Jcrop({
@@ -12,30 +16,46 @@
             bgOpacity: .3, 
 			boxWidth:300
 		});
+		$("#uploadImg").fileinput({
+			'showUpload':true,
+			'language':"zh",
+			'showRemove':false,
+			'previewClass':'uploadPreview',
+			'allowedFileExtensions':['jpg', 'png', 'jpeg'],
+			'previewSettings':
+				{
+				image: {width: "auto", height: "100px"},
+				},
+			'resizeImage': true,
+		    'maxImageWidth': 500,
+		    'maxImageHeight': 500,
+		    'resizePreference': 'width',
+			'resizeImage':false,
+			'maxFileSize':4096,
+			'uploadAsync':false,
+			'previewFileType':'any'});
 	});
 </script>
 @};
 
-@layout("../../layout/_mobileLayout.html", {title:"完善个人信息",js:js,head:css}){	
+@layout("../../layout/_mobileLayout.html", {title:"修改头像",js:js,head:css}){	
     <div class="container">
     	<h4>更换头像</h4>
     	<div class="row">
-    		<div class="col-sm-4 col-xs-4">
-    			<img src="${CONTEXT_PATH}/static/img/lepao/user.jpg" alt="用户头像"/>
-    		</div>
-    		<div class="col-sm-8 col-xs-8">
-    			<form name="form_portrait" method="post" action="/setportrait" id="form_portrait" enctype="multipart/form-data">
-				    <input type="file" name="file" class="file" id="fileField" />
-				    <br>
-				    <input type="submit" name="uploadImg" value="上传" class="default" id="newPortraitUpload" />
+    		
+    		<div class="col-sm-12 col-xs-12">
+    			<form name="form_portrait" method="post" 
+    			action="/lepao/doUpload?type=portrait&open_id=${open_id}" id="form_portrait" enctype="multipart/form-data">
+				    <input id="uploadImg" name="upload" type="file">
 				</form>
     		</div>
     	</div>
     	<hr>
-    	<div class="row">
+    	<div class="row editArea" style="display:none">
     		<img id="portrait" src="${CONTEXT_PATH}/static/img/lepao/WIN_20151027_21_14_23_Pro.jpg">
+    		<button type="button" class="btn btn-success" onclick="doRegister()">保存选中区域</button>
     	</div>
     	<hr>
-    	<button>保存选中区域</button>
+    	
     </div>
 @}

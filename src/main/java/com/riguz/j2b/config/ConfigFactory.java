@@ -40,7 +40,7 @@ public class ConfigFactory {
         plugins.add(dbPlugin);
 
         // 配置ActiveRecord 插件
-        ActiveRecordPlugin recordPlugin = new ActiveRecordPlugin(dbPlugin);
+        ActiveRecordPlugin recordPlugin = new ActiveRecordPlugin(group, dbPlugin);
         recordPlugin.setContainerFactory(new CaseInsensitiveContainerFactory(false));
         plugins.add(recordPlugin);
 

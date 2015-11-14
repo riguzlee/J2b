@@ -1,0 +1,22 @@
+@var js={
+<script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
+<script>
+$(document).ready(function(){
+    
+});
+</script>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:'找"对象"~_~', js:js, bodyClass:"matchBody"}){	
+    <div class="container" id="matchContainer"> 
+    	<div class="row match-header">
+    		<p><strong>看看你的乐跑对象是谁！</strong></p>
+    	</div>
+    	<div class="row match">
+    		<div class="col-sm-12 col-xs-12 col-md-12">
+    			<img src="${CONTEXT_PATH}/static/img/lepao/she.png" alt="she/he">
+    		</div>
+    	</div>
+    	<button type="button" class="btn btn-success">挑个对象</button>
+    </div>
+@}

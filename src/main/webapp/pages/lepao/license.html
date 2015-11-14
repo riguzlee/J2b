@@ -1,0 +1,26 @@
+@layout("../../layout/_mobileLayout.html", {title:"用户协议"}){	
+    <div class="container">
+    	<div class="row header">
+    		<p><strong>乐跑配对游戏用户协议</strong></p>
+    	</div>
+    	<hr>
+    	<p>
+    	1、我们将对您的登记信息进行保护，您的登记信息将仅对参加本活动的其他用户看到；
+    	<p>
+    	<p>
+    	2、其他用户可能看到您的以下信息：号码牌，姓名（姓名将隐藏一个字符），分享的照片。
+    	</p>
+    	<form method="post" action="/lepao/doAcceptLicense" id="registerForm" class="form-horizontal" user="form">
+			<input type="hidden" name="user.id"/>
+	    	<nav class="navbar navbar-default navbar-fixed-bottom">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-xs-12">
+	                    <button type="button" class="btn btn-success">我已阅读并同意用户协议</button>
+	                </div>
+	            </div>
+	        </div>
+        </form>
+    </nav>
+    </div>
+@}

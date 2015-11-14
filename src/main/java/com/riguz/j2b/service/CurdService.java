@@ -11,12 +11,13 @@ import com.riguz.j2b.model.bean.Argument;
 public class CurdService<M extends Entity> extends AbstractService {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    Page<M> getList(Entity dao, int pageNumber, int pageSize, String select, String sqlExceptSelect, Argument... args) {
+    protected Page<M> getList(Entity dao, int pageNumber, int pageSize, String select, String sqlExceptSelect, Argument... args) {
         return getList(dao, pageNumber, pageSize, select, sqlExceptSelect, null, args);
     }
 
     @SuppressWarnings("unchecked")
-    Page<M> getList(Entity dao, int pageNumber, int pageSize, String select, String sqlExceptSelect, List<Object> params, Argument... args) {
+    protected Page<M> getList(Entity dao, int pageNumber, int pageSize, String select, String sqlExceptSelect, List<Object> params,
+            Argument... args) {
         List<Object> newParams = new ArrayList<Object>();
         if (params != null)
             newParams.addAll(params);

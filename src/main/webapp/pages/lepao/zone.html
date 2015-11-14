@@ -1,0 +1,62 @@
+@var js={
+<script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
+<script src="${CONTEXT_PATH}/static/js/masonry.pkgd.min.js"></script>
+<script>
+$(document).ready(function(){
+    var $container = $('#sharedPictures');    
+    $container.imagesLoaded(function(){
+        $container.masonry({
+            itemSelector: '.sharedPicture',
+            isAnimated: true,
+            columnWidth: '.sharedPicture'
+        });
+    });
+    
+});
+</script>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:"美图分享", js:js}){	
+    <div class="container">
+    	<div id="sharedPictures">
+    	<div class="row">    	    
+    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
+    			<div class="thumbnail">
+    				<img src="${CONTEXT_PATH}/static/img/uploaded/img6.jpg">
+    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
+    			</div>
+    		</div>
+    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
+    			<div class="thumbnail">
+    				<img src="${CONTEXT_PATH}/static/img/uploaded/img5.jpg">
+    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
+    			</div>
+    		</div>
+    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
+    			<div class="thumbnail">
+    				<img src="${CONTEXT_PATH}/static/img/uploaded/img4.jpg">
+    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
+    			</div>
+    		</div>
+    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
+    			<div class="thumbnail">
+    				<img src="${CONTEXT_PATH}/static/img/uploaded/img3.jpg">
+    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
+    			</div>
+    		</div>
+    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
+    			<div class="thumbnail">
+    				<img src="${CONTEXT_PATH}/static/img/uploaded/img2.jpg">
+    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
+    			</div>
+    		</div>
+    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
+    			<div class="thumbnail">
+    				<img src="${CONTEXT_PATH}/static/img/uploaded/img1.jpg">
+    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
+    			</div>
+    		</div>
+		</div>
+    	</div>
+    </div>
+@}

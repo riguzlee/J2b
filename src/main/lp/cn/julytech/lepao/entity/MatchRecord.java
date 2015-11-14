@@ -2,16 +2,16 @@ package cn.julytech.lepao.entity;
 
 import com.riguz.j2b.model.Entity;
 
-public class User extends Entity {
+public class MatchRecord extends Entity {
 
     @Override
     public String getTableName() {
-        return "ENTITY";
+        return "match_record";
     }
 
     @Override
     public String getPrimaryKeyName() {
-        return "USER_ID";
+        return "usr_id";
     }
 
 }

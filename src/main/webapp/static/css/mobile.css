@@ -10,5 +10,75 @@ body {
 	margin-bottom: 10px;
 	padding-top: 15px;
 	padding-left: 10px;
-	color:#717171;
+	color: #717171;
+}
+
+.u-header {
+	height: 150px;
+	background: url('../img/lepao/u-bg.jpg') no-repeat;
+	margin-bottom: 10px;
+	padding-top: 15px;
+	text-align: center;
+}
+.match-header {
+	height: 150px;
+	background: url('../img/lepao/mt-bg.gif') no-repeat;
+	margin-bottom: 10px;
+	padding-top: 15px;
+	text-align: center;
+}
+
+.round img {
+	border-radius: 50px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border: 2px solid white;
+}
+
+.u-header a {
+	font-size: small;
+	color: #eee;
+}
+
+.title {
+	padding: 15px 10px 15px 10px;
+}
+
+.userInfo {
+	padding: 15px 10px 15px 10px;
+	text-align: center;
+}
+
+#portrait {
+	margin: 0 auto;
+}
+
+.sharedPicture img {
+	width: 200px;
+}
+
+.sharedPicture p {
+	padding: 5px 0px;
+	font-size: 12px;
+	text-align: center;
+	color: #333;
+	white-space: normal;
+	width: 200px;
+}
+
+/* for match.html*/
+#matchContainer, .matchBody{
+	background-color:#eee;
+}
+.match, #matchContainer{
+	text-align:center;	
+}
+.match{
+	height:200px;
+	margin-bottom:10px;
+}
+.match img{
+	width:50%;
+	height:50%;
+	border:2px solid white;
 }

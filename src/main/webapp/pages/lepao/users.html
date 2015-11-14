@@ -1,0 +1,43 @@
+@var js={
+<script src="${CONTEXT_PATH}/static/js/modalEvents.js"></script>
+<script src="${CONTEXT_PATH}/static/js/listEvents.js"></script>
+<script src="${CONTEXT_PATH}/static/js/formatter.js"></script>
+@};
+
+@var search={
+<div class="form-group">
+    <input name="search" class="form-control" type="text" placeholder="Search">
+</div>
+@};
+
+
+@layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"/lpadmin/users"}){
+@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addRoleDialog", editDialog:"#addRoleDialog", deleteAction:"/system/roles/delete"}){}
+<table id="rolesList" class="dataTable"
+    data-toggle="table"
+    data-toolbar="#toolbar"
+    data-height="600"
+    data-url="/lpadmin/users/list"
+    data-query-params="queryParams"
+    data-show-columns="false"
+    data-side-pagination="server"
+    data-pagination="true"
+    data-page-list="[5, 10, 20, 50, 100, 200]"
+    data-search="false"
+    data-click-to-select="true"
+    data-id-field="id">
+    <thead>
+    <tr>
+        <th data-field="check" data-checkbox="true"></th>
+        <th data-field="USR_ID" data-visible="false">ID</th>
+        <th data-field="GENDER">性别</th>
+        <th data-field="REAL_NAME">姓名</th>
+        <th data-field="LEPAO_NUMBER">号牌</th>
+        <th data-field="s">是否完善信息</th>
+        <th data-field="s2">是否已签到</th>
+        <th data-field="REMARK">备注</th>
+    </tr>
+    </thead>
+</table>
+@};
+

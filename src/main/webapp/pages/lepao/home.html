@@ -1,0 +1,34 @@
+@layout("../../layout/_mobileLayout.html", {title:"我的资料"}){	
+    <div class="container">
+    	<div class="row u-header round">
+    		<div class="row">
+    		<img src="${CONTEXT_PATH}/static/img/lepao/user.jpg" alt="用户头像"/>
+    		</div>
+    		<div class="row">
+				<a href="/lepao/portrait">更换头像</a>
+				<a href="#">编辑资料</a>
+			</div>
+    	</div>
+    	<div class="userInfo">
+    		<div class="row title">
+    			<strong>我的资料</strong>
+    		</div>
+	    	<div class="row">
+	    		<div class="col-xs-4 col-sm-4"><label>姓名</label></div>
+	    		<div class="col-xs-8 col-sm-8"><span>李海峰</span></div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-xs-4 col-sm-4"><label>性别</label></div>
+	    		<div class="col-xs-8 col-sm-8"><span>男</span></div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-xs-4 col-sm-4"><label>号牌</label></div>
+	    		<div class="col-xs-8 col-sm-8"><span>4399</span></div>
+	    	</div>
+	    	<div class="row">
+	    		<div class="col-xs-4 col-sm-4"><label>登记时间</label></div>
+	    		<div class="col-xs-8 col-sm-8"><span>2015/11/27</span></div>
+	    	</div>
+    	</div>
+    </div>
+@}

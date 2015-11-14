@@ -1,4 +1,19 @@
-@layout("../../layout/_mobileLayout.html", {title:"用户协议"}){	
+@var js={
+<script type="text/javascript">
+	function acceptLicense(){
+		var openId = $("input[name='open_id']").val();
+		if(openId ==  ''){
+			alert("无法获取用户授权！");
+			return;
+		}
+		console.log(openId);
+		var registerUrl = "/lepao/register?open_id=" + openId;
+		$(window.location).attr('href', registerUrl);
+	}
+</script>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:"用户协议",js:js}){	
     <div class="container">
     	<div class="row header">
     		<p><strong>乐跑配对游戏用户协议</strong></p>
@@ -10,13 +25,13 @@
     	<p>
     	2、其他用户可能看到您的以下信息：号码牌，姓名（姓名将隐藏一个字符），分享的照片。
     	</p>
-    	<form method="post" action="/lepao/doAcceptLicense" id="registerForm" class="form-horizontal" user="form">
-			<input type="hidden" name="user.id"/>
+    	<form method="post" action="/lepao/doAcceptLicense" id="licenseForm" class="form-horizontal" user="form">
+			<input type="hidden" name="open_id" value="${open_id}" required/>
 	    	<nav class="navbar navbar-default navbar-fixed-bottom">
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-xs-12">
-	                    <button type="button" class="btn btn-success">我已阅读并同意用户协议</button>
+	                    <button type="submit" class="btn btn-success">我已阅读并同意用户协议</button>
 	                </div>
 	            </div>
 	        </div>

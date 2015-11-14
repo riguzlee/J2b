@@ -1,6 +1,7 @@
 package cn.julytech.lepao.controller;
 
 import com.google.common.base.Strings;
+import com.riguz.j2b.ajax.ResponseFactory;
 import com.riguz.j2b.controller.AbstractJsonController;
 
 import cn.julytech.lepao.entity.WeixinUser;
@@ -27,7 +28,18 @@ public class LepaoController extends AbstractJsonController {
     }
 
     public void register() {
+        this.keepPara();
         this.render("/pages/lepao/register.html");
+    }
+
+    public void doRegister() {
+        WeixinUser user = this.getModel(WeixinUser.class, "user");
+        user.set("GENDER", "on".equals(this.getPara("GENDER")) ? 1 : 0);
+        if (this.usrService.doRegister(user))
+            ResponseFactory.createSuccessResponse(this);
+        else {
+            ResponseFactory.createErrorRespone(this, this.usrService.getErrorMsg());
+        }
     }
 
     public void sign() {
@@ -56,7 +68,7 @@ public class LepaoController extends AbstractJsonController {
     }
 
     public void doAcceptLicense() {
-        this.register();
+        this.redirect("/lepao/register?open_id=" + this.getPara("open_id"));
     }
 
     private WeixinUser getCurrentUser() {

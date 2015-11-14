@@ -5,7 +5,7 @@ import com.jfinal.validate.Validator;
 import com.riguz.j2b.ajax.ResponseFactory;
 
 public abstract class AbstractValidator extends Validator {
-    AbstractValidator() {
+    public AbstractValidator() {
         super();
         // 设置为短路模式
         this.setShortCircuit(true);

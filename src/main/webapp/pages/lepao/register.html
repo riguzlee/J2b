@@ -1,20 +1,47 @@
 @var css={
 <link href="${CONTEXT_PATH}/static/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />
 <link href="${CONTEXT_PATH}/static/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
+<link href='${CONTEXT_PATH}/static/bower/sco.js/css/scojs.css' rel='stylesheet'>
+<link href='${CONTEXT_PATH}/static/bower/sco.js/css/sco.message.css' rel='stylesheet'>
 @};
 
 @var js={
 <script src="${CONTEXT_PATH}/static/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <script src="${CONTEXT_PATH}/static/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.modal.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.confirm.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.message.js"></script>
+
 <script>
 	$(function(){
 		$(".switch").bootstrapSwitch();
 	});
-	function onClick(){
+	function doRegister(){
 		$("#registerForm").validate({
 		}).form();
 		if (!$("#registerForm").valid())
-			alert('xx');
+			return;
+		var formData = $("#registerForm").serialize();
+		var url = $("#registerForm").attr('action');
+		$.ajax({
+			type:'post',
+			url:url,
+			data:formData,
+			cache:false,
+			dataType:'json',
+			success:function(data){
+				var error = data.error;
+				if(error == '0'){
+					$('.modal').modal('hide')
+					$.scojs_message('操作成功！', $.scojs_message.TYPE_OK);
+					setTimeout(function(){
+						$(window.location).attr('href', '/lepao/home?open_id=' + $("input[name$=open_id]").val());
+					},1000); 
+				}
+				else
+					alert('错误：' + data.data);
+			}
+		});
 	}
 </script>
 @};
@@ -26,10 +53,11 @@
     	</div>
     	<hr>
     	<form method="post" action="/lepao/doRegister" id="registerForm" class="form-horizontal" user="form">
-			<input type="hidden" name="user.id"/>
-			<tp:inlineField id="userName" label="姓名" name="user.NAME" required="true"/>
-			<tp:switchField id="userGender" label="性别" name="user.IDENT" required="true" on="男" off="女" checked="true"/>
-			<tp:inlineField id="userNumber" label="号码布" name="user.NUMBER" required="true" />
+			<input type="hidden" name="user.OPEN_ID" value="${open_id!}"/>
+			<tp:inlineField id="userName" label="姓名" name="user.REAL_NAME" required="true"/>
+			<tp:switchField id="userGender" label="性别" name="GENDER" required="true" on="男" off="女" checked="true"/>
+			<tp:inlineField id="userAge" label="年龄" name="user.AGE" required="true" valid="digits=true min=10 max=70"/>
+			<tp:inlineField id="userNumber" label="号码布" name="user.LEPAO_NUMBER" required="true" />
 			<tp:inlineField id="userMobile" label="联系电话" name="user.MOBILE" required="false"/>
 			<tp:inlineField id="userHobbits" label="爱好" name="user.HOBBY" required="false" type="data-role='tagsinput'"/>
 			<div class=labels">
@@ -44,7 +72,7 @@
 	        <div class="container">
 	            <div class="row form-item pay">
 	                <div class="col-xs-12 pay-button">
-	                    <button type="button" class="btn btn-success">完成</button>
+	                    <button type="button" class="btn btn-success" onclick="doRegister()">完成</button>
 	                </div>
 	            </div>
 	        </div>

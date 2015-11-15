@@ -1,5 +1,15 @@
+@var css={
+<link href="${CONTEXT_PATH}/static/jcrop/jquery.Jcrop.min.css" rel="stylesheet" />
+<link href="${CONTEXT_PATH}/static/fileinput/css/fileinput.min.css" rel="stylesheet" />
+<link href='${CONTEXT_PATH}/static/bower/sco.js/css/scojs.css' rel='stylesheet'>
+<link href='${CONTEXT_PATH}/static/bower/sco.js/css/sco.message.css' rel='stylesheet'>
+@};
+
 @var js={
 <script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.modal.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.confirm.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.message.js"></script>
 <script>
 function doMatch(){
 	$("#matchForm").validate({
@@ -16,7 +26,7 @@ function doMatch(){
 			var error = data.error;
 			if(error == '0'){
 				$('.modal').modal('hide')
-				$.scojs_message('操作成功！', $.scojs_message.TYPE_OK);
+				$.scojs_message('成功匹配到一个对象！', $.scojs_message.TYPE_OK);
 				setTimeout(function(){
 					alert(data.data);
 				},1000); 
@@ -29,16 +39,37 @@ function doMatch(){
 </script>
 @};
 
-@layout("../../layout/_mobileLayout.html", {title:'找"对象"~_~', js:js, bodyClass:"matchBody"}){	
+@layout("../../layout/_mobileLayout.html", {title:'找"对象"~_~', js:js, bodyClass:"matchBody",head:css}){	
     <div class="container" id="matchContainer"> 
     	<div class="row match-header">
     		<p><strong>看看你的乐跑对象是谁！</strong></p>
     	</div>
     	<div class="row match">
     		<div class="col-sm-12 col-xs-12 col-md-12">
-    			<img src="${CONTEXT_PATH}/static/img/lepao/she.png" alt="she/he">
+    		<img src=
+    			@if(isEmpty(myMatch)){
+    			"${CONTEXT_PATH}/static/img/lepao/she.png" 
+    			@}else if(isEmpty(myMatch.PORTRAIT)){
+    			"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+    			@}else{
+    			"${CONTEXT_PATH}${myMatch.PORTRAIT}"
+    			@};
+    			alt="she/he">
     		</div>
     	</div>
+    	@if(!isEmpty(myMatch)){
+    	<div class="myMatch">
+    		<div class="row ">
+    			<div class="col-sm-4 col-xs-4 col-md-4">号牌</div>
+    			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.LEPAO_NUMBER}</div>
+    		</div>
+    		<div class="row ">
+    			<div class="col-sm-4 col-xs-4 col-md-4">爱好</div>
+    			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.HOBBY}</div>
+    		</div>
+    	</div>
+    		
+    	@}
     	<form method="post" action="/lepao/doMatch" id="matchForm" class="form-horizontal" user="form">
 			<input type="hidden" name="open_id" value="${open_id!}"/>
     		<button type="button" class="btn btn-success" onclick="doMatch()">挑个对象</button>

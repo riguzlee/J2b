@@ -102,6 +102,14 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         return null;
     }
 
+    public WeixinUser getMatch(String myOpenId) {
+        String sql = "SELECT * FROM match_record "
+                + "LEFT JOIN usr ON usr.OPEN_ID=match_record.TO_USER_OPEN_ID "
+                + "WHERE FROM_USER_OPEN_ID=? "
+                + "ORDER BY MATCH_TIME DESC";
+        return WeixinUser.dao.findFirst(sql, myOpenId);
+    }
+
     @Before(RegisterValidator.class)
     public boolean doRegister(WeixinUser model) {
         WeixinUser user = this.getByNumber(model.getStr("LEPAO_NUMBER"));

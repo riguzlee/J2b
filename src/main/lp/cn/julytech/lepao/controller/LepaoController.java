@@ -65,6 +65,13 @@ public class LepaoController extends AbstractJsonController {
 
     public void match() {
         this.keepPara();
+        WeixinUser user = this.getCurrentUser();
+        if (user == null) {
+            ResponseFactory.createErrorRespone(this, "无法获取微信授权");
+            return;
+        }
+        WeixinUser myMatch = this.usrService.getMatch(user.getStr("open_id"));
+        this.setAttr("myMatch", myMatch);
         this.render("/pages/lepao/match.html");
     }
 

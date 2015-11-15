@@ -94,6 +94,12 @@ body {
 	border: 2px solid white;
 }
 
+.myMatch{
+	text-align:center;
+	margin-bottom:15px;
+}
+
+
 .myPortrait img {
 	width: 50px;
 	height: 50px;

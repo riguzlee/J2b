@@ -11,9 +11,13 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.weixin.sdk.api.ApiConfigKit;
+import com.jfinal.weixin.sdk.api.ApiResult;
+import com.jfinal.weixin.sdk.api.UserApi;
 import com.riguz.j2b.model.bean.Argument;
 import com.riguz.j2b.service.CurdService;
 
+import cn.julytech.lepao.config.ConfigFactory;
 import cn.julytech.lepao.entity.MatchRecord;
 import cn.julytech.lepao.entity.WeixinUser;
 import cn.julytech.lepao.validator.RegisterValidator;
@@ -134,6 +138,11 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         user.set("HOBBY", model.getStr("HOBBY"));
         user.set("AGE", model.getInt("AGE"));
         user.set("REGISTER_DATE", new Date());
+
+        ApiConfigKit.setThreadLocalApiConfig(ConfigFactory.getConfig("anything"));
+        ApiResult info = UserApi.getUserInfo(model.getStr("OPEN_ID"));
+        String img = info.get("headimgurl");
+        user.set("PORTRAIT", img);
         return user.update();
     }
 }

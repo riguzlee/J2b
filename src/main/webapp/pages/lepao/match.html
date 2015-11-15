@@ -28,7 +28,7 @@ function doMatch(){
 				$('.modal').modal('hide')
 				$.scojs_message('成功匹配到一个对象！', $.scojs_message.TYPE_OK);
 				setTimeout(function(){
-					alert(data.data);
+					window.location.reload();
 				},1000); 
 			}
 			else

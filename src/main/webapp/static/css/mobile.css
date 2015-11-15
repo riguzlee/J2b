@@ -108,3 +108,12 @@ body {
 .uploadPreview img {
 	max-width: 100%;
 }
+
+
+.s-header {
+	height: 150px;
+	background: url('../img/lepao/run.gif') no-repeat;
+	margin-bottom: 10px;
+	padding-top: 95px;
+	text-align: center;
+}

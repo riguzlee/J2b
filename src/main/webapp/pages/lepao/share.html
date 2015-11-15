@@ -1,0 +1,41 @@
+@var css={
+<link href="${CONTEXT_PATH}/static/jcrop/jquery.Jcrop.min.css" rel="stylesheet" />
+<link href="${CONTEXT_PATH}/static/fileinput/css/fileinput.min.css" rel="stylesheet" />
+@};
+
+@var js={
+<script src="${CONTEXT_PATH}/static/jcrop/jquery.Jcrop.min.js"></script>
+<script src="${CONTEXT_PATH}/static/fileinput/js/fileinput.min.js"></script>
+<script src="${CONTEXT_PATH}/static/fileinput/js/plugins/canvas-to-blob.min.js"></script>
+<script src="${CONTEXT_PATH}/static/fileinput/js/fileinput_locale_zh.js"></script>
+<script src="${CONTEXT_PATH}/static/js/lrz.mobile.min.js"></script>
+
+<script>
+$(function(){
+
+	$('input[type=file]').change( function () {
+	    lrz(this.files[0], function (results) {
+	      // 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
+	      console.log(results); 
+	    });
+	});
+});
+</script>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:"分享照片",js:js,head:css}){	
+    <div class="container">
+    	<h4>分享照片</h4>
+    	<div class="row">
+    		
+    		<div class="col-sm-12 col-xs-12">
+    			<form name="form_portrait" method="post" 
+    			action="/lepao/doUpload?type=portrait&open_id=${open_id}" id="form_portrait" enctype="multipart/form-data">
+				    <input type="file" accept="image/*" name="sharedImage" />
+				</form>
+    		</div>
+    	</div>
+    	<hr>
+    	
+    </div>
+@}

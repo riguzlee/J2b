@@ -31,6 +31,7 @@
 		<uuid>3.2</uuid>
 		<jbcrypt>0.3m</jbcrypt>
 		<jfinal-captcha>0.1</jfinal-captcha>
+		<jfinal-weixin>1.4</jfinal-weixin>
 	</properties>
 
 	<dependencies>
@@ -115,6 +116,11 @@
 			<groupId>com.jfinal</groupId>
 			<artifactId>jfinal</artifactId>
 			<version>${jfinal}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jfinal</groupId>
+			<artifactId>jfinal-weixin</artifactId>
+			<version>${jfinal-weixin}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfinal</groupId>

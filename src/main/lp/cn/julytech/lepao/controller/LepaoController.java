@@ -56,11 +56,28 @@ public class LepaoController extends AbstractJsonController {
     }
 
     public void sign() {
-
+        String code = this.getPara("code");
+        String openId = this.getPara("open_id");
+        if (Strings.isNullOrEmpty(code) && Strings.isNullOrEmpty(openId)) {
+            this.renderText("无法获取用户授权。请在微信中打开此网页");
+            return;
+        }
+        WeixinUser user = this.getCurrentUser();
+        if (user == null) {
+            this.redirect("/lepao/license?open_id=" + openId);
+            return;
+        }
+        this.render("/pages/lepao/sign.html");
     }
 
     public void share() {
-
+        this.keepPara();
+        WeixinUser user = this.getCurrentUser();
+        if (user == null) {
+            ResponseFactory.createErrorRespone(this, "无法获取微信授权");
+            return;
+        }
+        this.render("/pages/lepao/share.html");
     }
 
     public void match() {

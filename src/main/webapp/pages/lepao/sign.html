@@ -16,7 +16,7 @@
 	$(function(){
 		$(".switch").bootstrapSwitch();
 	});
-	function doRegister(){
+	function doSign(){
 		$("#registerForm").validate({
 		}).form();
 		if (!$("#registerForm").valid())
@@ -46,33 +46,22 @@
 </script>
 @};
 
-@layout("../../layout/_mobileLayout.html", {title:"完善个人信息", js:js,head:css}){	
+@layout("../../layout/_mobileLayout.html", {title:"乐跑签到", js:js,head:css}){	
     <div class="container">
-    	<div class="row header">
-    		<p><strong>先完善一下您的资料吧！</strong></p>
+    	<div class="row s-header">
+    		<p><strong>只有在乐跑开始后才能签到噢！</strong></p>
     	</div>
     	<hr>
-    	<form method="post" action="/lepao/doRegister" id="registerForm" class="form-horizontal" user="form">
+    	<form method="post" action="/lepao/doSign" id="signForm" class="form-horizontal" user="form">
 			<input type="hidden" name="user.OPEN_ID" value="${open_id!}"/>
-			<tp:inlineField id="userName" label="姓名" name="user.REAL_NAME" required="true"/>
-			<tp:switchField id="userGender" label="性别" name="GENDER" required="true" on="男" off="女" checked="true"/>
-			<tp:inlineField id="userAge" label="年龄" name="user.AGE" required="true" valid="digits=true min=10 max=70"/>
+			<tp:inlineField id="userName" label="姓名" name="user.REAL_NAME" required="true"/>			
 			<tp:inlineField id="userNumber" label="号码布" name="user.LEPAO_NUMBER" required="true" />
-			<tp:inlineField id="userMobile" label="联系电话" name="user.MOBILE" required="false"/>
-			<tp:inlineField id="userHobbits" label="爱好" name="user.HOBBY" required="false" type="data-role='tagsinput'"/>
-			<div class=labels">
-				<span class="label label-default">运动</span>
-				<span class="label label-primary">音乐</span>
-				<span class="label label-success">读书</span>
-				<span class="label label-info">电影</span>
-				<span class="label label-warning">游戏</span>
-				<span class="label label-danger">美食</span>
-			</div>
+			<tp:inlineField id="userSays" label="说点什么？" name="saySomething" required="false"/>
 	    	<nav class="navbar navbar-default navbar-fixed-bottom">
 	        <div class="container">
 	            <div class="row form-item pay">
 	                <div class="col-xs-12 pay-button">
-	                    <button type="button" class="btn btn-success" onclick="doRegister()">完成</button>
+	                    <button type="button" class="btn btn-success" onclick="doSign()">点我签到</button>
 	                </div>
 	            </div>
 	        </div>

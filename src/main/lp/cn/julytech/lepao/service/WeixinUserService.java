@@ -11,6 +11,7 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.weixin.sdk.api.ApiConfigKit;
 import com.jfinal.weixin.sdk.api.ApiResult;
 import com.jfinal.weixin.sdk.api.UserApi;
@@ -44,11 +45,17 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         return WeixinUser.dao.findFirst("SELECT * FROM USR WHERE LEPAO_NUMBER=?", number);
     }
 
-    public WeixinUser match(int gender, String hobby) {
-        String sql = "SELECT * FROM USR WHERE GENDER=? ";
+    public long getUserCount(int gender) {
+        Record r = Db.use("db").findFirst("SELECT COUNT(*) AS CNT FROM USR WHERE GENDER=?", gender);
+        return r.getLong("CNT");
+    }
+
+    public WeixinUser match(int gender, String hobby, String toUserId) {
+        String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? ";
         List<Object> params = new ArrayList<Object>();
         int herGender = gender == 1 ? 0 : 1;
         params.add(herGender);
+        params.add(toUserId);
         String queryHobby = " AND (1<>1 ";
         if (!Strings.isNullOrEmpty(hobby)) {
             String[] temp = hobby.split(",");
@@ -63,19 +70,20 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         return WeixinUser.dao.findFirst(sql, params.toArray());
     }
 
-    public WeixinUser match(int gender) {
-        String sql = "SELECT * FROM USR WHERE GENDER=? ORDER BY BE_MATCHED_COUNT ASC";
-        return WeixinUser.dao.findFirst(sql, gender);
+    public WeixinUser match(int gender, String toUserId) {
+        String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? ORDER BY BE_MATCHED_COUNT ASC";
+        int herGender = gender == 1 ? 0 : 1;
+        return WeixinUser.dao.findFirst(sql, herGender, toUserId);
     }
 
     public String doMatch(final WeixinUser user) {
         int gender = user.getInt("GENDER");
         String hobby = user.getStr("HOBBY");
 
-        WeixinUser tmpUsr = this.match(gender, hobby);
+        WeixinUser tmpUsr = this.match(gender, hobby, user.getStr("USR_ID"));
         if (tmpUsr == null) {
             logger.debug("no same hobby");
-            tmpUsr = this.match(gender);
+            tmpUsr = this.match(gender, user.getStr("USR_ID"));
         }
         if (tmpUsr == null) {
             logger.warn("no match found " + hobby);

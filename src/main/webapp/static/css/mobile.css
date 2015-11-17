@@ -83,6 +83,22 @@ body {
 	text-align: center;
 }
 
+.welcomeBody{
+	height:100%;
+}
+.welcome{
+	background:url('../img/lepao/match_bg.png') repeat;
+	height:100%;
+	text-align:center;
+	overflow:hidden;
+}
+
+.ing{
+	height:100px;
+	background:url('../img/lepao/ing.gif') no-repeat;
+	margin-top:150px;
+	padding-top:20px;
+}
 .match {
 	height: 200px;
 	margin-bottom: 10px;

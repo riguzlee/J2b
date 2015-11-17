@@ -87,8 +87,21 @@ public class LepaoController extends AbstractJsonController {
             ResponseFactory.createErrorRespone(this, "无法获取微信授权");
             return;
         }
+        String type = this.getPara("type");
+        if ("welcome".equals(type)) {
+            this.render("/pages/lepao/matchWelcome.html");
+            return;
+        }
+        if ("ing".equals(type)) {
+            this.render("/pages/lepao/matchIng.html");
+            return;
+        }
         WeixinUser myMatch = this.usrService.getMatch(user.getStr("open_id"));
         this.setAttr("myMatch", myMatch);
+        long maleCount = this.usrService.getUserCount(1);
+        long femaleCount = this.usrService.getUserCount(0);
+        this.setAttr("males", maleCount);
+        this.setAttr("females", femaleCount);
         this.render("/pages/lepao/match.html");
     }
 

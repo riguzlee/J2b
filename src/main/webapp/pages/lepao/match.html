@@ -1,40 +1,11 @@
 @var css={
-<link href="${CONTEXT_PATH}/static/jcrop/jquery.Jcrop.min.css" rel="stylesheet" />
-<link href="${CONTEXT_PATH}/static/fileinput/css/fileinput.min.css" rel="stylesheet" />
-<link href='${CONTEXT_PATH}/static/bower/sco.js/css/scojs.css' rel='stylesheet'>
-<link href='${CONTEXT_PATH}/static/bower/sco.js/css/sco.message.css' rel='stylesheet'>
+
 @};
 
 @var js={
-<script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
-<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.modal.js"></script>
-<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.confirm.js"></script>
-<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.message.js"></script>
 <script>
 function doMatch(){
-	$("#matchForm").validate({
-	}).form();
-	var formData = $("#matchForm").serialize();
-	var url = $("#matchForm").attr('action');
-	$.ajax({
-		type:'post',
-		url:url,
-		data:formData,
-		cache:false,
-		dataType:'json',
-		success:function(data){
-			var error = data.error;
-			if(error == '0'){
-				$('.modal').modal('hide')
-				$.scojs_message('成功匹配到一个对象！', $.scojs_message.TYPE_OK);
-				setTimeout(function(){
-					window.location.reload();
-				},1000); 
-			}
-			else
-				alert('错误：' + data.data);
-		}
-	});
+	$(window.location).attr('href', '/lepao/match?open_id=${open_id}&type=ing');	
 }
 </script>
 @};

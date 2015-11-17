@@ -1,0 +1,59 @@
+@var css={
+<link href="${CONTEXT_PATH}/static/jcrop/jquery.Jcrop.min.css" rel="stylesheet" />
+<link href="${CONTEXT_PATH}/static/fileinput/css/fileinput.min.css" rel="stylesheet" />
+<link href='${CONTEXT_PATH}/static/bower/sco.js/css/scojs.css' rel='stylesheet'>
+<link href='${CONTEXT_PATH}/static/bower/sco.js/css/sco.message.css' rel='stylesheet'>
+<style>
+<!--
+html,body{
+height:100%;
+}
+-->
+</style>
+
+@};
+
+@var js={
+<script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.modal.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.confirm.js"></script>
+<script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.message.js"></script>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:'搜索号码布', js:js, bodyClass:"matchBody",head:css}){		
+    <div class="container"> 
+    	<div class="search">
+	    	<form method="get" action="/lepao/search" id="matchForm" class="form-inline" user="form">
+				<input type="hidden" name="open_id" value="${open_id!}"/>
+				<input type="text" name="number" placeholder="请输入号码布" value=${number!}>
+				<input type="submit" value="搜索" class="btn btn-success"/>
+	    	</form>
+    	</div>
+    	<h4>相关的人</h4>
+    	<hr>
+    	@for(item in users){
+    		<div class="row">
+    			<div class="col-xs-4 col-sm-4">
+    				<img src=
+    				@if(isEmpty(item.PORTRAIT)){
+		    		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+		    		@}else{
+		    		${item.PORTRAIT}
+		    		@}
+		    		 style="width:50px;height:50px;"
+    				 alt="头像">
+    			</div>
+    			<div class="col-xs-4 col-sm-4">
+    				${item.REAL_NAME}<br>
+    				年龄 
+    				@if(isEmpty(item.AGE)){
+    				未知
+    				@}else{
+    				${item.AGE}
+    				@}
+    			</div>
+    		</div>
+    		
+    	@}
+    </div>
+@}

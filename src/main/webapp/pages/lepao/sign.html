@@ -13,16 +13,13 @@
 <script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.message.js"></script>
 
 <script>
-	$(function(){
-		$(".switch").bootstrapSwitch();
-	});
 	function doSign(){
-		$("#registerForm").validate({
+		$("#signForm").validate({
 		}).form();
-		if (!$("#registerForm").valid())
+		if (!$("#signForm").valid())
 			return;
-		var formData = $("#registerForm").serialize();
-		var url = $("#registerForm").attr('action');
+		var formData = $("#signForm").serialize();
+		var url = $("#signForm").attr('action');
 		$.ajax({
 			type:'post',
 			url:url,
@@ -35,7 +32,7 @@
 					$('.modal').modal('hide')
 					$.scojs_message('操作成功！', $.scojs_message.TYPE_OK);
 					setTimeout(function(){
-						$(window.location).attr('href', '/lepao/home?open_id=' + $("input[name$=OPEN_ID]").val());
+						$(window.location).reload();
 					},1000); 
 				}
 				else
@@ -50,12 +47,13 @@
     <div class="container">
     	<div class="row s-header">
     		<p><strong>只有在乐跑开始后才能签到噢！</strong></p>
+    		<h3>${me.REAL_NAME}/${me.LEPAO_NUMBER}<h3>
     	</div>
     	<hr>
+    	@if(!signed){
     	<form method="post" action="/lepao/doSign" id="signForm" class="form-horizontal" user="form">
-			<input type="hidden" name="user.OPEN_ID" value="${open_id!}"/>
-			<tp:inlineField id="userName" label="姓名" name="user.REAL_NAME" required="true"/>			
-			<tp:inlineField id="userNumber" label="号码布" name="user.LEPAO_NUMBER" required="true" />
+			<input type="hidden" name="open_id" value="${open_id!}"/>
+			<input type="hidden" name="activaty" value="${activaty!}"/>
 			<tp:inlineField id="userSays" label="说点什么？" name="saySomething" required="false"/>
 	    	<nav class="navbar navbar-default navbar-fixed-bottom">
 	        <div class="container">
@@ -66,6 +64,9 @@
 	            </div>
 	        </div>
         </form>
+        @}else{
+        您已经签到成功了！
+        @}
     </nav>
     </div>
 @}

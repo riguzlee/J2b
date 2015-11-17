@@ -17,6 +17,7 @@ import com.riguz.j2b.ajax.ResponseFactory;
 import com.riguz.j2b.controller.AbstractJsonController;
 import com.riguz.j2b.service.IdentityService;
 
+import cn.julytech.lepao.entity.Sig;
 import cn.julytech.lepao.entity.WeixinUser;
 import cn.julytech.lepao.service.WeixinUserService;
 
@@ -69,7 +70,36 @@ public class LepaoController extends AbstractJsonController {
             this.redirect("/lepao/license?open_id=" + openId);
             return;
         }
+        this.keepPara();
+        this.setAttr("me", user);
+        Sig sig = this.usrService.getSignRecord(openId);
+        boolean signed = sig != null;
+        this.setAttr("sig", sig);
+        this.setAttr("signed", signed);
         this.render("/pages/lepao/sign.html");
+    }
+
+    public void doSign() {
+        String openId = this.getPara("open_id");
+        WeixinUser user = this.getCurrentUser();
+        if (user == null) {
+            ResponseFactory.createErrorRespone(this, "无法获取微信授权！");
+            return;
+        }
+        Sig sig = this.usrService.getSignRecord(openId);
+        if (sig != null) {
+            ResponseFactory.createErrorRespone(this, "您已经签到过啦！");
+            return;
+        }
+        String msg = this.getPara("saySomething");
+        String activaty = this.getPara("activaty");
+        boolean result = this.usrService.doSign(user, msg, activaty);
+        if (result == true) {
+            ResponseFactory.createSuccessResponse(this);
+        }
+        else
+            ResponseFactory.createErrorRespone(this, "签到失败，请重试");
+
     }
 
     public void share() {

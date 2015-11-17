@@ -20,6 +20,7 @@ import com.riguz.j2b.service.CurdService;
 
 import cn.julytech.lepao.config.ConfigFactory;
 import cn.julytech.lepao.entity.MatchRecord;
+import cn.julytech.lepao.entity.Sig;
 import cn.julytech.lepao.entity.WeixinUser;
 import cn.julytech.lepao.validator.RegisterValidator;
 
@@ -27,7 +28,7 @@ public class WeixinUserService extends CurdService<WeixinUser> {
     private static Logger logger = Logger.getLogger(WeixinUserService.class.getName());
 
     public WeixinUser getUsrByOpenId(String openId) {
-        return WeixinUser.dao.findFirst("select * from usr where open_id=?", openId);
+        return WeixinUser.dao.findFirst("SELECT * FROM USR WHERE OPEN_ID=?", openId);
     }
 
     public List<WeixinUser> search(String number) {
@@ -50,9 +51,23 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         return WeixinUser.dao.findFirst("SELECT * FROM USR WHERE LEPAO_NUMBER=?", number);
     }
 
+    public Sig getSignRecord(String openId) {
+        return Sig.dao.findFirst("SELECT * FROM sig WHERE SIGN_USER_OPENID=?", openId);
+    }
+
     public long getUserCount(int gender) {
         Record r = Db.use("db").findFirst("SELECT COUNT(*) AS CNT FROM USR WHERE GENDER=?", gender);
         return r.getLong("CNT");
+    }
+
+    public boolean doSign(WeixinUser user, String msg, String activaty) {
+        Sig sig = new Sig();
+        sig.set("ACTIVATY", activaty);
+        sig.set("SIGN_USER_OPENID", user.getStr("OPEN_ID"));
+        sig.set("SIGN_TIME", new Date());
+        sig.set("MESSAGE", msg);
+        sig.set("STATUS", 0);
+        return sig.save();
     }
 
     public WeixinUser match(int gender, String hobby, String toUserId) {

@@ -19,6 +19,7 @@ import com.riguz.j2b.model.bean.Argument;
 import com.riguz.j2b.service.CurdService;
 
 import cn.julytech.lepao.config.ConfigFactory;
+import cn.julytech.lepao.entity.Img;
 import cn.julytech.lepao.entity.MatchRecord;
 import cn.julytech.lepao.entity.Sig;
 import cn.julytech.lepao.entity.WeixinUser;
@@ -172,5 +173,16 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         String img = info.get("headimgurl");
         user.set("PORTRAIT", img);
         return user.update();
+    }
+
+    public boolean doShareImage(String openId, String url, String saySomething) {
+        Img img = new Img();
+        img.set("UPLOAD_USER_OPENID", openId);
+        img.set("UPLOAD_TIME", new Date());
+        img.set("FILE_PATH", url);
+        img.set("STATUS", 0);
+        img.set("SHARE_STATUS", -1);
+        img.set("DESCRIBLE", saySomething);
+        return img.save();
     }
 }

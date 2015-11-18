@@ -153,6 +153,11 @@
 			<artifactId>cos</artifactId>
 			<version>26Dec2008</version>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.4</version>
+		</dependency>
 
 	</dependencies>
 	<build>

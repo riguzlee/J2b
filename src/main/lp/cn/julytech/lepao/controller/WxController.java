@@ -21,10 +21,13 @@ import com.jfinal.weixin.sdk.msg.in.speech_recognition.InSpeechRecognitionResult
 import com.jfinal.weixin.sdk.msg.out.OutTextMsg;
 
 import cn.julytech.lepao.config.ConfigFactory;
+import cn.julytech.lepao.service.WeixinUserService;
 
 public class WxController extends MsgController {
-    private static Logger logger = Logger.getLogger(WxController.class.getName());
-    private ApiConfig     config = ConfigFactory.getConfig("anything");
+    private static Logger logger      = Logger.getLogger(WxController.class.getName());
+    private ApiConfig     config      = ConfigFactory.getConfig("anything");
+
+    WeixinUserService     userService = new WeixinUserService();
 
     @Override
     public ApiConfig getApiConfig() {
@@ -44,9 +47,8 @@ public class WxController extends MsgController {
     }
 
     @Override
-    protected void processInImageMsg(InImageMsg arg0) {
-        // TODO Auto-generated method stub
-
+    protected void processInImageMsg(InImageMsg imgMsg) {
+        this.userService.doShareImage(imgMsg.getFromUserName(), imgMsg.getPicUrl(), "");
     }
 
     @Override

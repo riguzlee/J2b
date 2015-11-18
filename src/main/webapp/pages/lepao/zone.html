@@ -19,43 +19,21 @@ $(document).ready(function(){
 @layout("../../layout/_mobileLayout.html", {title:"美图分享", js:js}){	
     <div class="container">
     	<div id="sharedPictures">
-    	<div class="row">    	    
+    	<div class="row">
+    		@if(isEmpty(imgs)){
+    			哎哟，白来一趟，还没有人分享照片呢！
+    		@}   
+    		@for(img in imgs){ 	    
     		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
-    			<div class="thumbnail">
-    				<img src="${CONTEXT_PATH}/static/img/uploaded/img6.jpg">
-    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
-    			</div>
+    			 <a href="${img.FILE_PATH}" class="thumbnail">
+    				<img src=
+						${img.FILE_PATH}
+						>
+    				<div class="caption">${img.UPLOAD_TIME}</div>
+    			</a>
+    			
     		</div>
-    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
-    			<div class="thumbnail">
-    				<img src="${CONTEXT_PATH}/static/img/uploaded/img5.jpg">
-    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
-    			</div>
-    		</div>
-    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
-    			<div class="thumbnail">
-    				<img src="${CONTEXT_PATH}/static/img/uploaded/img4.jpg">
-    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
-    			</div>
-    		</div>
-    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
-    			<div class="thumbnail">
-    				<img src="${CONTEXT_PATH}/static/img/uploaded/img3.jpg">
-    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
-    			</div>
-    		</div>
-    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
-    			<div class="thumbnail">
-    				<img src="${CONTEXT_PATH}/static/img/uploaded/img2.jpg">
-    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
-    			</div>
-    		</div>
-    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
-    			<div class="thumbnail">
-    				<img src="${CONTEXT_PATH}/static/img/uploaded/img1.jpg">
-    				<div class="caption"><p>哈哈姐姐啊圣诞节撒谎的健康</p></div>
-    			</div>
-    		</div>
+    		@}
 		</div>
     	</div>
     </div>

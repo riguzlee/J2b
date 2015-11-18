@@ -8,34 +8,44 @@
 <script src="${CONTEXT_PATH}/static/fileinput/js/fileinput.min.js"></script>
 <script src="${CONTEXT_PATH}/static/fileinput/js/plugins/canvas-to-blob.min.js"></script>
 <script src="${CONTEXT_PATH}/static/fileinput/js/fileinput_locale_zh.js"></script>
-<script src="${CONTEXT_PATH}/static/js/lrz.mobile.min.js"></script>
 
 <script>
-$(function(){
-
-	$('input[type=file]').change( function () {
-	    lrz(this.files[0], function (results) {
-	      // 你需要的数据都在这里，可以以字符串的形式传送base64给服务端转存为图片。
-	      console.log(results); 
-	    });
+	$(function(){
+		$("#uploadImg").fileinput({
+			'showUpload':true,
+			'language':"zh",
+			'showRemove':false,
+			'previewClass':'uploadPreview',
+			'allowedFileExtensions':['jpg', 'png', 'jpeg'],
+			'previewSettings':
+				{
+				image: {width: "auto", height: "100px"},
+				},
+			'resizeImage': true,
+		    'resizePreference': 'width',
+			'resizeImage':false,
+			'maxFileSize':4096,
+			'uploadAsync':false,
+			'previewFileType':'any'});
 	});
-});
 </script>
 @};
 
-@layout("../../layout/_mobileLayout.html", {title:"分享照片",js:js,head:css}){	
+@layout("../../layout/_mobileLayout.html", {title:"图片分享",js:js,head:css}){	
     <div class="container">
-    	<h4>分享照片</h4>
+    	<div class="row header">
+    		<p><strong>分享您拍的精彩瞬间！</strong></p>
+    	</div>
+    	<hr>
     	<div class="row">
     		
     		<div class="col-sm-12 col-xs-12">
-    			<form name="form_portrait" method="post" 
-    			action="/lepao/doUpload?type=portrait&open_id=${open_id}" id="form_portrait" enctype="multipart/form-data">
-				    <input type="file" accept="image/*" name="sharedImage" />
+    			<form name="form_portrait" method="post" action="/lepao/doShare?open_id=${open_id}" id="shareForm" enctype="multipart/form-data">
+				    <input id="uploadImg" name="upload" type="file">
 				</form>
     		</div>
     	</div>
-    	<hr>
+    	
     	
     </div>
 @}

@@ -2,7 +2,9 @@ package cn.julytech.lepao.entity;
 
 import com.riguz.j2b.model.Entity;
 
-public class Img extends Entity {
+public class Img extends Entity<Img> {
+
+    public static final Img dao = new Img();
 
     @Override
     public String getTableName() {

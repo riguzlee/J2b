@@ -1,0 +1,38 @@
+https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxabe606fea34f5d33&secret=144efcf8c0e5a6bc379ce09f8badcbfb
+
+
+
+
+{
+    "button": [
+        {
+            "type": "click", 
+            "name": "我的乐跑", 
+            "key":"HOME"
+        }, 
+        {
+            "type": "click", 
+            "name": "配对游戏", 
+            "key":"MATCH"
+        }, 
+        {
+            "type": "click", 
+            "name": "乐跑社区", 
+            "key":"ZONE"
+            
+        }
+    ]
+}
+
+WNCOFWrJixvnOmrQKRc25jbB2EkUs61m8iTWcM_C3nseIG1yaBJa2FwRYE73tLmH6NobYdIkjjjgl-bfdl6FSdhR25a3mSbRVk9CELSgYQgQSFeAHAJLY
+
+200	OK
+Connection: keep-alive
+Date: Tue, 01 Sep 2015 01:16:36 GMT
+Server: nginx/1.8.0
+Content-Type: application/json; encoding=utf-8
+Content-Length: 144
+{
+    "access_token": "JtOKLaLIXkNWZY9ZxdtDsPB0mj2xg-lHQMp6EV-74FOQBehAuNjuhyGSzMGhhXueckMg77MRfeJngq1TpbmwmkmxI7zX9jT8oujP8MeMpSs", 
+    "expires_in": 7200
+}

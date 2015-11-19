@@ -56,11 +56,11 @@
 			<input type="hidden" name="user.OPEN_ID" value="${open_id!}"/>
 			<tp:inlineField id="userName" label="姓名" name="user.REAL_NAME" required="true"/>
 			<tp:switchField id="userGender" label="性别" name="GENDER" required="true" on="男" off="女" checked="true"/>
-			<tp:inlineField id="userAge" label="年龄" name="user.AGE" required="true" valid="digits=true min=10 max=70"/>
 			<tp:inlineField id="userNumber" label="号码布" name="user.LEPAO_NUMBER" required="true" />
-			<tp:inlineField id="userMobile" label="联系方式" name="user.MOBILE" required="false"/>
+			<tp:inlineField id="userMobile" label="微信号" name="user.MOBILE" required="false" desc="填写您的微信号让别人联系到您"/>
+			<tp:inlineField id="userSays" label="想对他/她说" name="user.SAYS" required="false" type="data-role='tagsinput'" desc="填写您的交友宣言"/>
 			<tp:inlineField id="userCompany" label="公司" name="user.COMPANY" required="false" type="data-role='tagsinput'"/>
-			<tp:inlineField id="userHobbits" label="爱好" name="user.HOBBY" required="false" type="data-role='tagsinput'"/>
+			<tp:inlineField id="userHobbits" label="爱好" name="user.HOBBY" required="false" type="data-role='tagsinput'" desc="填写兴趣爱好匹配将更准"/>
 			
 	    	<nav class="navbar navbar-default navbar-fixed-bottom">
 	        <div class="container">

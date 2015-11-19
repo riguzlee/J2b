@@ -3,6 +3,7 @@
 <link href="${CONTEXT_PATH}/static/fileinput/css/fileinput.min.css" rel="stylesheet" />
 <link href='${CONTEXT_PATH}/static/bower/sco.js/css/scojs.css' rel='stylesheet'>
 <link href='${CONTEXT_PATH}/static/bower/sco.js/css/sco.message.css' rel='stylesheet'>
+<link href="${CONTEXT_PATH}/static/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
 <style>
 <!--
 html,body{
@@ -14,6 +15,7 @@ height:100%;
 @};
 
 @var js={
+<script src="${CONTEXT_PATH}/static/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
 <script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
 <script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.modal.js"></script>
 <script src="${CONTEXT_PATH}/static/bower/sco.js/js/sco.confirm.js"></script>
@@ -33,7 +35,7 @@ height:100%;
     	<hr>
     	@for(item in users){
     		<div class="row">
-    			<div class="col-xs-4 col-sm-4">
+    			<div class="col-xs-2 col-sm-2">
     				<img src=
     				@if(isEmpty(item.PORTRAIT)){
 		    		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
@@ -43,14 +45,14 @@ height:100%;
 		    		 style="width:50px;height:50px;"
     				 alt="头像">
     			</div>
-    			<div class="col-xs-4 col-sm-4">
-    				${item.REAL_NAME}<br>
-    				年龄 
-    				@if(isEmpty(item.AGE)){
-    				未知
+    			<div class="col-xs-10 col-sm-10">
+    				@if(item.GENDER == 0){
+    				<img src="${CONTEXT_PATH}/static/img/lepao/female.png">
     				@}else{
-    				${item.AGE}
+    				<img src="${CONTEXT_PATH}/static/img/lepao/male.png">
     				@}
+    				<strong>${item.REAL_NAME}</strong> <span style="font-size:small;color:#777;">${item.SAYS}</span><br>
+    				<span class="label label-default">${item.COMPANY}</span> <span class="label label-primary">${item.HOBBY}</span>
     			</div>
     		</div>
     		

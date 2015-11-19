@@ -10,7 +10,7 @@ function doMatch(){
 </script>
 @};
 
-@layout("../../layout/_mobileLayout.html", {title:'找"对象"~_~', js:js, bodyClass:"matchBody",head:css}){		
+@layout("../../layout/_mobileLayout.html", {title:'爱心对对碰', js:js, bodyClass:"matchBody",head:css}){		
     <div class="container" id="matchContainer"> 
     	<div class="row match-header">
   	  		<p><strong>看看你的乐跑对象是谁！</strong></p>
@@ -20,20 +20,25 @@ function doMatch(){
     	</div>
     	<div class="row match">
     		<div class="col-sm-12 col-xs-12 col-md-12">
-    		<strong>${myMatch.REAL_NAME}</strong><br/>
     		<img src=
-    			@if(isEmpty(myMatch)){
-    			"${CONTEXT_PATH}/static/img/lepao/she.png" 
-    			@}else if(isEmpty(myMatch.PORTRAIT)){
-    			"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+    			@if(has(myMatch)){
+	    			@if(isEmpty(myMatch.PORTRAIT)){
+	    			"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+	    			@}else{
+	    			"${CONTEXT_PATH}${myMatch.PORTRAIT}"
+	    			@}
     			@}else{
-    			"${CONTEXT_PATH}${myMatch.PORTRAIT}"
+    			"${CONTEXT_PATH}/static/img/lepao/she.png" 
     			@};
     			alt="she/he">
     		</div>
     	</div>
-    	@if(!isEmpty(myMatch)){
+    	@if(has(myMatch)){
     	<div class="myMatch">
+    		<div class="row ">
+    			<div class="col-sm-4 col-xs-4 col-md-4">姓名</div>
+    			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.REAL_NAME}</div>
+    		</div>
     		<div class="row ">
     			<div class="col-sm-4 col-xs-4 col-md-4">号牌</div>
     			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.LEPAO_NUMBER}</div>
@@ -42,12 +47,24 @@ function doMatch(){
     			<div class="col-sm-4 col-xs-4 col-md-4">爱好</div>
     			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.HOBBY}</div>
     		</div>
+    		<div class="row ">
+    			<div class="col-sm-4 col-xs-4 col-md-4">公司</div>
+    			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.COMPANY}</div>
+    		</div>
+    		<div class="row ">
+    			<div class="col-sm-4 col-xs-4 col-md-4">联系方式</div>
+    			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.MOBILE}</div>
+    		</div>
     	</div>
     		
     	@}
     	<form method="post" action="/lepao/doMatch" id="matchForm" class="form-horizontal" user="form">
 			<input type="hidden" name="open_id" value="${open_id!}"/>
-    		<button type="button" class="btn btn-success" onclick="doMatch()">挑个对象</button>
+    		<button type="button" class="btn btn-success" onclick="doMatch()"
+    			@if(myMatchCount <= 0){
+    				disabled
+    			@}
+    		>挑个对象(还有${myMatchCount}次机会)</button>
     	</form>
     </div>
 @}

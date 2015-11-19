@@ -49,6 +49,11 @@ public class LepaoController extends AbstractJsonController {
             return;
         }
         this.keepPara();
+        WeixinUser user = this.validateBindedUser();
+        if (user != null) {
+            this.redirect("/lepao/home?open_id=" + openId);
+            return;
+        }
         this.render("/pages/lepao/register.html");
     }
 
@@ -125,8 +130,15 @@ public class LepaoController extends AbstractJsonController {
             this.render("/pages/lepao/matchIng.html");
             return;
         }
-        WeixinUser myMatch = this.usrService.getMatch(user.getStr("open_id"));
-        this.setAttr("myMatch", myMatch);
+        List<WeixinUser> myMatchs = this.usrService.getMatch(user.getStr("open_id"));
+        if (!myMatchs.isEmpty())
+            this.setAttr("myMatch", myMatchs.get(0));
+        else
+            this.setAttr("myMatch", null);
+        int remainCount = 3 - myMatchs.size();
+        if (remainCount < 0)
+            remainCount = 0;
+        this.setAttr("myMatchCount", remainCount);
         long maleCount = this.usrService.getUserCount(1);
         long femaleCount = this.usrService.getUserCount(0);
         this.setAttr("males", maleCount);

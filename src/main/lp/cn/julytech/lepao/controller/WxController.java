@@ -19,6 +19,8 @@ import com.jfinal.weixin.sdk.msg.in.event.InMenuEvent;
 import com.jfinal.weixin.sdk.msg.in.event.InQrCodeEvent;
 import com.jfinal.weixin.sdk.msg.in.event.InTemplateMsgEvent;
 import com.jfinal.weixin.sdk.msg.in.speech_recognition.InSpeechRecognitionResults;
+import com.jfinal.weixin.sdk.msg.out.News;
+import com.jfinal.weixin.sdk.msg.out.OutNewsMsg;
 import com.jfinal.weixin.sdk.msg.out.OutTextMsg;
 
 import cn.julytech.lepao.config.ConfigFactory;
@@ -104,7 +106,18 @@ public class WxController extends MsgController {
             out = "点击<a href=\"http://lepao.riguz.com/lepao/share?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入开始分享";
         }
         else if ("SHAKE".equals(eventKey)) {
-            out = "点击<a href=\"http://lepao.riguz.com/lepao/shake?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入缘来是你";
+
+            OutNewsMsg msg = new OutNewsMsg(inMenuEvent);
+            News item = new News();
+            item.setPicUrl("http://lepao.riguz.com/static/img/lepao/lepao.jpg");
+            item.setTitle("缘来是你");
+            item.setUrl("http://lepao.riguz.com/lepao/shake?open_id=" + inMenuEvent.getFromUserName());
+            item.setDescription("点击进入缘来是你");
+            msg.addNews(item);
+            this.render(msg);
+            return;
+            // out = "点击<a href=\"http://lepao.riguz.com/lepao/shake?open_id=" +
+            // inMenuEvent.getFromUserName() + "\">这里</a>进入缘来是你";
         }
         else if ("ZONE".equals(eventKey)) {
             out = "点击<a href=\"http://lepao.riguz.com/lepao/zone?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入精彩空间";

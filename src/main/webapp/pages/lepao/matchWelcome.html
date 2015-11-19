@@ -13,16 +13,18 @@ height:100%;
 $(function(){
 	setTimeout(function(){
 		$(window.location).attr('href', '/lepao/match?open_id=${open_id}');
-	}, 1000);
+	}, 5000);
 	
 });
 </script>
 @};
 
-@layout("../../layout/_mobileLayout.html", {title:'找"对象"~_~', js:js,head:css}){		
+@layout("../../layout/_mobileLayout.html", {title:'爱心对对碰', js:js,head:css}){		
     <div class="container" style="height:100%">
-    	<div class="row welcome">
-    	<p>邂逅吧！</p>
+    	<div class="row welcome2">
+    	<div class="link">
+    	<a href="/lepao/match?open_id=${open_id}">进入</a>
+    	</div>
     	</div>
     	 
     </div>

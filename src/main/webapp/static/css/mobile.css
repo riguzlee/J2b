@@ -92,7 +92,16 @@ body {
 	text-align:center;
 	overflow:hidden;
 }
-
+.welcome2{
+	background:url('../img/lepao/welcome_02.png')  no-repeat;
+	background-size:cover; 
+	height:100%;
+	text-align:center;
+	overflow:hidden;
+}
+.link{
+	margin-top:500px;
+}
 .shake{
 	background:url('../img/lepao/shake_bg.png') repeat;
 	height:100%;

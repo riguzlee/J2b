@@ -4,8 +4,42 @@
 
 @var js={
 <script>
+$(function(){
+	$("#matching").hide();
+});
 function doMatch(){
-	$(window.location).attr('href', '/lepao/match?open_id=${open_id}&type=ing');	
+	//$(window.location).attr('href', '/lepao/match?open_id=${open_id}&type=ing');
+	$("#matchContainer").hide();
+	$("#matching").show();
+	setTimeout(function(){
+		doMatchSubmit();
+	}, 5000);
+}
+function doMatchSubmit(){
+	$("#matchForm").validate({
+	}).form();
+	var formData = $("#matchForm").serialize();
+	var url = $("#matchForm").attr('action');
+	$.ajax({
+		type:'post',
+		url:url,
+		data:formData,
+		cache:false,
+		dataType:'json',
+		success:function(data){
+			var error = data.error;
+			if(error == '0'){
+				$('.modal').modal('hide')
+				alert('成功匹配到一个对象！');
+				//$.scojs_message('成功匹配到一个对象！', $.scojs_message.TYPE_OK);
+				setTimeout(function(){
+					$(window.location).attr('href', '/lepao/match?open_id=${open_id}');
+				},1000); 
+			}
+			else
+				alert('错误：' + data.data);
+		}
+	});
 }
 </script>
 @};
@@ -65,6 +99,14 @@ function doMatch(){
     				disabled
     			@}
     		>挑个对象(还有${myMatchCount}次机会)</button>
+    	</form>
+    </div>
+    <div class="container welcome" id="matching"> 
+    	<div class="ing">
+    	<span class="ingTxt">正在靠近...</span>
+    	</div>
+    	<form method="post" action="/lepao/doMatch" id="matchForm" class="form-horizontal" user="form">
+			<input type="hidden" name="open_id" value="${open_id!}"/>
     	</form>
     </div>
 @}

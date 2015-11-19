@@ -72,7 +72,7 @@ public class WeixinUserService extends CurdService<WeixinUser> {
     }
 
     public WeixinUser match(int gender, String hobby, String toUserId) {
-        String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? ";
+        String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? AND OPEN_ID IS NOT NULL AND OPEN_ID<>'' ";
         List<Object> params = new ArrayList<Object>();
         int herGender = gender == 1 ? 0 : 1;
         params.add(herGender);
@@ -92,7 +92,7 @@ public class WeixinUserService extends CurdService<WeixinUser> {
     }
 
     public WeixinUser match(int gender, String toUserId) {
-        String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? ORDER BY BE_MATCHED_COUNT ASC";
+        String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? AND OPEN_ID IS NOT NULL AND OPEN_ID<>'' ORDER BY BE_MATCHED_COUNT ASC";
         int herGender = gender == 1 ? 0 : 1;
         return WeixinUser.dao.findFirst(sql, herGender, toUserId);
     }
@@ -175,9 +175,10 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         return user.update();
     }
 
-    public boolean doShareImage(String openId, String url, String saySomething) {
+    public boolean doShareImage(String openId, String url, String thumbUrl, String saySomething) {
         Img img = new Img();
         img.set("UPLOAD_USER_OPENID", openId);
+        img.set("THUMB_PATH", thumbUrl);
         img.set("UPLOAD_TIME", new Date());
         img.set("FILE_PATH", url);
         img.set("STATUS", 0);

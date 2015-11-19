@@ -1,0 +1,38 @@
+@var css={
+<style>
+<!--
+html,body{
+height:100%;
+}
+-->
+</style>
+@};
+
+@var js={
+<script>
+
+</script>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:'缘来是你', js:js,head:css}){		
+    <div class="container" style="height:100%">
+    	<div class="row shake">
+    	<div class="shake-header row">5
+    		<img src="${CONTEXT_PATH}/static/img/lepao/s_header_bg.png" style="width:70%;">
+    	</div>
+    	<div class="row">
+    		<div class="col-sm-6 col-xs-6">
+    			<a href="/lepao/match?open_id=${open_id}&type=welcome">
+    				<img src="${CONTEXT_PATH}/static/img/lepao/btn_match.png" style="width:70%;">
+    			</a>
+    		</div>
+    		<div class="col-sm-6 col-xs-6">
+    			<a href="/lepao/search?open_id=${open_id}">
+    				<img src="${CONTEXT_PATH}/static/img/lepao/btn_search.png" style="width:70%;">
+    			</a>
+    		</div>
+    	</div>
+    	</div>
+    	 
+    </div>
+@}

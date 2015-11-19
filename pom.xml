@@ -158,6 +158,16 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.4</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ning</groupId>
+			<artifactId>async-http-client</artifactId>
+			<version>1.8.14</version>
+		</dependency>
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
 
 	</dependencies>
 	<build>

@@ -93,6 +93,17 @@ body {
 	overflow:hidden;
 }
 
+.shake{
+	background:url('../img/lepao/shake_bg.png') repeat;
+	height:100%;
+	text-align:center;
+	overflow:hidden;
+}
+.shake-header{
+	padding-top:50px;
+}
+
+
 .ing{
 	height:100px;
 	background:url('../img/lepao/ing.gif') no-repeat;

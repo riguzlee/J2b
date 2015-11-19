@@ -151,6 +151,16 @@ public class LepaoController extends AbstractJsonController {
         }
     }
 
+    public void shake() {
+        String openId = this.getOpenId();
+        if (Strings.isNullOrEmpty(openId)) {
+            this.renderText("无法获取微信授权，请确保在微信中打开链接");
+            return;
+        }
+        this.keepPara();
+        this.render("/pages/lepao/shake.html");
+    }
+
     public void zone() {
         WeixinUser user = this.validateBindedUser();
         if (user == null) {
@@ -193,7 +203,9 @@ public class LepaoController extends AbstractJsonController {
                 File newFile = new File(PathKit.getWebRootPath() + imgUrl);
                 FileUtils.copyFile(source, newFile);
 
-                if (this.usrService.doShareImage(user.getStr("OPEN_ID"), imgUrl, "")) {
+                String thumb = this.imgService.buildThumb(imgUrl);
+
+                if (this.usrService.doShareImage(user.getStr("OPEN_ID"), imgUrl, thumb, "")) {
                     this.renderText("分享成功！请等待管理员审核！您可以继续分享");
                     return;
                 }

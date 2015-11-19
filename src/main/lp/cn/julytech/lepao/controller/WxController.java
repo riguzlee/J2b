@@ -1,5 +1,6 @@
 package cn.julytech.lepao.controller;
 
+import com.google.common.base.Strings;
 import com.jfinal.log.Logger;
 import com.jfinal.weixin.sdk.api.ApiConfig;
 import com.jfinal.weixin.sdk.jfinal.MsgController;
@@ -21,6 +22,7 @@ import com.jfinal.weixin.sdk.msg.in.speech_recognition.InSpeechRecognitionResult
 import com.jfinal.weixin.sdk.msg.out.OutTextMsg;
 
 import cn.julytech.lepao.config.ConfigFactory;
+import cn.julytech.lepao.service.ImgService;
 import cn.julytech.lepao.service.WeixinUserService;
 
 public class WxController extends MsgController {
@@ -28,6 +30,7 @@ public class WxController extends MsgController {
     private ApiConfig     config      = ConfigFactory.getConfig("anything");
 
     WeixinUserService     userService = new WeixinUserService();
+    ImgService            imgService  = new ImgService();
 
     @Override
     public ApiConfig getApiConfig() {
@@ -48,7 +51,21 @@ public class WxController extends MsgController {
 
     @Override
     protected void processInImageMsg(InImageMsg imgMsg) {
-        this.userService.doShareImage(imgMsg.getFromUserName(), imgMsg.getPicUrl(), "");
+
+        String fileName = this.imgService.download(imgMsg.getMediaId());
+        if (!Strings.isNullOrEmpty(fileName)) {
+            String thumbName = this.imgService.buildThumb(fileName);
+            this.userService.doShareImage(imgMsg.getFromUserName(), fileName, thumbName, "");
+            OutTextMsg outMsg = new OutTextMsg(imgMsg);
+            outMsg.setContent("分享成功");
+            this.render(outMsg);
+        }
+        else {
+            OutTextMsg outMsg = new OutTextMsg(imgMsg);
+            outMsg.setContent("分享失败");
+            this.render(outMsg);
+        }
+
     }
 
     @Override
@@ -86,8 +103,11 @@ public class WxController extends MsgController {
         else if ("SHARE".equals(eventKey)) {
             out = "点击<a href=\"http://lepao.riguz.com/lepao/share?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入开始分享";
         }
-        else if ("MATCH".equals(eventKey)) {
-            out = "点击<a href=\"http://lepao.riguz.com/lepao/match?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入开始配对";
+        else if ("SHAKE".equals(eventKey)) {
+            out = "点击<a href=\"http://lepao.riguz.com/lepao/shake?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入缘来是你";
+        }
+        else if ("ZONE".equals(eventKey)) {
+            out = "点击<a href=\"http://lepao.riguz.com/lepao/zone?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入精彩空间";
         }
         OutTextMsg outMsg = new OutTextMsg(inMenuEvent);
         outMsg.setContent(out);

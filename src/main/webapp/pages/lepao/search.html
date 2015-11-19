@@ -23,7 +23,7 @@ height:100%;
 @};
 
 @layout("../../layout/_mobileLayout.html", {title:'号布爱搜搜', js:js, bodyClass:"matchBody",head:css}){		
-    <div class="container"> 
+    <div class="container searchBg"> 
     	<div class="search">
 	    	<form method="get" action="/lepao/search" id="matchForm" class="form-inline" user="form">
 				<input type="hidden" name="open_id" value="${open_id!}"/>
@@ -52,7 +52,8 @@ height:100%;
     				<img src="${CONTEXT_PATH}/static/img/lepao/male.png">
     				@}
     				<strong>${item.REAL_NAME}</strong> <span style="font-size:small;color:#777;">${item.SAYS}</span><br>
-    				<span class="label label-default">${item.COMPANY}</span> <span class="label label-primary">${item.HOBBY}</span>
+    				<span class="label label-default">${item.COMPANY}</span> <span class="label label-primary">${item.HOBBY}</span><br/>
+    				<span class="label label-warning">${item.MOBILE}</span>
     			</div>
     		</div>
     		

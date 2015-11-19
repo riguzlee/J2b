@@ -92,6 +92,11 @@ body {
 	text-align:center;
 	overflow:hidden;
 }
+.searchBg{
+	background:url('../img/lepao/match_bg.png') repeat;
+	background-size:cover;
+	height:100%;
+}
 .welcome2{
 	background:url('../img/lepao/welcome_02.png')  no-repeat;
 	background-size:cover; 

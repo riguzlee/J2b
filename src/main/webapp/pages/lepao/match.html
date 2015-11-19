@@ -1,5 +1,11 @@
 @var css={
-
+<style>
+<!--
+html,body{
+height:100%;
+}
+-->
+</style>
 @};
 
 @var js={
@@ -45,9 +51,9 @@ function doMatchSubmit(){
 @};
 
 @layout("../../layout/_mobileLayout.html", {title:'爱心对对碰', js:js, bodyClass:"matchBody",head:css}){		
-    <div class="container" id="matchContainer"> 
+    <div class="container searchBg" id="matchContainer"> 
     	<div class="row match-header">
-  	  		<p><strong>看看你的乐跑对象是谁！</strong></p>
+  	  		<p><strong>赶紧碰个它！</strong></p>
   	  		<div style="margin-left:150px;">
   	  		  	<p><img src=${CONTEXT_PATH}/static/img/lepao/m.png />${males!} / <img src=${CONTEXT_PATH}/static/img/lepao/f.png /> ${females!}</p>
   	  		</div>
@@ -86,7 +92,7 @@ function doMatchSubmit(){
     			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.COMPANY}</div>
     		</div>
     		<div class="row ">
-    			<div class="col-sm-4 col-xs-4 col-md-4">联系方式</div>
+    			<div class="col-sm-4 col-xs-4 col-md-4">微信号</div>
     			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.MOBILE}</div>
     		</div>
     	</div>
@@ -98,7 +104,7 @@ function doMatchSubmit(){
     			@if(myMatchCount <= 0){
     				disabled
     			@}
-    		>挑个对象(还有${myMatchCount}次机会)</button>
+    		>碰个它(还有${myMatchCount}次机会)</button>
     	</form>
     </div>
     <div class="container welcome" id="matching"> 

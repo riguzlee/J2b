@@ -49,6 +49,13 @@ body {
 	-moz-border-radius: 50px;
 	border: 2px solid white;
 }
+.round2{
+	text-align:center;
+}
+.round2 img {
+	width: 150px;
+	height: 150px;
+}
 
 .u-header a {
 	font-size: small;
@@ -70,6 +77,10 @@ body {
 	*/
 }
 
+.userInfo2 {
+	padding: 15px 10px 15px 10px;
+	text-align: center;
+}
 #portrait {
 	margin: 0 auto;
 }
@@ -145,6 +156,7 @@ body {
 	height: 100px;
 	background: url('../img/lepao/ing.gif') no-repeat;
 	margin-top: 150px;
+	margin-left:50px;
 	padding-top: 20px;
 }
 

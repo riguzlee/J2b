@@ -32,8 +32,8 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         return WeixinUser.dao.findFirst("SELECT * FROM USR WHERE OPEN_ID=?", openId);
     }
 
-    public List<WeixinUser> search(String number) {
-        return WeixinUser.dao.find("SELECT * FROM USR WHERE LEPAO_NUMBER = ?", number);
+    public WeixinUser search(String number) {
+        return WeixinUser.dao.findFirst("SELECT * FROM USR WHERE LEPAO_NUMBER = ?", number);
 
     }
 

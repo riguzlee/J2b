@@ -40,7 +40,7 @@ function doMatchSubmit(){
 				//$.scojs_message('成功匹配到一个对象！', $.scojs_message.TYPE_OK);
 				setTimeout(function(){
 					$(window.location).attr('href', '/lepao/match?open_id=${open_id}');
-				},1000); 
+				},100000); 
 			}
 			else
 				alert('错误：' + data.data);
@@ -106,13 +106,15 @@ function doMatchSubmit(){
     			@}
     		>碰个它(还有${myMatchCount}次机会)</button>
     	</form>
+    	@include("_footer.html"){}
     </div>
     <div class="container welcome" id="matching"> 
     	<div class="ing">
-    	<span class="ingTxt">正在靠近...</span>
+    	<span class="ingTxt" style="font-size:16px;"><strong>正在靠近...</strong></span>
     	</div>
     	<form method="post" action="/lepao/doMatch" id="matchForm" class="form-horizontal" user="form">
 			<input type="hidden" name="open_id" value="${open_id!}"/>
     	</form>
+    	@include("_footer.html"){}
     </div>
 @}

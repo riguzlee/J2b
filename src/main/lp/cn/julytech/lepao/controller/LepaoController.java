@@ -3,7 +3,6 @@ package cn.julytech.lepao.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -283,12 +282,13 @@ public class LepaoController extends AbstractJsonController {
 
         String param = this.getPara("number");
         if (Strings.isNullOrEmpty(param)) {
-            this.setAttr("users", new ArrayList<WeixinUser>());
+            // this.setAttr("users", new ArrayList<WeixinUser>());
         }
         else {
-            List<WeixinUser> users = this.usrService.search(param);
+            WeixinUser he = this.usrService.search(param);
             this.keepPara();
-            this.setAttr("users", users);
+            this.setAttr("user", he);
+            logger.debug("he");
         }
 
         this.render("/pages/lepao/search.html");

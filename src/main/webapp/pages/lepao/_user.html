@@ -1,0 +1,58 @@
+
+   	<div class="row u-header round">
+   		<div class="row">
+   		<img src=
+   		@if(isEmpty(user.PORTRAIT)){
+   		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+   		@}else{
+   		${user.PORTRAIT}
+   		@}
+   		 alt="用户头像"/>
+   		</div>
+   		@if(allowChangePortrait){
+   		<div class="row" style="margin-top:10px;">
+			<a href="/lepao/portrait?open_id=${user.OPEN_ID}" style="background:#f66913;font-size:14px;padding:4px 5px 4px 5px;">更换头像</a>
+		</div>
+		@}
+   	</div>
+   	<div class="userInfo">
+   		@if(allowChangePortrait){
+   		<div class="row title">
+   			<strong>我的资料</strong>
+   		</div>
+   		@}
+    	<div class="row">
+    		<div class="col-xs-4 col-sm-4"><label>姓名</label></div>
+    		<div class="col-xs-8 col-sm-8"><span>${user.REAL_NAME}</span></div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-4 col-sm-4"><label>性别</label></div>
+    		<div class="col-xs-8 col-sm-8"><span>
+    			@if(user.GENDER == 1){
+    			男
+    			@}else{
+    			女
+    			@};
+    		</span></div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-4 col-sm-4"><label>号牌</label></div>
+    		<div class="col-xs-8 col-sm-8"><span>${user.LEPAO_NUMBER}</span></div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-4 col-sm-4"><label>微信号</label></div>
+    		<div class="col-xs-8 col-sm-8"><span>${user.MOBILE}</span></div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-4 col-sm-4"><label>公司</label></div>
+    		<div class="col-xs-8 col-sm-8"><span>${user.COMPANY}</span></div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-4 col-sm-4"><label>兴趣爱好</label></div>
+    		<div class="col-xs-8 col-sm-8"><span>${user.HOBBY}</span></div>
+    	</div>
+    	<div class="row">
+    		<div class="col-xs-4 col-sm-4"><label>登记时间</label></div>
+    		<div class="col-xs-8 col-sm-8"><span>${user.REGISTER_DATE}</span></div>
+    	</div>
+   	</div>

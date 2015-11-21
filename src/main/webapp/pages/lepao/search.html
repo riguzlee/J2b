@@ -31,32 +31,17 @@ height:100%;
 				<input type="submit" value="搜索" class="btn btn-success"/>
 	    	</form>
     	</div>
-    	<h4>相关的人</h4>
     	<hr>
-    	@for(item in users){
-    		<div class="row">
-    			<div class="col-xs-2 col-sm-2">
-    				<img src=
-    				@if(isEmpty(item.PORTRAIT)){
-		    		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
-		    		@}else{
-		    		${item.PORTRAIT}
-		    		@}
-		    		 style="width:50px;height:50px;"
-    				 alt="头像">
-    			</div>
-    			<div class="col-xs-10 col-sm-10">
-    				@if(item.GENDER == 0){
-    				<img src="${CONTEXT_PATH}/static/img/lepao/female.png">
-    				@}else{
-    				<img src="${CONTEXT_PATH}/static/img/lepao/male.png">
-    				@}
-    				<strong>${item.REAL_NAME}</strong> <span style="font-size:small;color:#777;">${item.SAYS}</span><br>
-    				<span class="label label-default">${item.COMPANY}</span> <span class="label label-primary">${item.HOBBY}</span><br/>
-    				<span class="label label-warning">${item.MOBILE}</span>
-    			</div>
-    		</div>
+    	@if(isEmpty(user)){
+    		暂时未搜索到相关的用户
+    	@}else{
     		
+    		@if(isEmpty(user.OPEN_ID)){
+    		该用户还未完善资料，再等等吧！
     	@}
+    	@include("_sUser.html", {allowChangePortrait:false}){}
+    	@}
+    	@include("_footer.html"){}
     </div>
+    
 @}

@@ -9,7 +9,7 @@ height:100%;
 @};
 
 @layout("../../layout/_mobileLayout.html", {title:"我的资料", head:css}){	
-    <div class="container searchBg">
+    <div class="container homeBg">
     	<div class="row u-header round">
     		<div class="row">
     		<img src=
@@ -20,8 +20,8 @@ height:100%;
     		@}
     		 alt="用户头像"/>
     		</div>
-    		<div class="row">
-				<a href="/lepao/portrait?open_id=${user.OPEN_ID}" style="background:#f66913;">更换头像</a>
+    		<div class="row" style="margin-top:10px;">
+				<a href="/lepao/portrait?open_id=${user.OPEN_ID}" style="background:#f66913;font-size:14px;padding:4px 5px 4px 5px;">更换头像</a>
 			</div>
     	</div>
     	<div class="userInfo">

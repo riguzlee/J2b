@@ -5,7 +5,7 @@ body {
 }
 
 .header {
-	height: 60px;
+	height: 100px;
 	background: url('../img/lepao/poss.gif') no-repeat;
 	background-position:10% 80%;
 	margin-bottom: 10px;
@@ -19,6 +19,8 @@ body {
 	margin-bottom: 10px;
 	padding-top: 15px;
 	text-align: center;
+	background: url('../img/lepao/p_bg.jpg') no-repeat;
+	background-size:cover;
 }
 
 .tag-label{
@@ -101,6 +103,10 @@ body {
 	background:url('../img/lepao/match_bg.png') repeat;
 	background-size:cover;
 	height:100%;
+}
+.homeBg{
+	height:100%;
+	background:#ffda00;
 }
 .welcome2{
 	background:url('../img/lepao/welcome_02.png')  no-repeat;

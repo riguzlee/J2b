@@ -33,7 +33,7 @@ public class WeixinUserService extends CurdService<WeixinUser> {
     }
 
     public List<WeixinUser> search(String number) {
-        return WeixinUser.dao.find("SELECT * FROM USR WHERE LEPAO_NUMBER LIKE ?", "%" + number + "%");
+        return WeixinUser.dao.find("SELECT * FROM USR WHERE LEPAO_NUMBER = ?", number);
 
     }
 

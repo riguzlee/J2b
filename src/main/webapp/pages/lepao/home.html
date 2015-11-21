@@ -1,5 +1,15 @@
-@layout("../../layout/_mobileLayout.html", {title:"我的资料"}){	
-    <div class="container">
+@var css={
+<style>
+<!--
+html,body{
+height:100%;
+}
+-->
+</style>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:"我的资料", head:css}){	
+    <div class="container searchBg">
     	<div class="row u-header round">
     		<div class="row">
     		<img src=
@@ -31,10 +41,6 @@
 	    			女
 	    			@};
 	    		</span></div>
-	    	</div>
-	    	<div class="row">
-	    		<div class="col-xs-4 col-sm-4"><label>年龄</label></div>
-	    		<div class="col-xs-8 col-sm-8"><span>${user.AGE}</span></div>
 	    	</div>
 	    	<div class="row">
 	    		<div class="col-xs-4 col-sm-4"><label>号牌</label></div>

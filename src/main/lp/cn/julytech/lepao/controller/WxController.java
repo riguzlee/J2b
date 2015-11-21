@@ -110,9 +110,9 @@ public class WxController extends MsgController {
             OutNewsMsg msg = new OutNewsMsg(inMenuEvent);
             News item = new News();
             item.setPicUrl("http://lepao.riguz.com/static/img/lepao/lepao.jpg");
-            item.setTitle("缘来是你");
+            item.setTitle("缘来乐跑");
             item.setUrl("http://lepao.riguz.com/lepao/shake?open_id=" + inMenuEvent.getFromUserName());
-            item.setDescription("点击进入缘来是你");
+            item.setDescription("点击进入缘来乐跑");
             msg.addNews(item);
             this.render(msg);
             return;

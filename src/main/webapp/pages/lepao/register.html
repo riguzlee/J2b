@@ -49,7 +49,6 @@
 @layout("../../layout/_mobileLayout.html", {title:"完善个人信息", js:js,head:css}){	
     <div class="container">
     	<div class="row header">
-    		<p><strong>先完善一下您的资料吧！</strong></p>
     	</div>
     	<hr>
     	<form method="post" action="/lepao/doRegister" id="registerForm" class="form-horizontal" user="form">
@@ -59,15 +58,18 @@
 			<tp:inlineField id="userNumber" label="号码布" name="user.LEPAO_NUMBER" required="true" />
 			<tp:inlineField id="userMobile" label="微信号" name="user.MOBILE" required="false" desc="填写您的微信号让别人联系到您"/>
 			<tp:inlineField id="userSays" label="想对他/她说" name="user.SAYS" required="false" desc="填写您的交友宣言"/>
-			<tp:inlineField id="userCompany" label="公司" name="user.COMPANY" required="false" type="data-role='tagsinput'"/>
 			<tp:inlineField id="userHobbits" label="爱好" name="user.HOBBY" required="false" type="data-role='tagsinput'" desc="填写兴趣爱好匹配将更准"/>
-			
-	    	<nav class="navbar navbar-default ">
-	        <div class="container">
-	            <div class="row form-item pay">
-	                <div class="col-xs-12 pay-button">
-	                    <button type="button" class="btn btn-success" onclick="doRegister()">完成</button>
-	                </div>
+			<div class="labels" style="margin-bottom:15px;">
+				<span class="tag-label">运动</span>
+				<span class="tag-label">音乐</span>
+				<span class="tag-label">电影</span>
+				<span class="tag-label">读书</span>
+				<span class="tag-label">美食</span>
+				<span class="tag-label">网购</span>
+			</div>
+	        <div class="row form-item pay">
+                <div class="col-xs-12 pay-button" style="text-align:center;">
+	                <button type="button" class="btn btn-success" onclick="doRegister()">完成</button>
 	            </div>
 	        </div>
         </form>

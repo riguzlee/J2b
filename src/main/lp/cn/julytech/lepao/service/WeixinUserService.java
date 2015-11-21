@@ -71,7 +71,7 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         return sig.save();
     }
 
-    public WeixinUser match(int gender, String hobby, String toUserId) {
+    public WeixinUser match(int gender, String hobby, String toUserId, String toUserOpenId) {
         String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? AND OPEN_ID IS NOT NULL AND OPEN_ID<>'' ";
         List<Object> params = new ArrayList<Object>();
         int herGender = gender == 1 ? 0 : 1;
@@ -87,24 +87,44 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         }
         queryHobby += ")";
         sql += queryHobby;
+        List<MatchRecord> matched = MatchRecord.dao.find("SELECT * FROM MATCH_RECORD WHERE FROM_USER_OPEN_ID=?", toUserOpenId);
+        String matchSql = " AND (1=1 ";
+        for (MatchRecord m : matched) {
+            matchSql += " AND OPEN_ID<>?";
+            params.add(m.getStr("TO_USER_OPEN_ID"));
+        }
+        matchSql += ") ";
+        sql += matchSql;
         sql += " ORDER BY BE_MATCHED_COUNT ASC";
         return WeixinUser.dao.findFirst(sql, params.toArray());
     }
 
-    public WeixinUser match(int gender, String toUserId) {
-        String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? AND OPEN_ID IS NOT NULL AND OPEN_ID<>'' ORDER BY BE_MATCHED_COUNT ASC";
+    public WeixinUser matchWithoutHobby(int gender, String toUserId, String toUserOpenId) {
+        String sql = "SELECT * FROM USR WHERE GENDER=? AND USR_ID <> ? AND OPEN_ID IS NOT NULL AND OPEN_ID<>'' ";
+        List<Object> params = new ArrayList<Object>();
         int herGender = gender == 1 ? 0 : 1;
-        return WeixinUser.dao.findFirst(sql, herGender, toUserId);
+        params.add(herGender);
+        params.add(toUserId);
+        List<MatchRecord> matched = MatchRecord.dao.find("SELECT * FROM MATCH_RECORD WHERE FROM_USER_OPEN_ID=?", toUserOpenId);
+        String matchSql = " AND (1=1 ";
+        for (MatchRecord m : matched) {
+            matchSql += " AND OPEN_ID<>?";
+            params.add(m.getStr("TO_USER_OPEN_ID"));
+        }
+        matchSql += ") ";
+        sql += matchSql;
+        sql += " ORDER BY BE_MATCHED_COUNT ASC";
+        return WeixinUser.dao.findFirst(sql, params.toArray());
     }
 
     public String doMatch(final WeixinUser user) {
         int gender = user.getInt("GENDER");
         String hobby = user.getStr("HOBBY");
 
-        WeixinUser tmpUsr = this.match(gender, hobby, user.getStr("USR_ID"));
+        WeixinUser tmpUsr = this.match(gender, hobby, user.getStr("USR_ID"), user.getStr("OPEN_ID"));
         if (tmpUsr == null) {
             logger.debug("no same hobby");
-            tmpUsr = this.match(gender, user.getStr("USR_ID"));
+            tmpUsr = this.matchWithoutHobby(gender, user.getStr("USR_ID"), user.getStr("OPEN_ID"));
         }
         if (tmpUsr == null) {
             logger.warn("no match found " + hobby);

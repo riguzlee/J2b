@@ -2,7 +2,8 @@ package cn.julytech.lepao.entity;
 
 import com.riguz.j2b.model.Entity;
 
-public class MatchRecord extends Entity {
+public class MatchRecord extends Entity<MatchRecord> {
+    public static final MatchRecord dao = new MatchRecord();
 
     @Override
     public String getTableName() {

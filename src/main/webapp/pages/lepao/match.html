@@ -40,7 +40,7 @@ function doMatchSubmit(){
 				//$.scojs_message('成功匹配到一个对象！', $.scojs_message.TYPE_OK);
 				setTimeout(function(){
 					$(window.location).attr('href', '/lepao/match?open_id=${open_id}');
-				},100000); 
+				},1000); 
 			}
 			else
 				alert('错误：' + data.data);
@@ -54,9 +54,7 @@ function doMatchSubmit(){
     <div class="container searchBg" id="matchContainer"> 
     	<div class="row match-header">
   	  		<p><strong>赶紧碰个它！</strong></p>
-  	  		<div style="margin-left:150px;">
-  	  		  	<p><img src=${CONTEXT_PATH}/static/img/lepao/m.png />${males!} / <img src=${CONTEXT_PATH}/static/img/lepao/f.png /> ${females!}</p>
-  	  		</div>
+  	  		
     	</div>
     	<div class="row match">
     		<div class="col-sm-12 col-xs-12 col-md-12">

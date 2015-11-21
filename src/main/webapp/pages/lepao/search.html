@@ -38,8 +38,11 @@ height:100%;
     		
     		@if(isEmpty(user.OPEN_ID)){
     		该用户还未完善资料，再等等吧！
+    		@}else{
+    		@include("_sUser.html", {allowChangePortrait:false}){}
+    		}
     	@}
-    	@include("_sUser.html", {allowChangePortrait:false}){}
+    	
     	@}
     	@include("_footer.html"){}
     </div>

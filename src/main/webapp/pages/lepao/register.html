@@ -3,6 +3,13 @@
 <link href="${CONTEXT_PATH}/static/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet" />
 <link href='${CONTEXT_PATH}/static/bower/sco.js/css/scojs.css' rel='stylesheet'>
 <link href='${CONTEXT_PATH}/static/bower/sco.js/css/sco.message.css' rel='stylesheet'>
+<style>
+<!--
+html,body{
+height:100%;
+}
+-->
+</style>
 @};
 
 @var js={
@@ -47,7 +54,7 @@
 @};
 
 @layout("../../layout/_mobileLayout.html", {title:"完善个人信息", js:js,head:css}){	
-    <div class="container">
+    <div class="container homeBg">
     	<div class="row header">
     	</div>
     	<hr>
@@ -69,7 +76,7 @@
 			</div>
 	        <div class="row form-item pay">
                 <div class="col-xs-12 pay-button" style="text-align:center;">
-	                <button type="button" class="btn btn-success" onclick="doRegister()" style="width:100px;">完成</button>
+	                <button type="button" class="btn btn-success" onclick="doRegister()" style="width:150px;">完成</button>
 	            </div>
 	        </div>
         </form>

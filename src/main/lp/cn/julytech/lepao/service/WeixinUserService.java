@@ -191,7 +191,9 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         ApiConfigKit.setThreadLocalApiConfig(ConfigFactory.getConfig("anything"));
         ApiResult info = UserApi.getUserInfo(model.getStr("OPEN_ID"));
         String img = info.get("headimgurl");
-        user.set("PORTRAIT", img);
+        if (img.endsWith("/0")) {
+            user.set("PORTRAIT", img);
+        }
         return user.update();
     }
 

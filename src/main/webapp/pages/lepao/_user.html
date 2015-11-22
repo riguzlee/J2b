@@ -4,7 +4,11 @@
  	@if(isEmpty(user.PORTRAIT)){
  	"${CONTEXT_PATH}/static/img/lepao/user.jpg"
  	@}else{
- 	${user.PORTRAIT}
+ 		@if(strutil.endWith(user.PORTRAIT, "/0")){
+ 		${user.PORTRAIT}
+ 		@}else{
+ 		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+ 		@}
  	@}
  	 alt="用户头像"/>
  	</div>

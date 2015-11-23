@@ -5,11 +5,11 @@
    		@if(isEmpty(user.PORTRAIT)){
    		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
    		@}else{
-   		@if(strutil.endWith(user.PORTRAIT, "/0")){
- 		${user.PORTRAIT}
- 		@}else{
- 		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
- 		@}
+   			@if(!strutil.endWith(user.PORTRAIT, "/0") && strutil.startWith(user.PORTRAIT, "http://")){
+ 				"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+ 			@}else{
+ 				${user.PORTRAIT}
+ 			@}
    		@}
    		 alt="用户头像"/>
    		</div>

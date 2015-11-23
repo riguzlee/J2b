@@ -1,0 +1,61 @@
+@var js={
+<script src="${CONTEXT_PATH}/static/js/modalEvents.js"></script>
+<script src="${CONTEXT_PATH}/static/js/listEvents.js"></script>
+<script src="${CONTEXT_PATH}/static/js/formatter.js"></script>
+@};
+
+@layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"/share", title:"图片审核"}){
+<div id="toolbar">
+	<div class="">
+	    <div class="form-inline" role="form">
+	        <div class="form-group">
+    		<input name="search" class="form-control" type="text" placeholder="Search">
+		</div>
+	        <button type="submit" class="btn btn-bold btn-primary searchButton">
+	        	<span class="ace-icon glyphicon glyphicon-search bigger-110 icon-only">查找</span>
+	        </button>
+	    </div>
+	</div>
+	<div class="">
+	    <div class="btn-group"  role="group">
+	    	<button id="delete-role" type="button" class="btn btn-success btn-bold passButton" disabled delete-action="">
+	            <span class="ace-icon fa fa-eye bigger-110 icon-only"></span>
+	        </button>
+	    	<button id="delete-role" type="button" class="btn btn-warn btn-bold rejectButton" disabled delete-action="">
+	            <span class="ace-icon fa fa-ban bigger-110 icon-only"></span>
+	        </button>
+	        <button id="delete-role" type="button" class="btn btn-danger btn-bold deleteButton" disabled delete-action="">
+	            <span class="ace-icon fa fa-trash-o bigger-110 icon-only"></span>
+	        </button>
+	        ${toolButtons!}
+	    </div>
+	</div>
+</div>
+
+<table id="rolesList" class="dataTable"
+    data-toggle="table"
+    data-toolbar="#toolbar"
+    data-height="600"
+    data-url="/share/list"
+    data-query-params="queryParams"
+    data-show-columns="false"
+    data-side-pagination="server"
+    data-pagination="true"
+    data-page-list="[5, 10, 20, 50, 100, 200]"
+    data-search="false"
+    data-click-to-select="true"
+    data-id-field="id">
+    <thead>
+    <tr>
+        <th data-field="check" data-checkbox="true"></th>
+        <th data-field="IMG_ID" data-visible="false">ID</th>
+        <th data-field="THUMB_PATH" data-formatter="thumbFormatter">缩略图</th>
+        <th data-field="UPLOAD	_USER_NAME">上传用户</th>
+        <th data-field="UPLOAD_TIME">上传时间</th>
+        <th data-field="DESCRIBLE">描述</th>
+        <th data-field="SHARE_STATUS">审核状态</th>
+    </tr>
+    </thead>
+</table>
+@};
+

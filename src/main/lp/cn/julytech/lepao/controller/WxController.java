@@ -17,7 +17,10 @@ import com.jfinal.weixin.sdk.msg.in.event.InLocationEvent;
 import com.jfinal.weixin.sdk.msg.in.event.InMassEvent;
 import com.jfinal.weixin.sdk.msg.in.event.InMenuEvent;
 import com.jfinal.weixin.sdk.msg.in.event.InQrCodeEvent;
+import com.jfinal.weixin.sdk.msg.in.event.InShakearoundUserShakeEvent;
 import com.jfinal.weixin.sdk.msg.in.event.InTemplateMsgEvent;
+import com.jfinal.weixin.sdk.msg.in.event.InVerifyFailEvent;
+import com.jfinal.weixin.sdk.msg.in.event.InVerifySuccessEvent;
 import com.jfinal.weixin.sdk.msg.in.speech_recognition.InSpeechRecognitionResults;
 import com.jfinal.weixin.sdk.msg.out.News;
 import com.jfinal.weixin.sdk.msg.out.OutNewsMsg;
@@ -53,7 +56,7 @@ public class WxController extends MsgController {
 
     @Override
     protected void processInImageMsg(InImageMsg imgMsg) {
-
+        logger.info("=>Img msg:" + imgMsg.getMediaId());
         String fileName = this.imgService.download(imgMsg.getMediaId());
         if (!Strings.isNullOrEmpty(fileName)) {
             String thumbName = this.imgService.buildThumb(fileName);
@@ -164,6 +167,24 @@ public class WxController extends MsgController {
 
     @Override
     protected void processInVoiceMsg(InVoiceMsg arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    protected void processInShakearoundUserShakeEvent(InShakearoundUserShakeEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    protected void processInVerifyFailEvent(InVerifyFailEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    protected void processInVerifySuccessEvent(InVerifySuccessEvent arg0) {
         // TODO Auto-generated method stub
 
     }

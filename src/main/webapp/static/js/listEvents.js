@@ -49,8 +49,8 @@ $(function() {
 		var single = false;
 		if($table.bootstrapTable('getSelections').length == 1)
 			single = true;
-		$(".editButton").prop('disabled', !single);
-		$(".deleteButton").prop('disabled', !$table.bootstrapTable('getSelections').length);
+		$(".singleSelect").prop('disabled', !single);
+		$(".multSelect").prop('disabled', !$table.bootstrapTable('getSelections').length);
 
 		// save your data, here just save the current page
 		selections = getIdSelections();

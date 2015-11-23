@@ -12,10 +12,10 @@
 	        <button id="add-role" type="button" class="btn btn-bold btn-primary addButton" data-toggle="modal" data-target="${addDialog}">
 	            <span class="glyphicon glyphicon-plus"></span>
 	        </button>
-	        <button id="edit-role" type="button" class="btn btn-bold btn-warning editButton" data-toggle="modal" data-target="${editDialog}" disabled>
+	        <button id="edit-role" type="button" class="btn btn-bold btn-warning editButton singleSelect" data-toggle="modal" data-target="${editDialog}" disabled>
 	            <span class="ace-icon fa fa-pencil-square-o bigger-110 icon-only"></span>
 	        </button>
-	        <button id="delete-role" type="button" class="btn btn-danger btn-bold deleteButton" disabled delete-action="${deleteAction}">
+	        <button id="delete-role" type="button" class="btn btn-danger btn-bold deleteButton multSelect" disabled delete-action="${deleteAction}">
 	            <span class="ace-icon fa fa-trash-o bigger-110 icon-only"></span>
 	        </button>
 	        ${toolButtons!}

@@ -4,8 +4,17 @@
  	@if(isEmpty(user.PORTRAIT)){
  	"${CONTEXT_PATH}/static/img/lepao/user.jpg"
  	@}else{
- 		@if(!strutil.endWith(user.PORTRAIT, "/0") && strutil.startWith(user.PORTRAIT, "http://")){
-			"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+ 		@if(strutil.startWith(user.PORTRAIT, "http://")){
+ 			@if(!strutil.endWith(user.PORTRAIT, "/") &&
+ 			@!strutil.endWith(user.PORTRAIT, "/0") &&
+ 			@!strutil.endWith(user.PORTRAIT, "/46") &&
+ 			@!strutil.endWith(user.PORTRAIT, "/64") &&
+ 			@!strutil.endWith(user.PORTRAIT, "/96") &&
+ 			@!strutil.endWith(user.PORTRAIT, "/132")){
+				"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+			@}else{
+				${user.PORTRAIT}
+			@}
 		@}else{
 			${user.PORTRAIT}
 		@}
@@ -14,10 +23,14 @@
  	</div>
  	@if(allowChangePortrait){
  	<div class="row" style="margin-top:10px;">
-		<a href="/lepao/portrait?open_id=${user.OPEN_ID}" style="background:#f66913;font-size:14px;padding:4px 5px 4px 5px;">更换头像</a>
+		<a href="/lepao/portrait?open_id=${user.OPEN_ID}" style="background:#625000;font-size:14px;padding:4px 10px 4px 10px;">更换头像</a>
 	</div>
-	@}
+	@}	
  </div>
+ <div class="row" style="text-align:center;">
+ 	<img src="${CONTEXT_PATH}/static/img/lepao/p_text.png" style="width:80%;">
+ </div>
+ 
  <div class="userInfo">
  	@if(allowChangePortrait){
  	<div class="row title">

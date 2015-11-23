@@ -5,11 +5,20 @@
    		@if(isEmpty(user.PORTRAIT)){
    		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
    		@}else{
-   			@if(!strutil.endWith(user.PORTRAIT, "/0") && strutil.startWith(user.PORTRAIT, "http://")){
- 				"${CONTEXT_PATH}/static/img/lepao/user.jpg"
- 			@}else{
- 				${user.PORTRAIT}
- 			@}
+   			@if(strutil.startWith(user.PORTRAIT, "http://")){
+	 			@if(!strutil.endWith(user.PORTRAIT, "/") &&
+	 			@!strutil.endWith(user.PORTRAIT, "/0") &&
+	 			@!strutil.endWith(user.PORTRAIT, "/46") &&
+	 			@!strutil.endWith(user.PORTRAIT, "/64") &&
+	 			@!strutil.endWith(user.PORTRAIT, "/96") &&
+	 			@!strutil.endWith(user.PORTRAIT, "/132")){
+					"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+				@}else{
+					${user.PORTRAIT}
+				@}
+			@}else{
+				${user.PORTRAIT}
+			@}
    		@}
    		 alt="用户头像"/>
    		</div>

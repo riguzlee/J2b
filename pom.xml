@@ -31,7 +31,7 @@
 		<uuid>3.2</uuid>
 		<jbcrypt>0.3m</jbcrypt>
 		<jfinal-captcha>0.1</jfinal-captcha>
-		<jfinal-weixin>1.4</jfinal-weixin>
+		<jfinal-weixin>1.5</jfinal-weixin>
 	</properties>
 
 	<dependencies>

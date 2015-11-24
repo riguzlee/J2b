@@ -10,5 +10,5 @@ function statusFormatter(value, row) {
 
 function thumbFormatter(value, row){
 	
-	return "<img src='" + value + "' alt='img'/>";
+	return "<img src='/upload/" + value + "' alt='img'/>";
 }

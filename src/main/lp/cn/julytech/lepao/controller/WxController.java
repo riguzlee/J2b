@@ -1,6 +1,5 @@
 package cn.julytech.lepao.controller;
 
-import com.google.common.base.Strings;
 import com.jfinal.log.Logger;
 import com.jfinal.weixin.sdk.api.ApiConfig;
 import com.jfinal.weixin.sdk.jfinal.MsgController;
@@ -27,6 +26,7 @@ import com.jfinal.weixin.sdk.msg.out.OutNewsMsg;
 import com.jfinal.weixin.sdk.msg.out.OutTextMsg;
 
 import cn.julytech.lepao.config.ConfigFactory;
+import cn.julytech.lepao.job.MessageHandler;
 import cn.julytech.lepao.service.ImgService;
 import cn.julytech.lepao.service.WeixinUserService;
 
@@ -57,20 +57,16 @@ public class WxController extends MsgController {
     @Override
     protected void processInImageMsg(InImageMsg imgMsg) {
         logger.info("=>Img msg:" + imgMsg.getMediaId());
-        String fileName = this.imgService.download(imgMsg.getMediaId());
-        if (!Strings.isNullOrEmpty(fileName)) {
-            String thumbName = this.imgService.buildThumb(fileName);
-            this.userService.doShareImage(imgMsg.getFromUserName(), fileName, thumbName, "");
-            OutTextMsg outMsg = new OutTextMsg(imgMsg);
-            outMsg.setContent("分享成功");
-            this.render(outMsg);
+        // 图片需要同步到本地，耗时操作，加入到队列处理
+
+        OutTextMsg outMsg = new OutTextMsg(imgMsg);
+        if (MessageHandler.msgQueue.add(imgMsg)) {
+            outMsg.setContent("分享成功，请等待审核");
         }
         else {
-            OutTextMsg outMsg = new OutTextMsg(imgMsg);
-            outMsg.setContent("分享失败");
-            this.render(outMsg);
+            outMsg.setContent("分享失败，请重试");
         }
-
+        this.render(outMsg);
     }
 
     @Override

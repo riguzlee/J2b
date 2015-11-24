@@ -16,6 +16,8 @@ import com.jfinal.render.ViewType;
 import com.riguz.j2b.shiro.SessionHandler;
 import com.riguz.j2b.shiro.ShiroPlugin;
 
+import cn.julytech.lepao.job.MessageHandler;
+
 public class WebConfig extends JFinalConfig {
     private static Logger logger = LoggerFactory.getLogger(WebConfig.class.getName());
     Routes                routes;
@@ -54,6 +56,9 @@ public class WebConfig extends JFinalConfig {
 
         // 加载Shiro插件
         me.add(new ShiroPlugin(this.routes));
+        // TODO
+        logger.info("Starting MessageHandleJob ....");
+        new Thread(new MessageHandler()).start();
     }
 
     @Override

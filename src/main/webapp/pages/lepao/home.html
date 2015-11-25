@@ -8,10 +8,23 @@ height:100%;
 </style>
 @};
 
-@layout("../../layout/_mobileLayout.html", {title:"我的资料", head:css}){	
+@var js = {
+<script type="text/javascript">
+	function redirectTo(url){
+		$(window.location).attr('href', url);
+	}
+</script>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:"我的资料", head:css, js:js}){	
     <div class="container homeBg">
     	@include("_user.html", {allowChangePortrait:true}){}
+    	<div class="row" style="margin-top:10px;text-align:center;">
+			<button type="button" class="btn btn-success" onclick="redirectTo('/lepao/shake?open_id=${user.OPEN_ID}')">确定</button>
+		</div>
+		
     	@include("_footer.html"){}
     </div>
     
 @}
+d

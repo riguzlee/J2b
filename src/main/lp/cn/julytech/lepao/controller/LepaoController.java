@@ -15,6 +15,7 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
 import com.jfinal.upload.UploadFile;
 import com.riguz.j2b.ajax.ResponseFactory;
+import com.riguz.j2b.config.ConfigManager;
 import com.riguz.j2b.controller.AbstractJsonController;
 import com.riguz.j2b.service.IdentityService;
 import com.riguz.j2b.util.JsonUtil;
@@ -229,6 +230,8 @@ public class LepaoController extends AbstractJsonController {
         this.renderText("分享失败，请重试");
     }
 
+    final String uploadPath = ConfigManager.getConfig("upload.path", PathKit.getWebRootPath());
+
     public void doUpload() {
         String path = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
         UploadFile file = getFile("upload", PathKit.getWebRootPath() + "/temp");
@@ -246,8 +249,8 @@ public class LepaoController extends AbstractJsonController {
             prefix = "img";
             fileName = IdentityService.getNewToken() + extension;
             try {
-                String imgUrl = "/upload/" + path + "/" + fileName;
-                File newFile = new File(PathKit.getWebRootPath() + imgUrl);
+                String imgUrl = path + "/" + fileName;
+                File newFile = new File(uploadPath + "/" + imgUrl);
                 FileUtils.copyFile(source, newFile);
                 user.set("PORTRAIT", imgUrl);
                 if (!user.update()) {

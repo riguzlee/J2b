@@ -13,10 +13,10 @@
  			@!strutil.endWith(user.PORTRAIT, "/132")){
 				"${CONTEXT_PATH}/static/img/lepao/user.jpg"
 			@}else{
-				${user.PORTRAIT}
+				"${user.PORTRAIT}"
 			@}
 		@}else{
-			${user.PORTRAIT}
+			"/upload/${user.PORTRAIT}"
 		@}
  	@}
  	 alt="用户头像"/>

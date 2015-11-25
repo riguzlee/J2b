@@ -30,7 +30,7 @@ public class ImgService extends CurdService<Img> {
     static final String   uploadPath = ConfigManager.getConfig("upload.path", PathKit.getWebRootPath());
 
     public List<Img> getSharedImages() {
-        return Img.dao.find("SELECT * FROM IMG WHERE SHARE_STATUS=? AND STATUS>= 0", 1);
+        return Img.dao.find("SELECT * FROM IMG WHERE SHARE_STATUS=? AND STATUS>= 0 ORDER BY UPLOAD_TIME DESC ", 1);
     }
 
     public Page<Img> getList(int pageNumber, int pageSize, Argument... args) {

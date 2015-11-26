@@ -99,18 +99,18 @@ public class WxController extends MsgController {
         logger.info("=>" + eventKey);
         String out = "消息已经成功接收";
         if ("HOME".equals(eventKey)) {
-            out = "点击<a href=\"http://lepao.riguz.com/lepao/home?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入您的主页";
+            out = "点击<a href=\"http://lepao.julytech.cn/lepao/home?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入您的主页";
         }
         else if ("SHARE".equals(eventKey)) {
-            out = "点击<a href=\"http://lepao.riguz.com/lepao/share?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入开始分享";
+            out = "点击<a href=\"http://lepao.julytech.cn/lepao/share?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入开始分享";
         }
         else if ("SHAKE".equals(eventKey)) {
 
             OutNewsMsg msg = new OutNewsMsg(inMenuEvent);
             News item = new News();
-            item.setPicUrl("http://lepao.riguz.com/static/img/lepao/lepao.jpg");
+            item.setPicUrl("http://lepao.julytech.cn/static/img/lepao/lepao.jpg");
             item.setTitle("缘来乐跑");
-            item.setUrl("http://lepao.riguz.com/lepao/shake?open_id=" + inMenuEvent.getFromUserName());
+            item.setUrl("http://lepao.julytech.cn/lepao/shake?open_id=" + inMenuEvent.getFromUserName());
             item.setDescription("点击进入缘来乐跑");
             msg.addNews(item);
             this.render(msg);
@@ -119,7 +119,7 @@ public class WxController extends MsgController {
             // inMenuEvent.getFromUserName() + "\">这里</a>进入缘来是你";
         }
         else if ("ZONE".equals(eventKey)) {
-            out = "点击<a href=\"http://lepao.riguz.com/lepao/zone?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入精彩空间";
+            out = "点击<a href=\"http://lepao.julytech.cn/lepao/zone?open_id=" + inMenuEvent.getFromUserName() + "\">这里</a>进入精彩空间";
         }
         OutTextMsg outMsg = new OutTextMsg(inMenuEvent);
         outMsg.setContent(out);

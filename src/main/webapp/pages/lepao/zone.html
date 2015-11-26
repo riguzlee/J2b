@@ -1,6 +1,7 @@
 @var js={
 <script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
 <script src="${CONTEXT_PATH}/static/js/masonry.pkgd.min.js"></script>
+<script src="${CONTEXT_PATH}/static/js/intense.min.js"></script>
 <script>
 $(document).ready(function(){
     var $container = $('#sharedPictures');    
@@ -11,6 +12,7 @@ $(document).ready(function(){
             columnWidth: '.sharedPicture'
         });
     });
+    Intense($(".thumbnail"));
     
 });
 </script>
@@ -22,7 +24,8 @@ $(document).ready(function(){
     	<div class="row">
     		@if(isEmpty(imgs)){
     			哎哟，白来一趟，还没有人分享照片呢！
-    		@}   
+    		@}
+    		   
     		@for(img in imgs){ 	    
     		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
     			 <a href="/upload/${img.FILE_PATH}" class="thumbnail">

@@ -4,7 +4,7 @@
 <script src="${CONTEXT_PATH}/static/js/formatter.js"></script>
 <script>
 	function handleSelections(action){
-		var selections = $table.bootstrapTable('getSelections');
+		var selections = $('.dataTable').bootstrapTable('getSelections');
 		var confirm = $.scojs_confirm({
 			content: "是否确认要操作" + selections.length + '个项目？',
 			action: function() {
@@ -23,13 +23,12 @@
 					});
 				});
 				$.scojs_message('操作完成，共处理了' + success + '个项目', $.scojs_message.TYPE_OK);
-				$table.bootstrapTable('refresh');
+				$('.dataTable').bootstrapTable('refresh');
 			}
 		});
 		confirm.show();
 	}
 	$(function(){
-		var $table = $('.dataTable');
 		$('#passBtn').click(function(){
 			handleSelections("/share/pass");	
 		});

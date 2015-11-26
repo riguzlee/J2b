@@ -61,10 +61,23 @@ function doMatchSubmit(){
     		<img src=
     			@if(has(myMatch)){
 	    			@if(isEmpty(myMatch.PORTRAIT)){
-	    			"${CONTEXT_PATH}/static/img/lepao/user.jpg"
-	    			@}else{
-	    			"${CONTEXT_PATH}${myMatch.PORTRAIT}"
-	    			@}
+				 		"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+				 	@}else{
+				 		@if(strutil.startWith(myMatch.PORTRAIT, "http://")){
+				 			@if(!strutil.endWith(myMatch.PORTRAIT, "/") &&
+				 			@!strutil.endWith(myMatch.PORTRAIT, "/0") &&
+				 			@!strutil.endWith(myMatch.PORTRAIT, "/46") &&
+				 			@!strutil.endWith(myMatch.PORTRAIT, "/64") &&
+				 			@!strutil.endWith(myMatch.PORTRAIT, "/96") &&
+				 			@!strutil.endWith(myMatch.PORTRAIT, "/132")){
+								"${CONTEXT_PATH}/static/img/lepao/she.png"
+							@}else{
+								"${myMatch.PORTRAIT}"
+							@}
+						@}else{
+							"/upload/${myMatch.PORTRAIT}"
+						@}
+				 	@}
     			@}else{
     			"${CONTEXT_PATH}/static/img/lepao/she.png" 
     			@};
@@ -88,6 +101,10 @@ function doMatchSubmit(){
     		<div class="row ">
     			<div class="col-sm-4 col-xs-4 col-md-4">公司</div>
     			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.COMPANY}</div>
+    		</div>
+    		<div class="row ">
+    			<div class="col-sm-4 col-xs-4 col-md-4">对ta说</div>
+    			<div class="col-sm-8 col-xs-8 col-md-8">${myMatch.SAYS}</div>
     		</div>
     		<div class="row ">
     			<div class="col-sm-4 col-xs-4 col-md-4">微信号</div>

@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import com.google.common.base.Strings;
 import com.jfinal.kit.PathKit;
 import com.jfinal.log.Logger;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.upload.UploadFile;
 import com.riguz.j2b.ajax.ResponseFactory;
 import com.riguz.j2b.config.ConfigManager;
@@ -173,6 +174,8 @@ public class LepaoController extends AbstractJsonController {
         this.render("/pages/lepao/shake.html");
     }
 
+    final int pageSize = 60;
+
     public void zone() {
         /*
          * WeixinUser user = this.validateBindedUser();
@@ -181,14 +184,21 @@ public class LepaoController extends AbstractJsonController {
          * return;
          * }
          */
-        List<Img> imgs = this.imgService.getSharedImages();
-        this.setAttr("imgs", imgs);
+        Page<Img> imgs = this.imgService.getSharedImages(1, 60);
+        // List<Img> imgs = this.imgService.getSharedImages();
+        this.setAttr("imgs", imgs.getList());
         this.render("/pages/lepao/zone.html");
     }
 
+    public void morePictures() {
+        int pageNumber = this.getParaToInt("page", 2);
+        Page<Img> imgs = this.imgService.getSharedImages(pageNumber, pageSize);
+        this.renderJson(imgs);
+    }
+
     public void lepaoZone() {
-        List<Img> imgs = this.imgService.getSharedImages();
-        this.setAttr("imgs", imgs);
+        Page<Img> imgs = this.imgService.getSharedImages(1, 20);
+        this.setAttr("imgs", imgs.getList());
         this.render("/pages/lepao/zonePc.html");
     }
 

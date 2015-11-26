@@ -10,5 +10,5 @@ function statusFormatter(value, row) {
 
 function thumbFormatter(value, row){
 	
-	return "<img src='/upload/" + value + "' alt='img'/>";
+	return "<a class='colorbox' target='_blank' href='/upload/" + row.FILE_PATH + "' alt='大图'><img src='/upload/" + value + "' alt='img'/></a>";
 }

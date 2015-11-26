@@ -2,39 +2,97 @@
 <script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
 <script src="${CONTEXT_PATH}/static/js/masonry.pkgd.min.js"></script>
 <script src="${CONTEXT_PATH}/static/js/intense.min.js"></script>
+<script src="${CONTEXT_PATH}/static/dropload/dropload.min.js"></script>
 <script>
+var page = 1;
 $(document).ready(function(){
     var $container = $('#sharedPictures');    
     $container.imagesLoaded(function(){
         $container.masonry({
-            itemSelector: '.sharedPicture',
+            itemSelector: '.item',
             isAnimated: true,
-            columnWidth: '.sharedPicture'
         });
     });
     Intense($(".thumbnail"));
+    $('.container').dropload({
+        scrollArea : window,
+        /*
+        loadDownFn : function(me){
+            $.ajax({
+                type: 'GET',
+                url: '/lepao/morePictures?page=' + page,
+                dataType: 'json',
+                success: function(data){
+                	if(data.rows.length > 0){
+	                	page += 1;
+	                	var result = '';
+	                    for(var i = 0; i < data.rows.length; i++){
+	                    	result += '<div class="item">'
+	           			 			 + '<a href="/upload/' + data.rows[i].FILE_PATH + '" class="thumbnail">'
+	           						 + '<img src="/upload/' + data.rows[i].THUMB_PATH + '">'
+	           						 + '<div class="caption">' + data.rows[i].UPLOAD_TIME + '</div></a></div>';
+	                	}
+	            		$('.lists').append(result);
+	            		$container.masonry( 'option', { columnWidth: '.item', isAnimated: false } )
+	                    $container.masonry('reloadItems');
+	                    $container.masonry('layout');
+                	}
+                	Intense($(".thumbnail"));
+                    me.resetload();
+                },
+                error: function(xhr, type){
+                    alert('Ajax error!');
+                    me.resetload();
+                }
+            });
+        },
+        */
+        loadUpFn:function(me){
+        	location.reload();
+        }
+    });
     
 });
+
 </script>
 @};
 
-@layout("../../layout/_mobileLayout.html", {title:"美图分享", js:js}){	
+@var css={
+<link href='${CONTEXT_PATH}/static/dropload/dropload.min.css' rel='stylesheet'>
+<style>
+<!--
+html,body{
+height:100%;
+}
+-->
+.item {
+  width: 45%;
+  margin: 4px;
+  float: left;
+}
+.thumbnail {
+    margin-bottom: 20px;
+}
+</style>
+
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:"美图分享", js:js, head:css}){	
     <div class="container">
-    	<div id="sharedPictures">
-    	<div class="row">
+    	<div id="sharedPictures" >
+    	<div class="lists">
     		@if(isEmpty(imgs)){
     			哎哟，白来一趟，还没有人分享照片呢！
     		@}
     		   
     		@for(img in imgs){ 	    
-    		<div class="col-md-4 col-sm-6 col-xs-6 sharedPicture">
+    		<div class="item">
     			 <a href="/upload/${img.FILE_PATH}" class="thumbnail">
     				<img src=
 						"/upload/${img.THUMB_PATH}"
 						>
     				<div class="caption">${img.UPLOAD_TIME}</div>
     			</a>
-    			
     		</div>
     		@}
 		</div>

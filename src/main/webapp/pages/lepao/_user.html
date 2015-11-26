@@ -11,7 +11,7 @@
  			@!strutil.endWith(user.PORTRAIT, "/64") &&
  			@!strutil.endWith(user.PORTRAIT, "/96") &&
  			@!strutil.endWith(user.PORTRAIT, "/132")){
-				"${CONTEXT_PATH}/static/img/lepao/user.jpg"
+				"${CONTEXT_PATH}/static/img/lepao/she.png"
 			@}else{
 				"${user.PORTRAIT}"
 			@}
@@ -69,6 +69,6 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-4 col-sm-4"><label>登记时间</label></div>
-		<div class="col-xs-8 col-sm-8"><span>${user.REGISTER_DATE}</span></div>
+		<div class="col-xs-8 col-sm-8"><span>${user.REGISTER_DATE ,dateFormat="yyyy-MM-dd"}</span></div>
 	</div>
 </div>

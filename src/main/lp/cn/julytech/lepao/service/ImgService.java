@@ -33,6 +33,10 @@ public class ImgService extends CurdService<Img> {
         return Img.dao.find("SELECT * FROM IMG WHERE SHARE_STATUS=? AND STATUS>= 0 ORDER BY UPLOAD_TIME DESC ", 1);
     }
 
+    public Page<Img> getSharedImages(int pageNumber, int pageSize) {
+        return Img.dao.paginate(pageNumber, pageSize, "SELECT * ", "FROM IMG WHERE SHARE_STATUS=? AND STATUS>= 0 ORDER BY UPLOAD_TIME DESC", 1);
+    }
+
     public Page<Img> getList(int pageNumber, int pageSize, Argument... args) {
         String select = "SELECT *";
         String where = "FROM IMG WHERE STATUS >=0 ORDER BY UPLOAD_TIME DESC";

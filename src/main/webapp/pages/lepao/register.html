@@ -22,6 +22,10 @@ height:100%;
 <script>
 	$(function(){
 		$(".switch").bootstrapSwitch();
+		$("#userHobbits").tagsinput({
+			  maxTags: 5,
+			  maxChars: 5
+		});
 	});
 	function doRegister(){
 		$("#registerForm").validate({
@@ -60,12 +64,12 @@ height:100%;
     	<hr>
     	<form method="post" action="/lepao/doRegister" id="registerForm" class="form-horizontal" user="form">
 			<input type="hidden" name="user.OPEN_ID" value="${open_id!}"/>
-			<tp:inlineField id="userName" label="姓名" name="user.REAL_NAME" required="true"/>
-			<tp:switchField id="userGender" label="性别" name="GENDER" required="true" on="男" off="女" checked="true"/>
-			<tp:inlineField id="userNumber" label="号码布" name="user.LEPAO_NUMBER" required="true" />
-			<tp:inlineField id="userMobile" label="微信号" name="user.MOBILE" required="false" desc="填写您的微信号让别人联系到您"/>
-			<tp:inlineField id="userSays" label="想对他/她说" name="user.SAYS" required="false" desc="填写您的交友宣言"/>
-			<tp:inlineField id="userHobbits" label="爱好" name="user.HOBBY" required="false" type="data-role='tagsinput'" desc="填写兴趣爱好匹配将更准"/>
+			<tp:inlineField id="userName" label="姓名" name="user.REAL_NAME" required="true" valid="maxlength=10"/>
+			<tp:switchField id="userGender" label="性别" name="GENDER" required="true" on="男" off="女" checked="true" />
+			<tp:inlineField id="userNumber" label="号码布" name="user.LEPAO_NUMBER" required="true" valid="maxlength=10" />
+			<tp:inlineField id="userMobile" label="微信号" name="user.MOBILE" required="false" valid="maxlength=15" desc="填写您的微信号让别人联系到您"/>
+			<tp:inlineField id="userSays" label="想对他/她说" name="user.SAYS" required="false" valid="maxlength=10" desc="填写您的交友宣言"/>
+			<tp:inlineField id="userHobbits" label="爱好" name="user.HOBBY" required="false" valid="maxlength=10" desc="填写兴趣爱好匹配将更准"/>
 			<div class="labels" style="margin-bottom:15px;">
 				<span class="tag-label">运动</span>
 				<span class="tag-label">音乐</span>

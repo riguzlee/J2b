@@ -2,6 +2,7 @@
 <script src="${CONTEXT_PATH}/static/js/modalEvents.js"></script>
 <script src="${CONTEXT_PATH}/static/js/listEvents.js"></script>
 <script src="${CONTEXT_PATH}/static/js/formatter.js"></script>
+<script src="${CONTEXT_PATH}/static/ace/js/jquery.colorbox.min.js"></script>
 <script>
 	function handleSelections(action){
 		var selections = $('.dataTable').bootstrapTable('getSelections');
@@ -38,6 +39,10 @@
 		$('#deleteBtn').click(function(){
 			handleSelections("/share/delete");	
 		});
+		$.fn.colorbox.settings.transition = "fade";
+		$.fn.colorbox.settings.bgOpacity = "0.9";
+		$.fn.colorbox.settings.contentCurrent = "image {current} of {total}";
+		$(".colorbox").colorbox({rel:'group1'});
 		
 	});
 	

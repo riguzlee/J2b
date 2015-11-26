@@ -187,6 +187,7 @@ public class WeixinUserService extends CurdService<WeixinUser> {
         user.set("HOBBY", model.getStr("HOBBY"));
         user.set("AGE", model.getInt("AGE"));
         user.set("REGISTER_DATE", new Date());
+        user.set("SAYS", model.getStr("SAYS"));
 
         ApiConfigKit.setThreadLocalApiConfig(ConfigFactory.getConfig("anything"));
         ApiResult info = UserApi.getUserInfo(model.getStr("OPEN_ID"));

@@ -174,14 +174,22 @@ public class LepaoController extends AbstractJsonController {
     }
 
     public void zone() {
-        WeixinUser user = this.validateBindedUser();
-        if (user == null) {
-            this.redirectToLicencePage();
-            return;
-        }
+        /*
+         * WeixinUser user = this.validateBindedUser();
+         * if (user == null) {
+         * this.redirectToLicencePage();
+         * return;
+         * }
+         */
         List<Img> imgs = this.imgService.getSharedImages();
         this.setAttr("imgs", imgs);
         this.render("/pages/lepao/zone.html");
+    }
+
+    public void lepaoZone() {
+        List<Img> imgs = this.imgService.getSharedImages();
+        this.setAttr("imgs", imgs);
+        this.render("/pages/lepao/zonePc.html");
     }
 
     public void portrait() {

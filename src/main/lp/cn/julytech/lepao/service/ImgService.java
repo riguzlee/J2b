@@ -14,13 +14,13 @@ import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.weixin.sdk.api.ApiConfig;
 import com.jfinal.weixin.sdk.api.ApiConfigKit;
-import com.jfinal.weixin.sdk.api.MediaFile;
 import com.riguz.j2b.config.ConfigManager;
 import com.riguz.j2b.model.bean.Argument;
 import com.riguz.j2b.service.CurdService;
 import com.riguz.j2b.service.IdentityService;
 
 import cn.julytech.lepao.entity.Img;
+import cn.julytech.lepao.weixin.Attachment;
 import cn.julytech.lepao.weixin.MediaApi;
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -43,13 +43,15 @@ public class ImgService extends CurdService<Img> {
 
     public String download(ApiConfig config, String mediaId) {
         ApiConfigKit.setThreadLocalApiConfig(config);
+        BufferedInputStream stream = null;
+        BufferedOutputStream outStream = null;
         try {
-            MediaFile downloadedImg = MediaApi.getMedia(mediaId);
+            Attachment downloadedImg = MediaApi.getMedia(mediaId);
             String dateDir = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
             String fileName = dateDir + "/" + IdentityService.getNewToken() + ".jpg";
             logger.info("Downloaded:" + downloadedImg.getFileName() + "/" + fileName);
             byte[] buffer = new byte[2048];
-            BufferedInputStream stream = downloadedImg.getFileStream();
+            stream = downloadedImg.getFileStream();
             String savePath = uploadPath + "/" + fileName;
             File imageFile = new File(savePath);
             logger.info("the Path is:" + savePath);
@@ -58,12 +60,11 @@ public class ImgService extends CurdService<Img> {
                 parentDir.mkdirs();
             if (!imageFile.exists())
                 imageFile.createNewFile();
-            BufferedOutputStream outStream = new BufferedOutputStream(new FileOutputStream(imageFile));
+            outStream = new BufferedOutputStream(new FileOutputStream(imageFile));
             int bytesRead = 0;
             while (-1 != (bytesRead = stream.read(buffer, 0, buffer.length))) {
                 outStream.write(buffer, 0, bytesRead);
             }
-            outStream.flush();
             outStream.close();
             stream.close();
             return fileName;
@@ -72,6 +73,24 @@ public class ImgService extends CurdService<Img> {
             logger.error("Download failed:" + e.getMessage());
             e.printStackTrace();
             return null;
+        }
+        finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outStream != null) {
+                try {
+                    outStream.close();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

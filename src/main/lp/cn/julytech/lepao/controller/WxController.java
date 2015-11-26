@@ -61,7 +61,7 @@ public class WxController extends MsgController {
 
         OutTextMsg outMsg = new OutTextMsg(imgMsg);
         if (MessageHandler.msgQueue.add(imgMsg)) {
-            outMsg.setContent("分享成功，请等待审核");
+            outMsg.setContent("分享成功，快去精彩现场找找朋友们吧");
         }
         else {
             outMsg.setContent("分享失败，请重试");

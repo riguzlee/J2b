@@ -1,0 +1,38 @@
+@var js={
+<script src="${CONTEXT_PATH}/static/js/imagesloaded.pkgd.min.js"></script>
+<script src="${CONTEXT_PATH}/static/js/masonry.pkgd.min.js"></script>
+<script>
+
+</script>
+@};
+
+@layout("../../layout/_mobileLayout.html", {title:"美图分享", js:js}){	
+    <div class="container">
+		<div class="row">
+		<div id="myCarousel" class="carousel slide">
+				<ol class="carousel-indicators">
+					@for(img in imgs){ 
+						<li data-target="#myCarousel" data-slide-to="${imgLP.index-1}"
+							@if(imgLP.index == 1){
+								class="active"
+							@}
+						></li>
+					@}
+				</ol>   
+				<div class="carousel-inner">
+					@for(img in imgs){
+					<div class=
+						@if(imgLP.index == 1){
+							"active item thumbnail"
+						@}else{
+							"item thumbnail"
+						@}
+						><img src="/upload/${img.FILE_PATH}" alt="精彩图片分享" height="600px"/></div>
+					@}
+				</div>   
+				<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+				<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+			</div>
+		</div>
+    </div>
+@}

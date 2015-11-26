@@ -22,6 +22,12 @@ public class MessageHandler implements Runnable {
         while (true) {
             item = msgQueue.poll();
             if (item == null) {
+                try {
+                    Thread.sleep(100);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 continue;
             }
             if (item instanceof InImageMsg) {

@@ -1,4 +1,5 @@
 /target/
+/WebRoot/WEB-INF/classes
 temp
 upload
 *.log

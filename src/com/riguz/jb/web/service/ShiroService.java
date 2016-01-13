@@ -1,9 +1,9 @@
 package com.riguz.jb.web.service;
 
 import com.jfinal.plugin.activerecord.Page;
-import com.riguz.j2b.platform.model.bean.Argument;
-import com.riguz.j2b.platform.service.CurdService;
-import com.riguz.j2b.system.entity.Filter;
+import com.riguz.jb.model.core.Filter;
+import com.riguz.jb.model.ext.arg.Argument;
+import com.riguz.jb.model.ext.sqlinxml.SqlKit;
 
 public class ShiroService extends CurdService<Filter> {
 
@@ -14,6 +14,6 @@ public class ShiroService extends CurdService<Filter> {
     }
 
     public Filter get(String id) {
-        return this.get(Filter.dao, id, "FILTER_ID", "NAME", "URL", "RULES", "REMARK", "ORDER");
+        return this.get(Filter.dao, SqlKit.sql("core.findFilterById"), id);
     }
 }

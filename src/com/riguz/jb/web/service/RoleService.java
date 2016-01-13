@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.jfinal.plugin.activerecord.Page;
 import com.riguz.jb.model.core.Role;
-import com.riguz.jb.model.core.User;
+import com.riguz.jb.model.ext.arg.Argument;
 import com.riguz.jb.model.ext.sqlinxml.SqlKit;
 
 public class RoleService extends CurdService<Role> {
@@ -16,19 +16,14 @@ public class RoleService extends CurdService<Role> {
     }
 
     public Role get(String id) {
-        return this.get(Role.dao, id, "ROLE_ID", "NAME", "IDENT", "ROLE_STATUS", "REMARK");
+        return this.get(Role.dao, SqlKit.sql("core.getRoleById"), id);
     }
 
     public List<Role> getAllRoles() {
-        return Role.dao.find(SqlKit.sql("system.getAllRoles"));
+        return Role.dao.find(SqlKit.sql("core.getAllRoles"));
     }
 
     public Role getRoleByIdent(String ident) {
-        return Role.dao.findFirst(SqlKit.sql("system.getRoleByIdent"), ident);
-    }
-
-    public List<User> getUserByIdent(String ident) {
-        String sql = "SELECT * FROM user_view WHERE IDENT=? AND (THRU_DATE IS NULL OR  THRU_DATE<NOW()) ";
-        return User.dao.find(sql, ident);
+        return Role.dao.findFirst(SqlKit.sql("core.getRoleByIdent"), ident);
     }
 }

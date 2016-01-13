@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>${title!}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Riguz.com.">
+    <meta name="author" content="Solee Riguz">
+
+	<base href="${CONTEXT_PATH}/"/>
+	
+    <link href="${CONTEXT_PATH}/static/ace/css/bootstrap.min.css" rel="stylesheet" />    
+    <link href="${CONTEXT_PATH}/static/css/mobile.css" rel="stylesheet" />
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+    ${head!}
+</head>
+<body class="${bodyClass!}">
+    ${layoutContent!}    
+    <script src="${CONTEXT_PATH}/static/ace/js/jquery.min.js"></script>
+    <script src="${CONTEXT_PATH}/static/ace/js/jquery.mobile.custom.min.js"></script>
+    <script src="${CONTEXT_PATH}/static/ace/js/bootstrap.min.js"></script>
+    <script src="${CONTEXT_PATH}/static/bower/jquery-form/jquery.form.js"></script>
+    <script src="${CONTEXT_PATH}/static/ace/js/jquery.validate.min.js"></script>
+    <script src="${CONTEXT_PATH}/static/ace/js/messages_zh.min.js"></script>
+    <script src="${CONTEXT_PATH}/static/js/validate.js"></script>
+    ${js!}
+   
+</body>
+ 
+</html>

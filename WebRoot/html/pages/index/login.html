@@ -1,0 +1,45 @@
+@var js={
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function($) {
+        $(document).on('click', '.toolbar a[data-target]',
+        function(e) {
+            e.preventDefault();
+            var target = $(this).data('target');
+            $('.widget-box.visible').removeClass('visible'); //hide others
+            $(target).addClass('visible'); //show target
+        });
+    });
+</script>
+<script src="${CONTEXT_PATH}/res/js/login.js"></script>
+@};
+@var bodyClass="login-layout blur-login";
+@layout("../../layout/_aceSimpleLayout.html", {extJs:js, bodyClass:bodyClass}){
+<div class="main-container">
+    <div class="main-content">
+        <div class="row">
+            <div style="width:960px; margin: 8% auto; padding: 0px 24px;">
+           
+                <div class="login-container">
+                    <div class="center">
+                        <h1>
+                            <i class="ace-icon fa fa-lock green"></i>
+                            <span class="red">Riguz</span>
+                            <span class="white" id="id-text2">JB Example</span>
+                            <i class="ace-icon fa fa-cloud blue"></i> 
+                        </h1>
+                       
+                    </div>
+                    <div class="space-6"></div>
+                    <div class="position-relative">
+                    	@include("_loginForm.html"){}
+                        @include("_resetForm.html"){}
+                        
+                    </div>
+                </div>
+            </div>
+         	@include("_version.html"){}
+        </div>
+    </div>
+</div>
+@};

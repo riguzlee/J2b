@@ -1,0 +1,42 @@
+@var js={
+<script src="${CONTEXT_PATH}/static/js/modalEvents.js"></script>
+<script src="${CONTEXT_PATH}/static/js/listEvents.js"></script>
+<script src="${CONTEXT_PATH}/static/js/formatter.js"></script>
+@};
+
+@var search={
+<div class="form-group">
+    <input name="search" class="form-control" type="text" placeholder="Search">
+</div>
+@};
+
+
+@layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"system/roles"}){
+@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addRoleDialog", editDialog:"#addRoleDialog", deleteAction:"/system/roles/delete"}){}
+@include("_editRole.html",{dialogId:"addRoleDialog", formId:"addRoleForm"}){}
+<table id="rolesList" class="dataTable"
+    data-toggle="table"
+    data-toolbar="#toolbar"
+    data-height="600"
+    data-url="/system/roles/list"
+    data-query-params="queryParams"
+    data-show-columns="false"
+    data-side-pagination="server"
+    data-pagination="true"
+    data-page-list="[5, 10, 20, 50, 100, 200]"
+    data-search="false"
+    data-click-to-select="true"
+    data-id-field="id">
+    <thead>
+    <tr>
+        <th data-field="check" data-checkbox="true"></th>
+        <th data-field="ID" data-visible="false">ID</th>
+        <th data-field="NAME">角色名称</th>
+        <th data-field="IDENT">角色标识</th>
+        <th data-field="ROLE_STATUS" data-formatter="statusFormatter">状态</th>
+        <th data-field="REMARK">备注</th>
+    </tr>
+    </thead>
+</table>
+@};
+

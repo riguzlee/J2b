@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+@include("_htmlMeta.html"){}
+
+<title>${title!}</title>
+@include("_aceCss.html"){}
+${css!}
+</head>
+<body class="no-skin">
+	<!-- 导航栏 -->
+	<div class="navbar" id="navbar">
+		@include("_aceNavbar.html"){}
+	</div>
+
+	<div class="main-container" id="main-container">
+		<!-- 侧边栏 -->
+		<div class="sidebar responsive" id="sidebar">
+			@var url="";
+			@if(has(pageUrl)){
+			@url=pageUrl;
+			@}
+			
+			@include("_aceSidebar.html", {pageUrl:url}){}
+		</div>
+
+		<div class="main-content">
+			<!-- 地图栏 -->
+			
+			<div class="page-content">
+				<!-- 右侧设置器 -->				
+				@include("_aceSettingBox.html"){}
+				@if(has(ajustRow)){
+					${layoutContent!}
+				@}else{
+				<div class="row">
+					<div class="col-xs-12">
+						<!-- 内容 -->
+						${layoutContent!}
+					</div>
+				</div>
+				@}
+			</div>
+		</div>
+		<!-- 底栏 -->
+		@include("_aceFooter.html"){}
+	</div>
+@include("_aceJs.html"){}	
+${extJs!}
+</body>
+</html>

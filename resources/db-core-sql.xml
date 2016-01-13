@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlGroup name="core">
+	<sql id="findUserByEmail">SELECT * FROM `USER` WHERE THRU_DATE IS NULL AND EMAIL = ?</sql>
+	<sql id="findUserByLoginName">SELECT * FROM `USER` WHERE `THRU_DATE` IS NULL AND LOGIN_NAME=?</sql>
+	<sql id="findUserRolesById">SELECT * FROM `ROLE` WHERE `ROLE_ID` IN (SELECT `ROLE_ID` FROM `USER_TO_ROLE` WHERE `USER_ID`=? AND THRU_DATE IS NULL)</sql>
+	<sql id="findUserById">SELECT * FROM `USER` WHERE THRU_DATE IS NULL AND USER_ID = ?</sql>
+	<sql id="findUserByTokenId">SELECT * FROM `USER` WHERE `TOKEN_ID` = ? AND `THRU_DATE` IS NULL</sql>
+	
+	<sql id="getAllFilters">SELECT * FROM FILTER WHERE FILTER_STATUS='N' AND THRU_DATE IS NULL ORDER BY `ORDER` ASC</sql>
+	
+	<sql id="userListSelect">SELECT `USER_ID` AS `ID`, `LOGIN_NAME`,`REAL_NAME`, `EMAIL`, `REMARK`, `ACCOUNT_STATUS`, `ADDITIONAL_ID`, IDENT, NAME AS ROLE_NAME</sql>
+	<sql id="userListWhere">FROM `USER_VIEW` WHERE THRU_DATE IS NULL </sql>
+	
+	<sql id="getAllRoles">SELECT * FROM ROLE WHERE THRU_DATE IS NULL</sql>
+	<sql id="getRoleByIdent">SELECT * FROM ROLE WHERE THRU_DATE IS NULL AND IDENT=?</sql>
+	
+	<sql id="getUserToRoles">SELECT * FROM user_to_role where `USER_ID`=? AND THRU_DATE IS NULL</sql>
+	
+	<sql id="getToken">SELECT * FROM `TOKEN` WHERE `TOKEN`=? AND `THRU_DATE` IS NULL</sql>
+</sqlGroup>

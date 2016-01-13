@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+body{
+	/*
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "STHeiti", "Helvetica","Arial","Verdana","sans-serif";
+	font-family: Avenir,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	*/
+	font-family: "Helvetica Neue", Helvetica, Microsoft Yahei,
+		Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+}
+h1,h2,h3,h4,h5,h6{
+	font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei","\9ED1\4F53",Arial,sans-serif !important;
+}
+img.randpic{
+	width:120px;
+}
+.version{
+	color:white;
+	float:right;
+}

@@ -1,0 +1,43 @@
+@var js={
+<script src="${CONTEXT_PATH}/static/js/commons.js"></script>
+<script src="${CONTEXT_PATH}/static/js/modalEvents.js"></script>
+<script src="${CONTEXT_PATH}/static/js/listEvents.js"></script>
+<script src="${CONTEXT_PATH}/static/js/formatter.js"></script>
+@};
+
+@var search={
+<div class="form-group">
+    <input name="search" class="form-control" type="text" placeholder="Search">
+</div>
+@};
+
+@layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"system/urls"}){
+@include("../../partial/_gridButtons.html", {searchForm:search, addDialog:"#addUrlDialog", editDialog:"#addUrlDialog", deleteAction:"/system/urls/delete"}){}
+@include("_editUrl.html",{dialogId:"addUrlDialog", formId:"addUrlForm"}){}
+<table id="urlsList" class="dataTable"
+    data-toggle="table"
+    data-toolbar="#toolbar"
+    data-height="600"
+    data-url="/system/urls/list"
+    data-query-params="queryParams"
+    data-show-columns="false"
+    data-side-pagination="server"
+    data-pagination="true"
+    data-page-list="[5, 10, 20, 50, 100, 200]"
+    data-search="false"
+    data-click-to-select="true"
+    data-id-field="id">
+    <thead>
+    <tr>
+        <th data-field="check" data-checkbox="true"></th>
+        <th data-field="ID" data-visible="false">ID</th>
+        <th data-field="NAME">权限名称</th>
+        <th data-field="URL">权限路径</th>
+        <th data-field="ORDER">权限排序</th>
+        <th data-field="RULES">权限表达式</th>
+        <th data-field="REMARK">备注</th>
+    </tr>
+    </thead>
+</table>
+@};
+

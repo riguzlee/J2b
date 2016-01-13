@@ -1,0 +1,28 @@
+@var content={
+    <div class="tip"/>
+    <div style="height:200px;">
+    <form method="post" action="system/users/grant" id="${formId}"  class="ajaxForm">
+        <input type="hidden" name="user.USER_ID"/>
+        <label checkbox-inline>
+        待授权用户：
+        <p id="usersToGrant"></p>
+        </label>
+        <br>
+        <label class="checkbox-inline">
+      		<input type="radio"  name="user.ROLE_IDENT" value="" checked="checked">不设置角色
+   		</label>
+   		<br>
+   		<br>
+   		<br>
+   		@for(r in ROLES){
+   		@if(r.IDENT != 'SYSTEM_SUPER_ADMIN'){
+   		<label class="checkbox-inline">
+      		<input type="radio"  name="user.ROLE_IDENT" value="${r.IDENT}">${r.NAME}
+   		</label>
+   		@}
+   		@};
+    </form>
+    </div>
+@};
+
+<tp:modalValidate id="${dialogId}" btn="设置角色" title="设置角色" content="${content}" form="${formId}"/>

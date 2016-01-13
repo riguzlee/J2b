@@ -1,0 +1,9 @@
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="description" content="Riguz.com.">
+<meta name="author" content="Solee Riguz">
+
+<!-- 解决Jetty和Tomcat部署时的相对路径问题。-->
+<!-- 页面及JS中所有的路径应当用相对路径（不以"/"开头)-->
+<base href="${CONTEXT_PATH}/"/>

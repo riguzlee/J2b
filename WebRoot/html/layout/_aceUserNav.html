@@ -1,0 +1,41 @@
+<div class="navbar-buttons navbar-header pull-right" role="navigation">
+    <ul class="nav ace-nav">  
+		
+		<!-- 告警栏 -->    	      
+        <li class="red">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="ace-icon fa fa-bell icon-animated-bell"></i>
+                <span class="badge badge-important msgCount">${MSG_CONUT!}</span>
+            </a>
+            <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                <li class="dropdown-header">
+                    <i class="ace-icon fa fa-exclamation-triangle"></i><span class="msgCount">${MSG_CONUT!}</span>条新消息
+                </li>
+                <li class="dropdown-footer">
+                    <a href="me/msg">查看所有消息<i class="ace-icon fa fa-arrow-right"></i></a>
+                </li>
+            </ul>
+        </li>
+        
+        <!-- 用户信息栏 -->
+        <li class="light-blue">
+            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+            <!-- --
+                <img class="nav-user-photo" src="${CONTEXT_PATH}/static/ace/avatars/user.jpg" alt="user"/>
+                
+                 -- -->
+                <span class="user-info"><small>${session["jfinal_user"]}</small>(${session["jfinal_role_object"].NAME!})</span>
+                <i class="ace-icon fa fa-caret-down"></i>
+            </a>
+            <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">           
+                <li>
+                    <a href="anon/reset"><i class="ace-icon fa fa-user"></i>重置密码</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="anon/doLogout"><i class="ace-icon fa fa-power-off"></i>注销</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

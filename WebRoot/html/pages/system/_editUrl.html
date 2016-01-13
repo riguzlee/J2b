@@ -1,0 +1,36 @@
+@var content={
+    <div class="tip"/>
+    <form method="post" add-action="/system/urls/add" update-action="/system/urls/update" id="${formId}"  class="ajaxForm">
+        <input type="hidden" name="url.FILTER_ID"/>
+        <tp:field id="urlName" label="权限名称" name="url.NAME" required="true" desc="为权限起一个名字"/>
+        <tp:field id="urlOrder" label="匹配顺序" name="url.ORDER" required="true" desc="数字越小的越先匹配" valid="min='0' max='9999' number=true"/>
+        <tp:field id="urlPattern" label="权限URL路径" name="url.URL" required="true" desc="匹配权限路径，使用/**匹配所有下级路径 例如:/a/**"/>
+        <tp:field id="urlFilters" label="过滤器" name="url.RULES" required="true" desc="多个过滤器用,号隔开"/>
+        <div class="form-group">
+            <label for="urlRemark">备注</label>
+            <textarea id="urlRemark" class="form-control" rows="3" name="url.REMARK" placeholder=""></textarea>
+        </div>
+    </form>
+@};
+
+<tp:modalValidate id="${dialogId}" btn="添加权限" title="编辑权限" content="${content}" form="${formId}"/>
+
+<script>
+function initControls(){
+}
+function loadItem(id){
+	console.log(id);
+    $.getJSON("/system/urls/get" + id, function(json){
+        if(json.error != 0){
+            alert('获取数据失败:' + json.data);
+        }
+        var item = json.data;
+        $("input[name='url.SHIRO_ID']").val(item.SHIRO_ID);
+        $("input[name='url.NAME']").val(item.NAME);
+        $("input[name='url.URL']").val(item.URL);
+        $("input[name='url.FILTERS']").val(item.FILTERS);
+        $("input[name='url.ORDER']").val(item.ORDER);
+        $("textarea[name='url.REMARK']").val(item.REMARK);
+    });
+}
+</script>

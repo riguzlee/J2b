@@ -1,0 +1,34 @@
+<div id="forgot-box" class="forgot-box widget-box no-border">
+    <div class="widget-body">
+        <div class="widget-main">
+            <h4 class="header red lighter bigger">
+                <i class="ace-icon fa fa-key"></i>
+                重置密码
+            </h4>
+            <div class="space-6"></div>
+            <p>请务必填写系统记录的注册邮箱，并根据邮件进行下一步操作</p>
+            <form class="resetForm" action="anon/sendReset">
+                <fieldset>
+                    <label class="block clearfix">
+                        <span class="block input-icon input-icon-right">
+                            <input type="email" name="email" class="form-control" placeholder="注册邮箱" required/>
+                            <i class="ace-icon fa fa-envelope"></i>
+                        </span>
+                    </label>
+                    <div class="clearfix">
+                        <button type="button" class="width-35 pull-right btn btn-sm btn-danger" id="sendResetBtn">
+                            <i class="ace-icon fa fa-lightbulb-o"></i>
+                            <span class="bigger-110">提交申请</span>
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="toolbar center">
+            <a href="#" data-target="#login-box" class="back-to-login-link">
+                返回登陆页面
+                <i class="ace-icon fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>

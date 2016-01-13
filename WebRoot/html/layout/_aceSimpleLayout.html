@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+@include("_htmlMeta.html"){}
+
+<title>${title!}</title>
+@include("_aceCss.html"){}
+</head>
+<body class="${bodyClass!}">
+	<!-- 内容 -->
+	${layoutContent!}
+@include("_aceJs.html"){}	
+${extJs!}
+</body>
+</html>

@@ -1,0 +1,60 @@
+@var content={
+    <div class="tip"/>
+    <form method="post" add-action="/system/users/add" update-action="/system/users/update" id="${formId}" class="ajaxForm">
+        <input type="hidden" name="user.USER_ID"/>
+        <tp:field id="userloginName" label="登录名" name="user.LOGIN_NAME" desc="请输入字母或者数字组合" required="true"/>
+        <tp:field id="userrealName" label="姓名" name="user.REAL_NAME" required="false" desc="请输入真实姓名"  />
+        <tp:field id="userEmail" label="用户邮箱" name="user.EMAIL" required="true" valid="email=true"/>
+        <div class="form-group">
+        	<label for="userUnitId">所属公司</label>
+	        <select id="userUnitId" name="addinfo.UNIT_ID" class="form-control">
+			  <option value =""></option>		  
+			</select>
+		</div>
+		<tp:field id="userDept" label="所属部门" name="addinfo.DEPARTMENT_NAME" required="false"/>
+        <div class="form-group">
+            <label for="remark">备注</label>
+            <textarea class="form-control" rows="3" name="user.REMARK" placeholder=""></textarea>
+        </div>
+    </form>
+@};
+
+<tp:modalValidate id="${dialogId}" btn="添加用户" title="编辑用户" content="${content}" form="${formId}"/>
+
+<script>
+function initControls(){
+	$("#user_role_id").empty();
+	$("#user_company_id").empty();
+	$("input[name='user.login_name']").attr("disabled",false);
+	$.getJSON("unit/tree",function(data){
+		var error = data.error;
+		if(error == '0'){
+			var items = data.data;
+			$.each(items, function(index, item){
+				$('#userUnitId').append("<option value='"+item.id+"'>"+item.name+"</option>"); 
+			});
+		}
+		else
+			alert('获取组织机构列表失败：' + data.data);
+		
+	  });
+}
+function loadItem(id){
+	var selections = $table.bootstrapTable('getSelections');
+	var theUser = selections[0];
+    $.getJSON("/system/users/get/" + id, function(json){
+    	if(json.error != 0){
+    		alert('获取数据失败:' + json.data);
+    	}
+    	var item = json.data;
+    	$("input[name='user.USER_ID']").val(item.USER_ID);
+    	$("input[name='user.LOGIN_NAME']").val(item.LOGIN_NAME);
+    	$("input[name='user.REAL_NAME']").val(item.REAL_NAME);
+    	$("input[name='user.EMAIL']").val(item.EMAIL);
+    	
+    	$("textarea[name='user.REMARK']").val(item.REMARK);
+    });
+    $("input[name='addinfo.DEPARTMENT_NAME']").val(theUser.DEPARTMENT_NAME);
+    $("#userUnitId").val(theUser.UNIT_ID);
+}
+</script>

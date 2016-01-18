@@ -1,10 +1,10 @@
-package com.riguz.jb.web.ext.ajax;
+package com.riguz.jb.web.ext.ajax.pagination;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataGrid<T> implements Serializable {
+public class BootstrapTableDataGrid<T> implements Serializable {
 
     public int     total     = 0;
     public int     page;

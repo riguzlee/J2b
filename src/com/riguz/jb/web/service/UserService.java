@@ -17,15 +17,18 @@ import com.riguz.jb.model.core.User;
 import com.riguz.jb.model.core.UserToRole;
 import com.riguz.jb.model.ext.arg.Argument;
 import com.riguz.jb.model.ext.sqlinxml.SqlKit;
+import com.riguz.jb.web.ext.ajax.pagination.PageParam;
 
 public class UserService extends CurdService<User> {
     private static Logger logger     = LoggerFactory.getLogger(UserService.class.getName());
     RoleService           roleSerive = new RoleService();
 
-    public Page<User> getList(int pageNumber, int pageSize, Argument... args) {
-        Page<User> users = this.getList(User.dao, pageNumber, pageSize, SqlKit.sql("system.userListSelect"),
-                SqlKit.sql("system.userListWhere"), args);
-        return users;
+    public Page<User> getList(PageParam pageParam, Argument... args) {
+        return this.getList(Role.dao,
+                pageParam.getPageNumber(),
+                pageParam.getPageSize(),
+                SqlKit.sql("core.userListSelect"),
+                SqlKit.sql("core.userListWhere"), args);
     }
 
     public User get(String id) {

@@ -24,6 +24,9 @@ import com.riguz.jb.shiro.SessionHandler;
 import com.riguz.jb.shiro.ShiroPlugin;
 import com.riguz.jb.web.controller.AnonController;
 import com.riguz.jb.web.controller.IndexController;
+import com.riguz.jb.web.controller.RoleController;
+import com.riguz.jb.web.controller.ShiroController;
+import com.riguz.jb.web.controller.UserController;
 import com.riguz.jb.web.service.SecurityService;
 
 public class JbConfig extends JFinalConfig {
@@ -53,6 +56,9 @@ public class JbConfig extends JFinalConfig {
         this.routes = me;
         me.add("/anon", AnonController.class);
         me.add("/", IndexController.class);
+        me.add("/system/users", UserController.class);
+        me.add("/system/roles", RoleController.class);
+        me.add("/system/urls", ShiroController.class);
     }
 
     ShiroPlugin shiroPlugin = null;

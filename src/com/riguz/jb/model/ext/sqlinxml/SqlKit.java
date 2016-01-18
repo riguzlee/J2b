@@ -23,6 +23,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Strings;
 import com.jfinal.kit.PathKit;
 
 public class SqlKit {
@@ -35,7 +36,11 @@ public class SqlKit {
         if (sqlMap == null) {
             throw new NullPointerException("SqlInXmlPlugin not start");
         }
-        return sqlMap.get(groupNameAndsqlId);
+        String sql = sqlMap.get(groupNameAndsqlId);
+        // 这里如果没取到sql就抛出异常，及时发现错误
+        if (Strings.isNullOrEmpty(sql))
+            throw new IllegalArgumentException("No sql found for:" + groupNameAndsqlId);
+        return sql;
     }
 
     static void clearSqlMap() {

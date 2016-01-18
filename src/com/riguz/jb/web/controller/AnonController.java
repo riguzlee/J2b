@@ -15,6 +15,7 @@ import com.riguz.jb.model.core.Role;
 import com.riguz.jb.model.core.User;
 import com.riguz.jb.util.mail.MailKit;
 import com.riguz.jb.web.ext.ajax.ResponseFactory;
+import com.riguz.jb.web.ext.ajax.pagination.impl.JqGridAdapter;
 import com.riguz.jb.web.ext.menu.MenuFactory;
 import com.riguz.jb.web.ext.menu.MenuItem;
 import com.riguz.jb.web.service.RandomPictureService;
@@ -22,6 +23,11 @@ import com.riguz.jb.web.service.SecurityService;
 import com.riguz.jb.web.validator.RandkeyValidator;
 
 public class AnonController extends AbstractJsonController {
+    public AnonController() {
+        super();
+        this.dataGridAdapter = new JqGridAdapter(this);
+    }
+
     private static Logger logger          = LoggerFactory.getLogger(AnonController.class.getName());
     SecurityService       securityService = new SecurityService();
     RandomPictureService  randPicService  = new RandomPictureService();

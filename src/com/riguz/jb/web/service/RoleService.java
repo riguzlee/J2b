@@ -6,13 +6,16 @@ import com.jfinal.plugin.activerecord.Page;
 import com.riguz.jb.model.core.Role;
 import com.riguz.jb.model.ext.arg.Argument;
 import com.riguz.jb.model.ext.sqlinxml.SqlKit;
+import com.riguz.jb.web.ext.ajax.pagination.PageParam;
 
 public class RoleService extends CurdService<Role> {
 
-    public Page<Role> getList(int pageNumber, int pageSize, Argument... args) {
-        String select = "SELECT `ROLE_ID` AS `ID`, `IDENT`, `NAME`, `REMARK`, `ROLE_STATUS`";
-        String where = "FROM `ROLE` WHERE THRU_DATE IS NULL ";
-        return this.getList(Role.dao, pageNumber, pageSize, select, where, args);
+    public Page<Role> getList(PageParam pageParam, Argument... args) {
+        return this.getList(Role.dao,
+                pageParam.getPageNumber(),
+                pageParam.getPageSize(),
+                SqlKit.sql("core.roleListSelect"),
+                SqlKit.sql("core.roleListWhere"), args);
     }
 
     public Role get(String id) {

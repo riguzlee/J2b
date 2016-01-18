@@ -3,7 +3,6 @@
 
 <link href="${CONTEXT_PATH}/res/ace/css/ace-fonts.min.css" rel="stylesheet" />
 
-<link href="${CONTEXT_PATH}/res/ace/css/ace.min.css" rel="stylesheet" class="ace-main-stylesheet" />
 <!--[if lte IE 9]>
 <link href="${CONTEXT_PATH}/res/ace/css/ace-part2.min.css" rel="stylesheet" class="ace-main-stylesheet" />
 <![endif]-->
@@ -15,6 +14,13 @@
 <![endif]-->
 
 <!-- Custome -->
+<!-- 
+<link href='${CONTEXT_PATH}/res/ext/bootstrap-table/bootstrap-table.min.css' rel='stylesheet'>
+ -->
+<!-- jqGrid.css should be placed before ace.css (otherwise table style will not load as expected! -->
+<link href='${CONTEXT_PATH}/res/ace/css/jquery-ui.min.css' rel='stylesheet'>
+<link href='${CONTEXT_PATH}/res/ace/css/ui.jqgrid.min.css' rel='stylesheet'>
+
 <link href='${CONTEXT_PATH}/res/ext/sco.js/css/scojs.css' rel='stylesheet'>
 <link href='${CONTEXT_PATH}/res/ext/sco.js/css/sco.message.css' rel='stylesheet'>
 
@@ -22,6 +28,7 @@
 <link href="${CONTEXT_PATH}/res/ace/css/jquery-ui.min.css" rel="stylesheet">
 
 
+<link href="${CONTEXT_PATH}/res/ace/css/ace.min.css" rel="stylesheet" class="ace-main-stylesheet" />
 <script src="${CONTEXT_PATH}/res/ace/js/ace-extra.min.js"></script>
 
 <!--[if lte IE 8]>

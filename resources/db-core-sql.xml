@@ -14,6 +14,10 @@
 	
 	<sql id="userListSelect">SELECT `USER_ID` AS `ID`, `LOGIN_NAME`,`REAL_NAME`, `EMAIL`, `REMARK`, `ACCOUNT_STATUS`, `ADDITIONAL_ID`, IDENT, NAME AS ROLE_NAME</sql>
 	<sql id="userListWhere">FROM `USER_VIEW` WHERE THRU_DATE IS NULL </sql>
+	<sql id="roleListSelect">SELECT `ROLE_ID` AS `ID`, `IDENT`, `NAME`, `REMARK`, `ROLE_STATUS`</sql>
+	<sql id="roleListWhere">FROM `ROLE` WHERE THRU_DATE IS NULL </sql>
+	<sql id="filterListSelect">SELECT `FILTER_ID` AS `ID`,`NAME`, `URL`, `RULES`, `REMARK`, `ORDER`</sql>
+	<sql id="filterListWhere">FROM `FILTER` WHERE THRU_DATE IS NULL </sql>
 	
 	<sql id="getAllRoles">SELECT * FROM ROLE WHERE THRU_DATE IS NULL</sql>
 	<sql id="getRoleByIdent">SELECT * FROM ROLE WHERE THRU_DATE IS NULL AND IDENT=?</sql>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
-import com.riguz.jb.web.ext.ajax.DataGrid;
+import com.riguz.jb.web.ext.ajax.pagination.BootstrapTableDataGrid;
 
 /**
  * Record工具类
@@ -34,13 +34,14 @@ public class RecordKit {
 
     /**
      * 适配分页查询结果到JSON返回值对象
+     * @param <T>
      * 
      * @param page
      *            查询到的某一页
      * @return 一个DataGrid对象。返回给页面用
      */
-    public static DataGrid<Record> recordsToDataGrid(Page<Record> page) {
-        DataGrid<Record> grid = new DataGrid<Record>();
+    public static <T> BootstrapTableDataGrid<T> recordsToDataGrid(Page<T> page) {
+        BootstrapTableDataGrid<T> grid = new BootstrapTableDataGrid<T>();
         grid.page = page.getPageNumber();
         grid.total = page.getTotalRow();
         grid.rows = page.getList();

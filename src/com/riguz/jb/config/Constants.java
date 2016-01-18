@@ -1,6 +1,11 @@
 package com.riguz.jb.config;
 
 public final class Constants {
+    public static final int    DEFAULT_PAGE_SIZE        = 15;                     // 默认分页大小
+    public static final String DEFAULT_PAGE_SIZE_PARAM  = "limit";                // 默认分页参数
+    public static final String DEFAULT_PAGE_NUM_PARAM   = "offset";               // 默认分页参数
+    public static final String DEFAULT_PAGE_ORDER_PARAM = "order";                // 默认排序参数
+    public static final String DEFAULT_PAGE_DATA_VAR    = "_PAGE";                // 默认页面数据变量
 
     public static final String SESSION_SHIRO_PLUGIN = "_SESSION_SHIRO_PLUGIN";
 

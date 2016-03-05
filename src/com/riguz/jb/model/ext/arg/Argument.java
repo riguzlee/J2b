@@ -2,7 +2,13 @@ package com.riguz.jb.model.ext.arg;
 
 public class Argument {
     public enum QUERY_TYPE {
-        EQUAL("="), LIKE("LIKE"), NOT_EQUAL("<>"), LESS_THEN("<"), GREATER_THEN(">"), LESS_EQUAL("<="), GREATER_EQUAL(">=");
+        EQUAL("="), 
+        LIKE("LIKE"),
+        NOT_EQUAL("<>"),
+        LESS_THEN("<"),
+        GREATER_THEN(">"),
+        LESS_EQUAL("<="),
+        GREATER_EQUAL(">=");
 
         final String queryType;
 
@@ -19,6 +25,17 @@ public class Argument {
         this.fieldName = filedName;
         this.queryType = queryType;
         this.param = param;
+        
+        if(queryType == QUERY_TYPE.LIKE
+                && param != null
+                && param instanceof String){
+            String likeStr = (String)param;
+            if(!likeStr.startsWith("%"))
+                likeStr = "%" + likeStr;
+            if(!likeStr.endsWith("%"))
+                likeStr = likeStr + "%";
+            this.param = likeStr;
+        }
     }
 
     public String getFieldName() {

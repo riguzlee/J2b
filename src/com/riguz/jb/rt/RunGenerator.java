@@ -24,8 +24,8 @@ public class RunGenerator {
     }
 
     public DataSource getDataSource() {
-        DruidPlugin dbPlugin = new DruidPlugin(p.get("jdbc." + this.group + ".url"), p.get("jdbc." + this.group + ".user"),
-                p.get("jdbc." + this.group + ".password"));
+        DruidPlugin dbPlugin = new DruidPlugin(p.get("jdbc." + this.group + ".url"), p.get("jdbc." + this.group
+                + ".user"), p.get("jdbc." + this.group + ".password"));
         dbPlugin.setDriverClass(p.get("jdbc." + this.group + ".driver"));
         dbPlugin.start();
         return dbPlugin.getDataSource();

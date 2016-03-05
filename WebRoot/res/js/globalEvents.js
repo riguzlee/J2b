@@ -4,9 +4,7 @@ $(function() {
 
 	$ok = $('.searchButton');
 	$ok.click(function () {
-		var params = {};	
-		params['offset']=0;
-		$table.bootstrapTable('refresh',{query: params});
+		alert('Hello!');
 	});
 	$('.addButton').click(function(){
 		$('.ajaxForm').clearForm();

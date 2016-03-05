@@ -12,10 +12,11 @@ $(function() {
 			success:function(data){
 				var error = data.error;
 				if(error == '0'){
-					$.scojs_message('登录成功！', $.scojs_message.TYPE_OK);
+					jbAlert('登录成功！', '提示');
 					$(window.location).attr('href', '/');
 				}
 				else{
+					jbAlert('登录失败:' + data.data, '提示');
 					$.scojs_message('登录失败:' + data.data, $.scojs_message.TYPE_ERROR);
 					$(".randpic").click();
 				}

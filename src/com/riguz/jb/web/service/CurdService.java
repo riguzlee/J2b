@@ -26,7 +26,8 @@ public class CurdService<M extends Model> extends AbstractService {
         SqlAndParam queryParam = ArgumentFactory.build(args);
         sqlExceptSelect += queryParam.getSql();
         newParams.addAll(queryParam.getParams());
-        return (Page<M>) dao.paginate(pageNumber, pageSize, select, sqlExceptSelect, newParams.toArray());
+        
+        return dao.paginate(pageNumber, pageSize, select, sqlExceptSelect, newParams.toArray());
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

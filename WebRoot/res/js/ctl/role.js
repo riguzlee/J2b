@@ -22,17 +22,24 @@ $(document).ready(function () {
 		url: 'system/roles/list',
 		mtype: "GET",
 		datatype: "json",
-		caption: "jqGrid with inline editing",
-		viewrecords : true,
-		altRows: true,
-		colNames: ['Order ID', 'Customer ID'],
+		caption: "角色列表",
+		
+		colNames: ['角色名称', '角色标识', '备注'],
 		colModel: [
-		           { label: 'OrderID', name: 'NAME', width: 75 },
-		           { label: 'Customer ID', name: 'IDENT', width: 150 }
+		           { name: 'NAME', width: 75 },
+		           { name: 'IDENT', width: 150 },
+		           { name: 'REMARK', width: 150 }
 		           ],
-		           page: 1,
-		           height:250,
-		           rowNum: 10,
+		           page: 1,                  //当前页          page=1
+		           height:250,               //高度
+		           viewrecords:true,         //显示总记录数 
+		           rowNum: 10,               //每页显示记录数  rows=10
+		           autowidth: true,          //自动匹配宽度 
+		           multiselect: true,        //可多选，为true则出现复选框
+		           multiselectWidth: 25,     //设置多选列宽度		           
+		           sortable:true,            //可以排序:参数将传递给后台 
+		           sortname: 'NAME',         //排序字段名 sidx=NAME
+		           sortorder: "desc",        //排序方式   sord=desc
 		           pager: "#jqGridPager",
 		           loadComplete : function() {
 		        	   var table = this;

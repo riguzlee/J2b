@@ -58,3 +58,10 @@ function enableTooltips(table) {
 	$('.navtable .ui-pg-button').tooltip({container:'body'});
 	$(table).find('.ui-pg-div').tooltip({container:'body'});
 }
+
+function jbAlert(error, title){
+	jAlert(error, title);
+}
+function jbAlert(error){
+	jAlert(error, '提示');
+}

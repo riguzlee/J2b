@@ -4,6 +4,8 @@ import org.beetl.ext.jfinal.BeetlRenderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.alibaba.druid.filter.stat.StatFilter;
+import com.alibaba.druid.wall.WallFilter;
 import com.google.common.base.Strings;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
@@ -18,6 +20,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.druid.DruidStatViewHandler;
 import com.jfinal.render.ViewType;
 import com.riguz.jb.model.ext.sqlinxml.SqlInXmlPlugin;
 import com.riguz.jb.shiro.SessionHandler;
@@ -93,6 +96,10 @@ public class JbConfig extends JFinalConfig {
         me.add(new ContextPathHandler());
         // 去掉 jsessionid 防止找不到action
         me.add(new SessionHandler());
+        
+        //配Druid自带监听页面
+        DruidStatViewHandler dvh =  new DruidStatViewHandler("/druid");
+        me.add(dvh);
     }
 
     final Prop jdbcConfig = PropKit.use("jdbc.properties");
@@ -107,6 +114,16 @@ public class JbConfig extends JFinalConfig {
                 || Strings.isNullOrEmpty(passwd))
             return null;
         DruidPlugin dbPlugin = new DruidPlugin(url, user, passwd, driver);
+        
+        // 配置Druid SQL防火墙过滤器
+        WallFilter wallFilter = new WallFilter();
+        wallFilter.setDbType("mysql");
+        dbPlugin.addFilter(wallFilter);
+        
+        //配置Druid SQL监控
+        StatFilter statFilter = new StatFilter();
+        statFilter.setDbType("mysql");
+        dbPlugin.addFilter(statFilter);
         plugins.add(dbPlugin);
 
         // 配置ActiveRecord 插件

@@ -12,7 +12,9 @@ public class ArgumentFactory {
         List<Object> params = new ArrayList<Object>();
         StringBuilder builder = new StringBuilder();
         for (Argument arg : args) {
-            if (arg.getParam() == null || (arg.getParam() instanceof String && Strings.isNullOrEmpty((String) arg.getParam())))
+            if (arg.getParam() == null
+                || (arg.getParam() instanceof String 
+                && Strings.isNullOrEmpty((String) arg.getParam())))
                 continue;
             builder.append(MessageFormat.format(" AND `{0}` {1} ?", arg.getFieldName(), arg.getQueryType().toString()));
             params.add(arg.getParam());

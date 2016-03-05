@@ -3,6 +3,8 @@ package com.riguz.jb.web.controller;
 import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 import com.riguz.jb.model.core.Role;
+import com.riguz.jb.model.ext.arg.Argument;
+import com.riguz.jb.model.ext.arg.Argument.QUERY_TYPE;
 import com.riguz.jb.web.ext.ajax.ResponseFactory;
 import com.riguz.jb.web.ext.ajax.pagination.PageParam;
 import com.riguz.jb.web.ext.ajax.pagination.impl.JqGridAdapter;
@@ -23,7 +25,8 @@ public class RoleController extends AbstractJsonController {
 
     public void list() {
         PageParam param = this.dataGridAdapter.getPageParam();
-        Page<Role> list = this.roleService.getList(param);
+        String paramSearch = this.getPara("search");
+        Page<Role> list = this.roleService.getList(param, new Argument("NAME", QUERY_TYPE.LIKE, paramSearch));
         this.renderPage(list);
     }
 

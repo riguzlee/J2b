@@ -1,8 +1,18 @@
 @var js = {
-<script src="${CONTEXT_PATH}/res/js/commons.js"></script>
+@include("../../partial/_listJs.html"){}
 <script src="${CONTEXT_PATH}/res/js/ctl/role.js"></script>
 @};
+
+@var search={
+<tp:field id="searchInput" name="search" required="false" label="关键字"/>
+@};
+
+@var toolbar={
+<tp:toolbtn id="addRoleBtn" />
+@};
+
 @layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"system/roles"}){
+@include("../../partial/_toolbar.html", {form:search, buttons:toolbar}){}
 <table id="jqGrid"></table>
 <div id="jqGridPager"></div>
 @};

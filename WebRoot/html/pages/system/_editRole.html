@@ -1,6 +1,6 @@
 @var content={
     <div class="tip"/>
-    <form method="post" add-action="/system/roles/add" update-action="/system/roles/update" id="${formId}"  class="ajaxForm">
+    <form method="post" add-action="/system/roles/add" update-action="/system/roles/update" id="${formId}"  class="editForm">
         <input type="hidden" name="role.ROLE_ID" class="id"/>
         <tp:field id="roleName" label="角色名称" name="role.NAME" required="true"/>
         <tp:field id="roleIdent" label="角色标识" name="role.IDENT" required="true" desc="用来标识一个角色"/>
@@ -13,20 +13,3 @@
 
 <tp:modalValidate id="${dialogId}" btn="添加角色" title="编辑角色" content="${content}" form="${formId}"/>
 
-<script>
-function initControls(){
-}
-function loadItem(id){
-    $.getJSON("/system/roles/get/" + id, function(json){
-    	if(json.error != 0){
-    		alert('获取数据失败:' + json.data);
-    		return;
-    	}
-    	var item = json.data;
-    	$("input[name='role.ROLE_ID']").val(item.ROLE_ID);
-    	$("input[name='role.NAME']").val(item.NAME);
-    	$("input[name='role.IDENT']").val(item.IDENT);
-    	$("textarea[name='role.REMARK']").val(item.REMARK);
-    });
-}
-</script>

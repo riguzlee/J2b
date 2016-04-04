@@ -8,6 +8,7 @@ import com.riguz.jb.model.ext.arg.Argument.QUERY_TYPE;
 import com.riguz.jb.web.ext.ajax.ResponseFactory;
 import com.riguz.jb.web.ext.ajax.pagination.PageParam;
 import com.riguz.jb.web.ext.ajax.pagination.impl.JqGridAdapter;
+import com.riguz.jb.web.service.IdentityService;
 import com.riguz.jb.web.service.RoleService;
 import com.riguz.jb.web.validator.IdValidator;
 
@@ -39,6 +40,8 @@ public class RoleController extends AbstractJsonController {
 
     public void add() {
         Role item = this.getModel(Role.class, "role");
+        String id = IdentityService.getNewId("ROLE");
+        item.setRoleId(id);
         boolean result = this.roleService.save(item);
         ResponseFactory.renderResult(this, result);
     }
@@ -50,9 +53,8 @@ public class RoleController extends AbstractJsonController {
         ResponseFactory.renderResult(this, result);
     }
 
-    @Before(IdValidator.class)
     public void delete() {
-        boolean result = this.roleService.delete(Role.dao, this.getPara());
+        boolean result = this.roleService.delete(Role.dao, this.getPara("ids"));
         ResponseFactory.renderResult(this, result);
     }
 }

@@ -1,18 +1,22 @@
 @var js = {
 @include("../../partial/_listJs.html"){}
-<script src="${CONTEXT_PATH}/res/js/ctl/role.js"></script>
+<script src="${CONTEXT_PATH}/res/js/globalEvents.js?t=${timestamp!'9527'}"></script>
+<script src="${CONTEXT_PATH}/res/js/ctl/role.js?t=${timestamp!'9527'}"></script>
 @};
 
 @var search={
 <tp:field id="searchInput" name="search" required="false" label="关键字"/>
 @};
 
+@var delUrl = "system/roles/delete";
 @var toolbar={
-<tp:toolbtn id="addRoleBtn" />
+<tp:toolbtn id="addRoleBtn" text="新增" icon="glyphicon glyphicon-plus" event="onClick='clearModalDialog()' data-target='#addRoleDialog' data-toggle='modal'"/>
+<tp:toolbtn id="delRoleBtn" text="删除" icon="glyphicon glyphicon-remove" class="btn-danger" event='onClick="del(&#39;${delUrl}&#39;)"' />
 @};
 
 @layout("../../layout/_aceLayout.html", {extJs:js, pageUrl:"system/roles"}){
 @include("../../partial/_toolbar.html", {form:search, buttons:toolbar}){}
+@include("_editRole.html", {formId:"addRoleForm", dialogId:"addRoleDialog"}){}
 <table id="jqGrid"></table>
 <div id="jqGridPager"></div>
 @};

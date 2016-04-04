@@ -24,14 +24,16 @@ $(document).ready(function () {
 		datatype: "json",
 		caption: "角色列表",
 		
-		colNames: ['角色名称', '角色标识', '备注'],
+		colNames: ['操作', '角色名称', '角色标识', '备注'],
 		colModel: [
+		           { name: 'ID', width: 50, formatter:editFormatter, key:true},
 		           { name: 'NAME', width: 75 },
-		           { name: 'IDENT', width: 150 },
+		           { name: 'IDENT', width: 50 },
 		           { name: 'REMARK', width: 150 }
 		           ],
 		           page: 1,                  //当前页          page=1
-		           height:250,               //高度
+		           height:325,            //高度
+		           shrinkToFit: true,
 		           viewrecords:true,         //显示总记录数 
 		           rowNum: 10,               //每页显示记录数  rows=10
 		           autowidth: true,          //自动匹配宽度 
@@ -41,6 +43,7 @@ $(document).ready(function () {
 		           sortname: 'NAME',         //排序字段名 sidx=NAME
 		           sortorder: "desc",        //排序方式   sord=desc
 		           pager: "#jqGridPager",
+		           rownumbers: true,
 		           loadComplete : function() {
 		        	   var table = this;
 		        	   setTimeout(function(){
@@ -54,3 +57,20 @@ $(document).ready(function () {
 	});
 	$(window).triggerHandler('resize.jqGrid');
 });
+
+function editFormatter(cellvalue, options, rowObject){
+	//FIXME
+	return '<a href="#" data-toggle="modal" data-target=".modal" onClick="edit(\'' + cellvalue + '\')">' + '编辑' + '</a>';
+}
+
+function loadItem(id){
+	ajaxGet("system/roles/get/" + id, function(json){
+		console.log(json);
+		var item = json.data;
+    	$("input[name='role.ROLE_ID']").val(item.ROLE_ID);
+    	$("input[name='role.NAME']").val(item.NAME);
+    	$("input[name='role.IDENT']").val(item.IDENT);
+    	$("textarea[name='role.REMARK']").val(item.REMARK);
+    	
+	});
+}

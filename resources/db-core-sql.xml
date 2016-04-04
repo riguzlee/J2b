@@ -7,7 +7,7 @@
 	<sql id="findUserByTokenId">SELECT * FROM `USER` WHERE `TOKEN_ID` = ? AND `THRU_DATE` IS NULL</sql>
 	<sql id="getUserById">SELECT USER_ID,LOGIN_NAME,REAL_NAME,EMAIL,ACCOUNT_STATUS,REMARK FROM USER WHERE USER_ID=?</sql>
 	
-	<sql id="findRoleById">SELECT * FROM ROLE WHERE ROLE_ID=?</sql>
+	<sql id="getRoleById">SELECT * FROM ROLE WHERE ROLE_ID=?</sql>
 	
 	<sql id="findFilterById">SELECT * FROM FILTER WHERE FILTER_ID=?</sql>
 	<sql id="getAllFilters">SELECT * FROM FILTER WHERE FILTER_STATUS='N' AND THRU_DATE IS NULL ORDER BY `ORDER` ASC</sql>

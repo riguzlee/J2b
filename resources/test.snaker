@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="Test Flow" name="testFlow">
+<start displayName="start1" layout="322,0,-1,-1" name="start1">
+<transition g="" name="transition1" offset="0,0" to="step1"/>
+</start>
+<task autoExecute="Y" displayName="施工方上报" layout="300,72,-1,-1" name="step1" performType="ANY" taskType="Major">
+<transition g="" name="transition2" offset="0,0" to="step4"/>
+</task>
+<task autoExecute="Y" displayName="结算" layout="492,228,-1,-1" name="step4" performType="ANY" taskType="Major">
+<transition g="" name="transition5" offset="0,0" to="end1"/>
+</task>
+<end displayName="end1" layout="322,312,-1,-1" name="end1"/>
+</process>

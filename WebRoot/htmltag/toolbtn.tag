@@ -1,3 +1,3 @@
-<button id="${id}" type="button" class="btn btn-bold btn-primary ${class!}" onclick="${event!}">
-    <span class="${icon!}"></span>
+<button id="${id}" class="btn btn-sm ${class!'btn-primary'}" ${event!}>
+    <span class="ace-icon ${icon!}">${text!}</span>
 </button>

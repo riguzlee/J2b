@@ -59,9 +59,44 @@ function enableTooltips(table) {
 	$(table).find('.ui-pg-div').tooltip({container:'body'});
 }
 
-function jbAlert(error, title){
-	jAlert(error, title);
+function clearForm(formId){
+	$(formId).clearForm();;
 }
+
 function jbAlert(error){
 	jAlert(error, '提示');
+}
+
+function jbConfirm(msg, callback){
+	jConfirm(msg, '提示', callback);
+}
+function ajaxCall(url, data, type, callback){
+	console.log(url);
+	console.log(data);
+	$.ajax({
+		type:type,
+		url:url,
+		data:data,
+		cache:false,
+		dataType:'json',
+		success:function(data){
+			var error = data.error;
+			if(error == '0'){
+				callback(data);
+			}
+			else{
+				jbAlert('错误:' + data.data);
+			}
+		},
+		error:function(){
+			jbAlert('操作失败！');
+		}
+	});
+}
+function ajaxPost(url, data, callback){
+	ajaxCall(url, data, 'post', callback);
+}
+
+function ajaxGet(url, callback){
+	ajaxCall(url, '', 'get', callback);
 }

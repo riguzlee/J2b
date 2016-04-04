@@ -1,7 +1,9 @@
 package com.riguz.jb.web.controller;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.riguz.jb.web.ext.ajax.RandomTimestampInterceptor;
 import com.riguz.jb.web.ext.ajax.pagination.IGridAdapter;
 
 /**
@@ -11,6 +13,7 @@ import com.riguz.jb.web.ext.ajax.pagination.IGridAdapter;
  * @author solever
  *
  */
+@Before(RandomTimestampInterceptor.class)
 public abstract class AbstractJsonController extends Controller {
     IGridAdapter dataGridAdapter = null;
 

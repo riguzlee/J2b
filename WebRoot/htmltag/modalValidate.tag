@@ -10,11 +10,11 @@
                 </div>
                 <div class="modal-body">${content!}</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary pull-left" onclick='validateAndSubmit("#${formId}")'>
+                    <button type="button" class="btn btn-primary btn-sm pull-left" onclick='validateAndSubmit("#${formId}")'>
                         <span class="glyphicon glyphicon-ok">保存</span>
                     </button>
-                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">
-                         <span class="glyphicon glyphicon-minus">取消</span>
+                    <button type="button" class="btn btn-inverse btn-sm pull-right" data-dismiss="modal">
+                         <span class="glyphicon glyphicon-remove">取消</span>
                      </button>
                 </div>
             </div>

@@ -19,4 +19,6 @@ public final class Constants {
     public static final String ERROR_KEY            = "errorMsg";             // 默认错误变量（在controller中用到）
     public static final String ERROR_CODE_KEY       = "errorCode";
     public static final String ERROR_DETAIL_KEY     = "errorDetail";
+
+    public static final String ATTR_TIMESTAMP       = "timestamp";
 }

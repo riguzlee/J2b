@@ -1,8 +1,15 @@
 package com.riguz.jb.web.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Strings;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 import com.riguz.jb.model.ext.arg.Argument;
@@ -10,7 +17,7 @@ import com.riguz.jb.model.ext.arg.ArgumentFactory;
 import com.riguz.jb.model.ext.arg.SqlAndParam;
 
 public class CurdService<M extends Model> extends AbstractService {
-
+    private static final Logger logger = LoggerFactory.getLogger(CurdService.class);
     @SuppressWarnings({ "rawtypes" })
     protected Page<M> getList(Model dao, int pageNumber, int pageSize, String select, String sqlExceptSelect, Argument... args) {
         return getList(dao, pageNumber, pageSize, select, sqlExceptSelect, null, args);
@@ -46,11 +53,32 @@ public class CurdService<M extends Model> extends AbstractService {
     }
 
     @SuppressWarnings("rawtypes")
-    public boolean delete(Model dao, String id) {
-        Model item = dao.findById(id);
-        if (item == null)
+    public boolean delete(Model dao, String idStr) {
+        logger.info("Trying to delete:", dao.getClass().getName(), idStr);
+        if(Strings.isNullOrEmpty(idStr))
             return false;
-        return item.delete();
+        final String[] ids = idStr.split(",");
+        final Model daoF = dao;
+        boolean success = Db.tx(new IAtom(){
+
+            @Override
+            public boolean run() throws SQLException {
+                for(String id:ids){
+                    id = id.trim();
+                    if(Strings.isNullOrEmpty(id))
+                            continue;
+                    // This may be not efficient
+                    Model item = daoF.findById(id);
+                    if(item == null || !item.delete()){
+                        logger.error("Failed to delete", item);
+                        return false;
+                    }
+                }
+                return true;
+            }
+            
+        });
+       return success;
     }
 
 }

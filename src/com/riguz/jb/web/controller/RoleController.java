@@ -27,7 +27,11 @@ public class RoleController extends AbstractJsonController {
     public void list() {
         PageParam param = this.dataGridAdapter.getPageParam();
         String paramSearch = this.getPara("search");
-        Page<Role> list = this.roleService.getList(param, new Argument("NAME", QUERY_TYPE.LIKE, paramSearch));
+        String sidx = this.getPara("sidx", "NAME");
+        String sord = this.getPara("sord", "asc");
+        Argument orderArg = new Argument(sidx, QUERY_TYPE.ORDERBY, sord);
+        
+        Page<Role> list = this.roleService.getList(param, new Argument("NAME", QUERY_TYPE.LIKE, paramSearch), orderArg);
         this.renderPage(list);
     }
 

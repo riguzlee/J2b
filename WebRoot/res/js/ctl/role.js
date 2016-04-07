@@ -22,11 +22,11 @@ $(document).ready(function () {
 		url: 'system/roles/list',
 		mtype: "GET",
 		datatype: "json",
-		caption: "角色列表",
-		
+		//caption: "角色列表",
+
 		colNames: ['操作', '角色名称', '角色标识', '备注'],
 		colModel: [
-		           { name: 'ID', width: 50, formatter:editFormatter, key:true},
+		           { name: 'ID', width: 50, formatter:editFormatter, key:true, sortable:false},
 		           { name: 'NAME', width: 75 },
 		           { name: 'IDENT', width: 50 },
 		           { name: 'REMARK', width: 150 }
@@ -43,6 +43,7 @@ $(document).ready(function () {
 		           sortname: 'NAME',         //排序字段名 sidx=NAME
 		           sortorder: "desc",        //排序方式   sord=desc
 		           pager: "#jqGridPager",
+		           altRows: true,
 		           rownumbers: true,
 		           loadComplete : function() {
 		        	   var table = this;
@@ -67,10 +68,10 @@ function loadItem(id){
 	ajaxGet("system/roles/get/" + id, function(json){
 		console.log(json);
 		var item = json.data;
-    	$("input[name='role.ROLE_ID']").val(item.ROLE_ID);
-    	$("input[name='role.NAME']").val(item.NAME);
-    	$("input[name='role.IDENT']").val(item.IDENT);
-    	$("textarea[name='role.REMARK']").val(item.REMARK);
-    	
+		$("input[name='role.ROLE_ID']").val(item.ROLE_ID);
+		$("input[name='role.NAME']").val(item.NAME);
+		$("input[name='role.IDENT']").val(item.IDENT);
+		$("textarea[name='role.REMARK']").val(item.REMARK);
+
 	});
 }

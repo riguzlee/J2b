@@ -31,6 +31,7 @@ function openModal(){
 }
 
 function edit(id){
+	clearModalDialog();
 	loadItem(id);	
 }
 
@@ -57,4 +58,35 @@ function del(url){
 		});
 	});
 	
+}
+
+function clearModalDialog(){
+	clearForm('.editForm');
+	//清除验证提示及错误
+	$(".error").removeClass("error");
+	$('.editForm').validate({}).resetForm();
+}
+
+function validateAndSubmit(formId){
+	console.log(formId);
+	var formData = $(formId).serialize();
+	var url = '';
+	var id = $("input[name$='_ID']").val();
+	console.log(id);
+	if(id == null || id == '')
+		url = $(formId).attr('add-action');
+	else
+		url = $(formId).attr('update-action') + "/" + id;
+	
+	var action = $(formId).attr('action');
+	if(action != null && action != undefined)
+		url = action;
+	$(formId).validate({}).form();
+	if (!$(formId).valid())
+		return;
+	ajaxPost(url, formData, function(data){
+		jbAlert('操作成功!');
+		closeModal();
+		reloadGrid();
+	});	
 }

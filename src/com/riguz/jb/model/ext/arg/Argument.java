@@ -8,7 +8,8 @@ public class Argument {
         LESS_THEN("<"),
         GREATER_THEN(">"),
         LESS_EQUAL("<="),
-        GREATER_EQUAL(">=");
+        GREATER_EQUAL(">="),
+        ORDERBY("orderby");
 
         final String queryType;
 

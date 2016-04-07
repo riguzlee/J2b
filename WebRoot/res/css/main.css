@@ -33,7 +33,9 @@ img.randpic {
 	font: x-small;
 	font-style: italic;
 }
-
+.form-control.error{
+	border-color:red;
+}
 .modal-footer {
 	background-color: #fff !important;
 }
